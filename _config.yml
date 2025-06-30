@@ -30,7 +30,7 @@ repository               : "CaoJiahao2/CaoJiahao2.github.io"
 teaser                   : "/assets/images/500x300.png"
 logo                     : "assets/images/logo.jpg"
 masthead_title           : "Welcome to CaoJiahao's personal website"
-future                   : true      # Allow future posts to be displayed
+# future                   : true      # Allow future posts to be displayed
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200
 enable_copy_code_button  : # true, false (default)
