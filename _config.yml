@@ -15,7 +15,9 @@
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "en-US"
+# locale                   : "en-US"
+locale                  : "zh-CN" # Set to your preferred locale, e.g., "en-US", "zh-CN"
+lang                    : "zh-CN" # Set to your preferred language, e.g., "
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
 title                    : "Cao Jiahao's personal website" # site title that appears in the masthead and browser tab
 title_separator          : "-"
@@ -28,6 +30,7 @@ repository               : "CaoJiahao2/CaoJiahao2.github.io"
 teaser                   : "/assets/images/500x300.png"
 logo                     : "assets/images/logo.jpg"
 masthead_title           : "Welcome to CaoJiahao's personal website"
+future                   : true      # Allow future posts to be displayed
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200
 enable_copy_code_button  : # true, false (default)
