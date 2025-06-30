@@ -16,8 +16,8 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 # locale                   : "en-US"
-locale                  : "zh-CN" # Set to your preferred locale, e.g., "en-US", "zh-CN"
-lang                    : "zh-CN" # Set to your preferred language, e.g., "
+locale                   : "zh-CN" # Set to your preferred locale, e.g., "en-US", "zh-CN"
+lang                     : "zh-CN" # Set to your preferred language, e.g., "
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
 title                    : "Cao Jiahao's personal website" # site title that appears in the masthead and browser tab
 title_separator          : "-"
@@ -33,7 +33,7 @@ masthead_title           : "Welcome to CaoJiahao's personal website"
 future                   : true      # Allow future posts to be displayed
 breadcrumbs              : # true, false (default)
 words_per_minute         : 200
-enable_copy_code_button  : # true, false (default)
+enable_copy_code_button  : true #, false (default)
 copyright                : # "copyright" name, defaults to site.title
 copyright_url            : # "copyright" URL, defaults to site.url
 comments:
@@ -93,11 +93,11 @@ baidu_site_verification  :
 
 # Social Sharing
 twitter:
-  username               :
+  username               :CaoKm94090
 facebook:
-  username               :
-  app_id                 :
-  publisher              :
+  username               :Cao Jiahao
+  app_id                 :100091840113348
+  publisher              :Cao Jiahao
 og_image                 : # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
@@ -108,9 +108,9 @@ social:
 
 # Analytics
 analytics:
-  provider               : # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider               : "google-gtag"  # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          :
+    tracking_id          : G-RKCFC7PKTF # Your Google Analytics tracking ID
     anonymize_ip         : # true, false (default)
 
 
@@ -131,6 +131,21 @@ author:
     - label: "Wechat"
       icon: "fab fa-fw fa-weixin"
       url: "https://mp.weixin.qq.com/s/gh_ad8045e516a8" # Replace with your actual WeChat URL
+    - label: "zhihu"
+      icon: "fab fa-fw fa-zhihu"
+      url: "https://www.zhihu.com/people/cao-jia-hao-15-15"
+    - label: "Bilibili"
+      icon: "fab fa-fw fa-bilibili"
+      url: "https://space.bilibili.com/652150415" # Replace with your actual bilibili URL
+    - label: "douyin"
+      icon: "fab fa-fw fa-douyin"
+      url: "https://v.douyin.com/8fk8IGmYkco/" # Replace with your actual Douyin URL
+    - label: "xiaohongshu"
+      icon: "fab fa-fw fa-xiaohongshu"
+      url: "https://www.xiaohongshu.com/user/profile/6067dec30000000001000f75" # Replace with your actual Xiaohongshu URL
+    - label: "weibo"
+      icon: "fab fa-fw fa-weibo"
+      url: "https://weibo.com/u/7527475180" # Replace with your actual Weibo URL
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://x.com/CaoKm94090"
@@ -140,6 +155,12 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/CaoJiahao2"
+    - label: "GitLab"
+      icon: "fab fa-fw fa-gitlab"
+      url: "https://gitlab.com/CaoJiahao2"
+    - label: "Hugging Face"
+      icon: "fab fa-fw fa-huggingface"
+      url: "https://huggingface.co/Jiahao28"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       url: "https://instagram.com/caojiahao2828/"
@@ -159,6 +180,9 @@ footer:
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       url: "https://gitlab.com/CaoJiahao2"
+    - label: "Hugging Face"
+      icon: "fab fa-fw fa-huggingface"
+      url: "https://huggingface.co/Jiahao28"
     # - label: "Bitbucket"
     #   icon: "fab fa-fw fa-bitbucket"
     #   url: "https://bitbucket.org/"
@@ -168,6 +192,21 @@ footer:
     - label: "bilibili"
       icon: "fab fa-fw fa-bilibili"
       url: "https://space.bilibili.com/652150415" # Replace with your actual bilibili URL
+    - label: "zhihu"
+      icon: "fab fa-fw fa-zhihu"
+      url: "https://www.zhihu.com/people/cao-jia-hao-15-15"
+    - label: "douyin"
+      icon: "fab fa-fw fa-douyin"
+      url: "https://v.douyin.com/8fk8IGmYkco/" # Replace with your actual Douyin URL
+    - label: "xiaohongshu"
+      icon: "fab fa-fw fa-xiaohongshu"
+      url: "https://www.xiaohongshu.com/user/profile/6067dec30000000001000f75" # Replace with your actual Xiaohongshu URL
+    - label: "weibo"
+      icon: "fab fa-fw fa-weibo"
+      url: "https://weibo.com/u/7527475180" # Replace with your actual Weibo URL
+    - label: "Email"
+      icon: "fas fa-fw fa-envelope-square"
+      url: "mailto:caojiahao2828@gmail.com"
 
 # Reading Files
 include:
