@@ -112,7 +112,8 @@ analytics:
   google:
     tracking_id          : G-RKCFC7PKTF # Your Google Analytics tracking ID
     anonymize_ip         : # true, false (default)
-
+footer:
+  custom: true
 
 # Site Author
 author:
