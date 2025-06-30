@@ -13,7 +13,7 @@ tags: [个人简历, 教育经历, 研究项目, 荣誉奖项, 技能认证, 学
 
 ## 个人简历
 
-<img src="https://github.com/CaoJiahao2/CaoJiahao2.github.io/tree/master/assets/images/profile.jpg" alt="Profile Photo" style="width: 300px; height: 300px;">
+<img src="https://github.com/CaoJiahao2/CaoJiahao2.github.io/tree/master/assets/images/profile.jpg" alt="Profile Photo" width="300" height="300">
 
 **联系方式**  
 182-7352-3582 | u202011733@hust.edu.cn  
