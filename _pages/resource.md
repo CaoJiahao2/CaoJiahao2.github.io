@@ -5,7 +5,7 @@ date: 2025-07-01
 author:  "Cao Jiahao"
 permalink: /resources/
 layout: single
-# classes: wide
+classes: wide
 comments: true
 share: true
 show_date: true

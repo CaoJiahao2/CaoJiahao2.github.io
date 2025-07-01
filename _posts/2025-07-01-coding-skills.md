@@ -12,7 +12,7 @@ tags:
     - C++
     - Java
 date: 2025-07-01
-author:  "Cao Jiahao"
+# author:  "Cao Jiahao"
 author_profile: true
 ---
 
