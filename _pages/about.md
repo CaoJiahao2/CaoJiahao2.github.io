@@ -11,10 +11,7 @@ tags: [个人简历, 教育经历, 研究项目, 荣誉奖项, 技能认证, 学
 
 <div align="center">
   <h1>个人简历 / Resume</h1>
-  <h2>曹佳豪 - Cao Jiahao</h2>
 </div>
-
----
 
 <div style="display: flex; width: 100%;">
   <div style="flex: 2; text-align: center; display: flex; flex-direction: column; justify-content: center;">
@@ -170,7 +167,7 @@ tags: [个人简历, 教育经历, 研究项目, 荣誉奖项, 技能认证, 学
 
 <div style="text-align: center; margin-top: 20px;">
   <p>如果您觉得我的工作对您有所帮助，愿意请我喝杯奶茶，请扫码打赏</p>
-  <p>If you find my work helpful and would like to treat me to a bubble tea, please scan the code to donate.</p>
+  <p>If you find my work helpful and would like to treat me to a bubble tea<br>please scan the code to donate.</p>
   <p>欢迎随时联系我！</p>
   <p>please feel free to reach out!</p>
 </div>

@@ -14,6 +14,7 @@ tags:
     - 学术写作
 date: 2025-07-01
 author: 曹佳豪 - Cao Jiahao
+toc: true
 ---
 
 <!-- # 深度学习研究全流程技能指南 -->

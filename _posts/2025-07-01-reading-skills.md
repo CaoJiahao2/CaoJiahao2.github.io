@@ -13,6 +13,7 @@ tags:
     - 研究方法
 date: 2025-07-01
 author: 曹佳豪 - Cao Jiahao
+toc: true
 ---
 
 <!-- # 研究生阅读深度学习学术文献的技巧与策略 -->

@@ -13,6 +13,7 @@ tags:
   - 视频生成
 date: 2025-07-01
 author: 曹佳豪 - Cao Jiahao
+toc: true
 ---
 
 <!-- # 最先进 LLM 与 MLLM 及图像/视频生成模型调研（2025 年版） -->

@@ -13,6 +13,7 @@ tags:
     - 学术写作
 date: 2025-07-01
 author: 曹佳豪 - Cao Jiahao
+toc: true
 ---
 
 <!-- # deep-learning-notes -->
