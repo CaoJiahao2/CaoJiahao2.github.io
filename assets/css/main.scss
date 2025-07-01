@@ -9,7 +9,63 @@ search: false
 @import "minimal-mistakes"; // main partials
 
 // 自定义博客内容左右间距，防止内容紧贴边缘
-.page, .post, .archive, .single, .layout--single, .layout--page {
-  padding-left: 24px;
-  padding-right: 24px;
+/* 为所有内容容器添加统一的左右间距 */
+.page__content,
+.page__inner-wrap,
+.page,
+.post,
+.archive,
+.single,
+.initial-content,
+article,
+.layout--single,
+.layout--page,
+.layout--home,
+.layout--posts,
+main, 
+.content,
+.container,
+.wrapper,
+#main,
+#content {
+  padding-left: 100px !important;
+  padding-right: 100px !important;
+}
+
+/* 特别针对 _pages 文件夹中的内容 */
+.page__content p,
+.page__inner-wrap p,
+.e-content,
+.page__main {
+  max-width: 100% !important;
+}
+
+/* 防止某些嵌套内容出现双重间距 */
+.page__content .page__content,
+.page__inner-wrap .page__inner-wrap,
+.container .container,
+main main,
+#main #main,
+#content #content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 767px) {
+  .page__content,
+  .page__inner-wrap,
+  .page,
+  .post,
+  .archive,
+  .single,
+  .initial-content,
+  article,
+  .layout--single,
+  .layout--page,
+  .layout--home,
+  .layout--posts {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
 }
