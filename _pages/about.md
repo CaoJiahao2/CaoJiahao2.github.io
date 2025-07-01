@@ -5,6 +5,7 @@ date: 2025-07-01
 author: 曹佳豪 - Cao Jiahao
 permalink: /about/
 layout: single
+classes: wide
 tags: [个人简历, 教育经历, 研究项目, 荣誉奖项, 技能认证, 学生工作, 志愿服务]
 ---
 

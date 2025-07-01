@@ -5,6 +5,7 @@ date: 2025-07-01
 author: 曹佳豪 - Cao Jiahao
 permalink: /resources/
 layout: single
+classes: wide
 tags: [深度学习, 计算机视觉, 资源大全, 学习资料, 数据集, 工具库, GitHub 项目]
 ---
 # 深度学习（计算机视觉）常用资源大全
