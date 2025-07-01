@@ -12,7 +12,7 @@ tags:
     - 技能指南
     - 学术写作
 date: 2025-07-01
-author:  "Cao Jiahao"
+
 ---
 
 <!-- # deep-learning-notes -->

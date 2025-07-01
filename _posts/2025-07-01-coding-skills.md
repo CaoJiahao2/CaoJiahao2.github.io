@@ -12,8 +12,6 @@ tags:
     - C++
     - Java
 date: 2025-07-01
-# author:  "Cao Jiahao"
-author_profile: true
 ---
 
 <!-- # 编程技能资源大全（Coding Skills Resources） -->

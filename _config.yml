@@ -357,7 +357,10 @@ compress_html:
   clippings: all
   ignore:
     envs: development
-
+collection:
+  navi:
+    output: true
+    permalink: /navi/:path/
 
 # Defaults
 defaults:
@@ -383,3 +386,12 @@ defaults:
       layout: single
       author_profile: true
       share: true
+  # _navi
+  - scope:
+      path: "_navi"
+      type: navi
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      classes: wide
