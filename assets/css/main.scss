@@ -7,3 +7,9 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+// 自定义博客内容左右间距，防止内容紧贴边缘
+.page, .post, .archive, .single, .layout--single, .layout--page {
+  padding-left: 24px;
+  padding-right: 24px;
+}

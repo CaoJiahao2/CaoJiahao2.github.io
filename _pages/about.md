@@ -16,22 +16,17 @@ tags: [个人简历, 教育经历, 研究项目, 荣誉奖项, 技能认证, 学
 ---
 
 <div align="center">
-  <img src="../assets/images/profile.jpg" alt="Profile Photo" width="200" height="300">
-</div>
 
-<div align="center">
-
-**联系方式 / Contact**  
-📞 +86 182-7352-3582 | ✉️ m202476943@hust.edu.cn  
-🏠 湖北省武汉市洪山区珞喻路1037号华中科技大学  
-  HUST, No. 1037, Luoyu Road, Hongshan District, Wuhan, Hubei, China  
-2003-02 | 男 | 汉族 | 湖南郴州人 | 中共党员  
-2003-02 | Male | Han Chinese | From Chenzhou, Hunan | Communist Party Member  
-**研究方向 / Research Interests**：人工智能、计算机视觉、模式识别  
+<b>联系方式 / Contact</b><br>
+📞 +86 182-7352-3582 | ✉️ m202476943@hust.edu.cn<br>
+🏠 湖北省武汉市洪山区珞喻路1037号华中科技大学<br>
+  HUST, No. 1037, Luoyu Road, Hongshan District, Wuhan, Hubei, China<br>
+2003-02 | 男 | 汉族 | 湖南郴州人 | 中共党员<br>
+2003-02 | Male | Han Chinese | From Chenzhou, Hunan | Communist Party Member<br>
+<b>研究方向 / Research Interests</b>：人工智能、计算机视觉、模式识别<br>
 Artificial Intelligence, Computer Vision, Pattern Recognition
 
 </div>
-
 ---
 
 ## 教育经历 / Education

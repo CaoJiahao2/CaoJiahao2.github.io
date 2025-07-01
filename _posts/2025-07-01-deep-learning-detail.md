@@ -15,7 +15,7 @@ date: 2025-07-01
 author: 曹佳豪 - Cao Jiahao
 ---
 
-# deep-learning-notes
+<!-- # deep-learning-notes -->
 ![logo](../assets/images/deep-learning-notes.png)
 
 my study notes and personal thoughts on deep learning
@@ -86,7 +86,7 @@ my study notes and personal thoughts on deep learning
   - [📌 总结](#-总结)
 
 ## 一、最受欢迎的编程语言
-![TIOBE-rank](./asserts/TIOBE-rank.png)
+![TIOBE-rank](../assets/images/TIOBE-rank.png)
 ### 1. Python
 
 **Python** 在近年来持续保持着强劲的增长势头，特别是在以下领域广受欢迎：
@@ -162,7 +162,7 @@ my study notes and personal thoughts on deep learning
 ---
 
 ## 二、最流行的开发环境
-![IDE-rank](./asserts/IDE-rank.png)
+![IDE-rank](../assets/images/IDE-rank.png)
 开发者通常会选择最适合他们所用编程语言和项目需求的开发环境。目前最流行的开发环境主要分为两大类：**集成开发环境 (IDE)** 和**代码编辑器 (Code Editor)**。
 
 ---
