@@ -1,5 +1,5 @@
 ---
-# Only the main Sass file needs front matter (the dashes are enough)
+// # Only the main Sass file needs front matter (the dashes are enough)
 search: false
 ---
 
@@ -9,63 +9,19 @@ search: false
 @import "minimal-mistakes"; // main partials
 
 // 自定义博客内容左右间距，防止内容紧贴边缘
-/* 为所有内容容器添加统一的左右间距 */
-.page__content,
-.page__inner-wrap,
-.page,
-.post,
-.archive,
-.single,
-.initial-content,
-article,
-.layout--single,
-.layout--page,
-.layout--home,
-.layout--posts,
-main, 
-.content,
-.container,
-.wrapper,
-#main,
-#content {
-  padding-left: 100px !important;
-  padding-right: 100px !important;
+.page, .post, .archive, .single, .layout--single, .layout--page {
+  padding-left: 150px !important;
+  padding-right: 150px !important;
 }
 
-/* 特别针对 _pages 文件夹中的内容 */
-.page__content p,
-.page__inner-wrap p,
-.e-content,
-.page__main {
-  max-width: 100% !important;
+// 针对页面内容区域的更精确选择器
+#main article.page .page__inner-wrap .page__content {
+  padding-left: 150px !important;
+  padding-right: 150px !important;
 }
 
-/* 防止某些嵌套内容出现双重间距 */
-.page__content .page__content,
-.page__inner-wrap .page__inner-wrap,
-.container .container,
-main main,
-#main #main,
-#content #content {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-/* 响应式调整 */
-@media (max-width: 767px) {
-  .page__content,
-  .page__inner-wrap,
-  .page,
-  .post,
-  .archive,
-  .single,
-  .initial-content,
-  article,
-  .layout--single,
-  .layout--page,
-  .layout--home,
-  .layout--posts {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-  }
+// 确保页面内容不会被其他样式覆盖
+.page__content {
+  padding-left: 150px !important;
+  padding-right: 150px !important;
 }
