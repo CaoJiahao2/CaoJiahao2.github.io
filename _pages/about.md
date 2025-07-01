@@ -15,18 +15,22 @@ tags: [个人简历, 教育经历, 研究项目, 荣誉奖项, 技能认证, 学
 
 ---
 
-<div align="center">
-
-<b>联系方式 / Contact</b><br>
-📞 +86 182-7352-3582 | ✉️ m202476943@hust.edu.cn<br>
-🏠 湖北省武汉市洪山区珞喻路1037号华中科技大学<br>
-  HUST, No. 1037, Luoyu Road, Hongshan District, Wuhan, Hubei, China<br>
-2003-02 | 男 | 汉族 | 湖南郴州人 | 中共党员<br>
-2003-02 | Male | Han Chinese | From Chenzhou, Hunan | Communist Party Member<br>
-<b>研究方向 / Research Interests</b>：人工智能、计算机视觉、模式识别<br>
-Artificial Intelligence, Computer Vision, Pattern Recognition
-
+<div style="display: flex; width: 100%;">
+  <div style="flex: 2; text-align: center; display: flex; flex-direction: column; justify-content: center;">
+    <b>联系方式 / Contact</b><br>
+    📞 +86 182-7352-3582 | ✉️ m202476943@hust.edu.cn<br>
+    🏠 湖北省武汉市洪山区珞喻路1037号华中科技大学<br>
+     HUST, No. 1037, Luoyu Road, Hongshan District, Wuhan, Hubei, China<br>
+    2003-02 | 男 | 汉族 | 湖南郴州人 | 中共党员<br>
+    2003-02 | Male | Han Chinese | Chenzhou, Hunan | CPC Member<br>
+    <b>研究方向 / Research Interests</b>：人工智能、计算机视觉、模式识别<br>
+    Artificial Intelligence, Computer Vision, Pattern Recognition
+  </div>
+  <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
+    <img src="../assets/images/profile.jpg" alt="Profile Photo" width="220" height="280">
+  </div>
 </div>
+
 ---
 
 ## 教育经历 / Education
@@ -154,3 +158,18 @@ Artificial Intelligence, Computer Vision, Pattern Recognition
 - **合作与交流 / Collaboration & Communication**  
   希望与更多志同道合的朋友交流合作，共同成长、共同进步，为社会和科技的发展贡献自己的力量。  
   I look forward to communicating and collaborating with more like-minded peers, growing and progressing together, and contributing to the development of society and technology.
+
+  ---
+
+## 联系&赞赏 / Contact & Appreciation
+<img src="../assets/images/wechat.jpg" alt="Wechat" width="240" height="280">
+<img src="../assets/images/QQ.jpg" alt="QQ" width="240" height="280">
+<img src="../assets/images/reward-code.jpg" alt="Reward Code" width="240" height="280">
+<img src="../assets/images/zifubao.png" alt="支付宝" width="240" height="280">
+
+<div style="text-align: center; margin-top: 20px;">
+  <p>如果您觉得我的工作对您有所帮助，愿意请我喝杯奶茶，请扫码打赏</p>
+  <p>If you find my work helpful and would like to treat me to a bubble tea, please scan the code to donate.</p>
+  <p>欢迎随时联系我！</p>
+  <p>please feel free to reach out!</p>
+</div>
