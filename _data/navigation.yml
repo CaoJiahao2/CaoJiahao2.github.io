@@ -12,5 +12,7 @@ main:
     url: "/research/"
   - title: "生活"
     url: "/life/"
+  - title: "光影"
+    url: "/photography/"
   - title: "关于我"
     url: "/about/"

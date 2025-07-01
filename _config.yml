@@ -139,10 +139,10 @@ author:
       icon: "fab fa-fw fa-bilibili"
       url: "https://space.bilibili.com/652150415" # Replace with your actual bilibili URL
     - label: "douyin"
-      icon: "fab fa-fw fa-douyin"
+      icon: "assets/images/icons/douyin.svg"
       url: "https://v.douyin.com/8fk8IGmYkco/" # Replace with your actual Douyin URL
     - label: "xiaohongshu"
-      icon: "fab fa-fw fa-xiaohongshu"
+      icon: "assets/images/icons/xiaohongshu.svg"
       url: "https://www.xiaohongshu.com/user/profile/6067dec30000000001000f75" # Replace with your actual Xiaohongshu URL
     - label: "weibo"
       icon: "fab fa-fw fa-weibo"
@@ -160,7 +160,7 @@ author:
       icon: "fab fa-fw fa-gitlab"
       url: "https://gitlab.com/CaoJiahao2"
     - label: "Hugging Face"
-      icon: "fab fa-fw fa-huggingface"
+      icon: "assets/images/icons/huggingface.svg"
       url: "https://huggingface.co/Jiahao28"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
@@ -182,7 +182,7 @@ footer:
       icon: "fab fa-fw fa-gitlab"
       url: "https://gitlab.com/CaoJiahao2"
     - label: "Hugging Face"
-      icon: "fab fa-fw fa-huggingface"
+      icon: "assets/images/icons/huggingface.svg"
       url: "https://huggingface.co/Jiahao28"
     # - label: "Bitbucket"
     #   icon: "fab fa-fw fa-bitbucket"
@@ -197,10 +197,10 @@ footer:
       icon: "fab fa-fw fa-zhihu"
       url: "https://www.zhihu.com/people/cao-jia-hao-15-15"
     - label: "douyin"
-      icon: "fab fa-fw fa-douyin"
+      icon: "assets/images/icons/douyin.svg"
       url: "https://v.douyin.com/8fk8IGmYkco/" # Replace with your actual Douyin URL
     - label: "xiaohongshu"
-      icon: "fab fa-fw fa-xiaohongshu"
+      icon: "assets/images/icons/xiaohongshu.svg"
       url: "https://www.xiaohongshu.com/user/profile/6067dec30000000001000f75" # Replace with your actual Xiaohongshu URL
     - label: "weibo"
       icon: "fab fa-fw fa-weibo"
