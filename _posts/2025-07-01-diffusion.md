@@ -11,7 +11,7 @@ tags:
     - 模型
     - 技术
 date: 2025-07-01
-author: 曹佳豪 - Cao Jiahao
+author:  "Cao Jiahao"
 ---
 
 ## 一、主流框架与库

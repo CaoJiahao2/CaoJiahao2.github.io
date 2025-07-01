@@ -2,13 +2,15 @@
 title: 深度学习（计算机视觉）常用资源大全
 description: 深度学习（计算机视觉）领域常用资源大全，包含学习文档、数据集、工具库、GitHub 项目等，适用于学生、研究者和工程师进行深入学习与开发实践。
 date: 2025-07-01
-author: 曹佳豪 - Cao Jiahao
+author:  "Cao Jiahao"
 permalink: /resources/
 layout: single
 classes: wide
+comments: true
+share: true
+show_date: true
 tags: [深度学习, 计算机视觉, 资源大全, 学习资料, 数据集, 工具库, GitHub 项目]
 ---
-# 深度学习（计算机视觉）常用资源大全
 
 本文件系统整理了计算机视觉领域中与深度学习相关的常用网站、文档、数据集、工具库及 GitHub 优秀项目，适用于学生、研究者和工程师进行深入学习与开发实践。
 

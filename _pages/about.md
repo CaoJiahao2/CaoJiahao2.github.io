@@ -2,7 +2,7 @@
 title: 曹佳豪 - Cao Jiahao
 description: 曹佳豪的个人简历，包含教育经历、研究项目、荣誉奖项、技能认证、学生工作及志愿服务经历等信息。
 date: 2025-07-01
-author: 曹佳豪 - Cao Jiahao
+author:  "Cao Jiahao"
 permalink: /about/
 classes: wide
 tags: [个人简历, 教育经历, 研究项目, 荣誉奖项, 技能认证, 学生工作, 志愿服务]

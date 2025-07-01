@@ -12,7 +12,7 @@ tags:
     - 学习资源
     - 可视化工具
 date: 2025-07-01
-author: 曹佳豪 - Cao Jiahao
+author:  "Cao Jiahao"
 ---
 
 

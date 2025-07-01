@@ -13,7 +13,7 @@ tags:
     - 技能指南
     - 学术写作
 date: 2025-07-01
-author: 曹佳豪 - Cao Jiahao
+author:  "Cao Jiahao"
 ---
 
 <!-- # 深度学习研究全流程技能指南 -->

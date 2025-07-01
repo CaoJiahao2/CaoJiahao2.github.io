@@ -10,7 +10,7 @@ tags:
     - 概述
     - 教程
 date: 2025-07-01
-author: 曹佳豪 - Cao Jiahao
+author:  "Cao Jiahao"
 ---
 
 <!-- # 机器学习概述 -->
