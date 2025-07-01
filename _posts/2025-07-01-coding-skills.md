@@ -13,7 +13,6 @@ tags:
     - Java
 date: 2025-07-01
 author: 曹佳豪 - Cao Jiahao
-toc: true
 ---
 
 <!-- # 编程技能资源大全（Coding Skills Resources） -->
