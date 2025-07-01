@@ -34,7 +34,13 @@
       {% if author.links %}
         {% for link in author.links %}
           {% if link.label and link.url %}
-            <li><a href="{{ link.url }}" rel="nofollow noopener noreferrer me"{% if link.url contains 'http' %} itemprop="sameAs"{% endif %}><i class="{{ link.icon | default: 'fas fa-link' }}" aria-hidden="true"></i><span class="label">{{ link.label }}</span></a></li>
+            <li><a href="{{ link.url }}" rel="nofollow noopener noreferrer me"{% if link.url contains 'http' %} itemprop="sameAs"{% endif %}>
+              {% if link.icon contains '.svg' %}
+                <img src="{{ link.icon | relative_url }}" alt="{{ link.label }}" style="height:1.2em;width:1.2em;vertical-align:middle;margin-right:0.5em;" aria-hidden="true">
+              {% else %}
+                <i class="{{ link.icon | default: 'fas fa-link' }}" aria-hidden="true"></i>
+              {% endif %}
+              <span class="label">{{ link.label }}</span></a></li>
           {% endif %}
         {% endfor %}
       {% endif %}
