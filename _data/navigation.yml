@@ -7,7 +7,7 @@ main:
   - title: "观点"
     url: "/idea/"
   - title: "资源"
-    url: "/resources/"
+    url: "/resource/"
   - title: "科研"
     url: "/research/"
   - title: "生活"

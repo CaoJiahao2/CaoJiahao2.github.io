@@ -1,5 +1,5 @@
----
-layout: archive
+--- 
+layout: archive 
 ---
 
 {{ content }}
@@ -8,6 +8,8 @@ layout: archive
 
 {% if page.collection == "idea" %}
   {% assign posts = site.idea %}
+{% elsif page.collection == "resource" %}
+  {% assign posts = site.resource %}
 {% elsif paginator %}
   {% assign posts = paginator.posts %}
 {% else %}
