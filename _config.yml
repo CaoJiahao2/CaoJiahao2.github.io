@@ -361,22 +361,22 @@ compress_html:
   clippings: all
   ignore:
     envs: development
-collection:
+collections:
   navi:
     output: true
     permalink: /collection/:path/
   idea:
     output: true
-    permalink: /idea/:path/
+    permalink: /idea/:name/
   resources:
     output: true
-    permalink: /resources/:path/
+    permalink: /resources/:name/
   research:
     output: true
-    permalink: /research/:path/
+    permalink: /research/:name/
   life:
     output: true
-    permalink: /life/:path/
+    permalink: /life/:name/
   # photography:
   #   output: true
   #   permalink: /collection/:path/
