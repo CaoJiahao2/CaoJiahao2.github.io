@@ -1,0 +1,10 @@
+/*
+  Custom overrides for disabling sticky TOC in right sidebar
+*/
+
+@include breakpoint($large) {
+  .sidebar__right.sticky {
+    position: relative !important;
+    top: auto !important;
+  }
+}

@@ -2,7 +2,7 @@
 title: 生活
 description: 日常生活
 date: 2025-07-02
-permalink: /about/
+permalink: /life/
 tags: [生活]
 ---
 

@@ -8,8 +8,8 @@ layout: archive
 
 {% if page.collection == "idea" %}
   {% assign posts = site.idea %}
-{% elsif page.collection == "resource" %}
-  {% assign posts = site.resource %}
+{% elsif page.collection == "resources" %}
+  {% assign posts = site.resources %}
 {% elsif paginator %}
   {% assign posts = paginator.posts %}
 {% else %}
