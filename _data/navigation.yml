@@ -5,7 +5,7 @@ main:
   - title: "博客"
     url: "/blog/"
   - title: "观点"
-    url: "/ideas/"
+    url: "/idea/"
   - title: "资源"
     url: "/resources/"
   - title: "科研"

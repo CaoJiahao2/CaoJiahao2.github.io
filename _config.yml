@@ -164,7 +164,7 @@ author:
       url: "https://huggingface.co/Jiahao28"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/caojiahao2828/"
+      url: "https://www.instagram.com/caojiahaojiahao?igsh=anFpYmQxd3B6NXho"
 
 # Site Footer
 footer:
@@ -189,7 +189,7 @@ footer:
     #   url: "https://bitbucket.org/"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://www.instagram.com/caojiahao2828/"
+      url: "https://www.instagram.com/caojiahaojiahao?igsh=anFpYmQxd3B6NXho"
     - label: "bilibili"
       icon: "fab fa-fw fa-bilibili"
       url: "https://space.bilibili.com/652150415" # Replace with your actual bilibili URL
@@ -288,7 +288,7 @@ paginate_path: /page:num/
 #   for configuration details
 pagination:
   # Set enabled to true to use paginate v2
-  # enabled: true
+  enabled: true
   debug: false
   collection: 'posts'
   per_page: 10
@@ -367,16 +367,16 @@ collection:
     permalink: /collection/:path/
   idea:
     output: true
-    permalink: /collection/:path/
+    permalink: /idea/:path/
   resources:
     output: true
-    permalink: /collection/:path/
+    permalink: /resources/:path/
   research:
     output: true
-    permalink: /collection/:path/
+    permalink: /research/:path/
   life:
     output: true
-    permalink: /collection/:path/
+    permalink: /life/:path/
   # photography:
   #   output: true
   #   permalink: /collection/:path/
