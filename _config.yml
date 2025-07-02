@@ -312,6 +312,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+  - jekyll-archives
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -339,16 +340,19 @@ tag_archive:
   type: liquid
   path: /tags/
 # https://github.com/jekyll/jekyll-archives
-# jekyll-archives:
-#   enabled:
-#     - categories
-#     - tags
-#   layouts:
-#     category: archive-taxonomy
-#     tag: archive-taxonomy
-#   permalinks:
-#     category: /categories/:name/
-#     tag: /tags/:name/
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: archive-taxonomy
+    tag: archive-taxonomy
+  permalinks:
+    year: /:year/
+    month: /:year/:month/
+    day: /:year/:month/:day/
+    category: /categories/:name/
+    tag: /tags/:name/
 
 
 # HTML Compression
@@ -360,7 +364,22 @@ compress_html:
 collection:
   navi:
     output: true
-    permalink: /navi/:path/
+    permalink: /collection/:path/
+  idea:
+    output: true
+    permalink: /collection/:path/
+  resources:
+    output: true
+    permalink: /collection/:path/
+  research:
+    output: true
+    permalink: /collection/:path/
+  life:
+    output: true
+    permalink: /collection/:path/
+  # photography:
+  #   output: true
+  #   permalink: /collection/:path/
 
 # Defaults
 defaults:
@@ -386,12 +405,51 @@ defaults:
       layout: single
       author_profile: true
       share: true
+      classes: wide
   # _navi
   - scope:
-      path: "_navi"
+      path: ""
       type: navi
     values:
       layout: single
       author_profile: true
       share: true
       classes: wide
+  # _idea
+  - scope:
+      path: ""
+      type: idea
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      toc: true
+  # _resources
+  - scope:
+      path: ""
+      type: resources
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      toc: true
+      comments: true
+  # _research
+  - scope:
+      path: ""
+      type: research
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      toc: true
+  # _life
+  - scope:
+      path: ""
+      type: life
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      toc: true
+      comments: true
