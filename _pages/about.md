@@ -35,9 +35,9 @@ tags: [个人简历, 教育经历, 研究项目, 荣誉奖项, 技能认证, 学
   - 计算机科学与技术学院 计算机科学与技术专业  
     School of Computer Science and Technology, Computer Science and Technology Major  
     GPA: 3.79 / 4.0  
-  - 土木与水利工程学院 土木工程专业卓越计划（双学位）  
+  <!-- - 土木与水利工程学院 土木工程专业卓越计划（双学位）  
     School of Civil and Hydraulic Engineering, Civil Engineering Excellence Program (Double Degree)  
-    GPA: 3.79 / 4.0（专业排名前5/82 | Top 5/82 in major）  
+    GPA: 3.79 / 4.0（专业排名前5/82 | Top 5/82 in major）   -->
   - 学士学位 / Bachelor of Science
 
 - **硕士 / Master's**  
