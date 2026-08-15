@@ -1,7 +1,7 @@
 ---
 title:  "最先进 LLM 与 MLLM 及图像/视频生成模型调研（2025 年版）"
 header:
-  teaser: "/assets/images/500x300.png"
+  teaser: "/assets/images/og-default.png"
 categories: 
     - AI
     - 模型

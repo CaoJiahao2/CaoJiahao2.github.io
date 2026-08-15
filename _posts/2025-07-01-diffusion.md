@@ -1,7 +1,7 @@
 ---
 title:  "diffusion 模型调研（2025 年版）"
 header:
-  teaser: "/assets/images/500x300.png"
+  teaser: "/assets/images/og-default.png"
 categories: 
     - AI
     - 模型

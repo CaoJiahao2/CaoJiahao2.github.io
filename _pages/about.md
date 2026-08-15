@@ -1,170 +1,110 @@
 ---
 title: 曹佳豪 - Cao Jiahao
-description: 曹佳豪的个人简历，包含教育经历、研究项目、荣誉奖项、技能认证、学生工作及志愿服务经历等信息。
+description: 曹佳豪的个人简历，华中科技大学软件工程硕士研究生，研究方向为多模态大模型、AIGC、计算机视觉与 AI 应用开发。
 date: 2025-07-01
 permalink: /about/
-tags: [个人简历, 教育经历, 研究项目, 荣誉奖项, 技能认证, 学生工作, 志愿服务]
+tags: [个人简历, 多模态大模型, AIGC, 计算机视觉, AI应用开发]
 ---
 
-<div align="center">
-  <h1>个人简历 / Resume</h1>
-</div>
+<p style="text-align:center;font-size:1.1rem;color:#888;">
+  <a href="/about-en/">English Version / 英文版</a>
+</p>
 
-<div style="display: flex; width: 100%;">
-  <div style="flex: 2; text-align: center; display: flex; flex-direction: column; justify-content: center;">
-    <b>联系方式 / Contact</b><br>
-    📞 +86 182-7352-3582 | ✉️ m202476943@hust.edu.cn<br>
-    🏠 湖北省武汉市洪山区珞喻路1037号华中科技大学<br>
-     HUST, No. 1037, Luoyu Road, Hongshan District, Wuhan, Hubei, China<br>
-    2003-02 | 男 | 汉族 | 湖南郴州人 | 中共党员<br>
-    2003-02 | Male | Han Chinese | Chenzhou, Hunan | CPC Member<br>
-    <b>研究方向 / Research Interests</b>：人工智能、计算机视觉、模式识别<br>
-    Artificial Intelligence, Computer Vision, Pattern Recognition
+<div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start; justify-content: space-between; margin: 1.5rem 0;">
+  <div>
+    <p><strong>电话 / 微信：</strong>18273523582</p>
+    <p><strong>邮箱：</strong><a href="mailto:caojiahao@hust.edu.cn">caojiahao@hust.edu.cn</a></p>
+    <p><strong>年龄：</strong>23 岁</p>
+    <p><strong>擅长领域：</strong>大模型 / CV / AIGC 算法工程师</p>
   </div>
-  <div style="flex: 1; display: flex; justify-content: flex-end; align-items: center;">
-    <img src="../assets/images/profile.jpg" alt="Profile Photo" width="220" height="280">
-  </div>
+  <img src="/assets/images/profile.jpg" alt="曹佳豪" width="220" height="293" loading="lazy" decoding="async">
 </div>
 
----
+## 教育背景
 
-## 教育经历 / Education
+### 华中科技大学（985）· 软件工程（A+ 学科）· 视觉与特征学习实验室 · 硕士（保研）
+*2024.09 – 2027.06*
 
-- **本科 / Undergraduate**  
-  **华中科技大学 / Huazhong University of Science and Technology** (2020.09 – 2024.06)  
-  - 计算机科学与技术学院 计算机科学与技术专业  
-    School of Computer Science and Technology, Computer Science and Technology Major  
-    GPA: 3.79 / 4.0  
-  <!-- - 土木与水利工程学院 土木工程专业卓越计划（双学位）  
-    School of Civil and Hydraulic Engineering, Civil Engineering Excellence Program (Double Degree)  
-    GPA: 3.79 / 4.0（专业排名前5/82 | Top 5/82 in major）   -->
-  - 学士学位 / Bachelor of Science
+- **导师：**白翔（杰青、IEEE Fellow）
+- **研究方向：**多模态大模型、AIGC、计算机视觉、AI 应用开发
 
-- **硕士 / Master's**  
-  **华中科技大学 / Huazhong University of Science and Technology** (2024.09 – 至今 / Present)  
-  - 软件工程学院 软件工程专业  
-    School of Software Engineering, Software Engineering Major  
-    研究方向 / Research: 人工智能、计算机视觉、模式识别  
-    Supervisor: Professor Bai Xiang  
-  - 相关荣誉 / Awards:  
-    - 华中科技大学启明学院本科特优生（本科学术最高荣誉，全校综合占比约3%）  
-      HUST Qiming College Outstanding Undergraduate Student (top academic honor, top 3% of the school)
-    - 研究生一等学业奖学金，学习优秀奖学金，学习进步奖学金，社会实践优秀个人，科技创新一等助学金  
-      First-class Graduate Academic Scholarship, Academic Excellence Scholarship, Academic Progress Scholarship, Outstanding Social Practice Individual, First-class Scholarship for Technological Innovation
-  - 部分课程成绩 / Key Courses:  
-    - MATLAB（100）、计算机组成原理（91）、数据库（90）、数字电路（87）、大学物理（96）、机械制造技术（95）、有限单元法（94）  
-      MATLAB (100), Computer Organization (91), Database (90), Digital Circuit (87), College Physics (96), Manufacturing Technology (95), Finite Element Method (94)
+### 华中科技大学（985）· 智能建造（计算机辅修学位）· 卓越工程师计划实验班 · 本科
+*2020.09 – 2024.06*
 
----
+- **综测排名：**5/82
+- **荣誉奖项：**华中科技大学本科特优生（占比约 3%）、科技创新一等奖学金、学习优秀奖学金等
 
-## 主要研究与创新项目经历 / Major Research & Innovation Projects
+## 实习经历
 
-- 参加校知名互联网创新团队冰岩作坊举办的夏令营，负责移动端APP开发 (2022.07 – 2022.08)  
-  Participated in Bingyan Studio summer camp, responsible for mobile APP development
-- 参加校RobotMaster机器人创新团队狼牙战队举办的夏令营 (2022.07)  
-  Participated in Langya team summer camp
-- 智能感知与自动驾驶本科生创新团队成员，围绕智能感知和自动驾驶技术进行学习和科研 (2022.10–2024.06)  
-  Member of undergraduate innovation team for intelligent perception and autonomous driving
-- 大创项目“基于单目图像的3D目标检测研究”团队成员 (2023.03–2024.04)  
-  Member of "Research on 3D Object Detection Based on Monocular Images" project
-- 2023年“挑战杯”创新创业大赛“揭榜挂帅”专项赛道-城市排水管道智能作业机器人系统研究赛题团队成员 (2023.03–11)  
-  Member of "Challenge Cup" innovation and entrepreneurship competition team
+### 图灵人工智能研究院（南京）· 视觉算法工程师
+*2026.06 – 至今*
 
----
+#### 通用工业缺陷检测大模型
+*核心技术栈：多模态 VLM / LoRA 微调 / vLLM 部署*
 
-## 主要荣誉奖项 / Major Honors & Awards
+- **项目背景：**传统工业质检方案需逐产品单独训练模型，泛化差、迭代成本高。基于 **Qwen3.5-4B** VLM 大模型，构建覆盖鞋类、服装、PCB 等 **7 个工业领域**的通用缺陷检测系统，用一套基座 + 多域 LoRA 实现跨领域复用和高效部署。
+- **训练流程：**
+  - 数据层：整合归一化 7 类工业数据集，统一标注格式，设计 bbox 坐标归一化至 [0,1000] 的标准化管线。
+  - **SFT 阶段：**设计三阶段**渐进训练**——Stage1 仅学习边界框定位，Stage2 引入缺陷分类，Stage3 注入领域缺陷先验（如服装领域的"勾丝、油污、起球"等），逐步增加任务复杂度。
+  - **DPO 阶段：**构建误检抑制、漏检抑制、定位质量三类偏好对，通过 DPO 进一步优化模型的缺陷判断边界。
+- **工程部署：**基于 vLLM 实现单卡多 LoRA 常驻，通过权重原地加减法实现**请求级毫秒热切换（<10ms）**，7 个适配器共约 500MB 常驻显存；设计分块推理 + 聚合 + NMS 的完整后处理流水线，提升小目标检测能力。
+- **性能效果：**微调后各领域检测精度显著提升——金属领域 mIoU 从基座 0.11 提升至 **0.50（+4.4×）**，医疗器械 Precision 达 **70.6%**；7 个领域共享基座模型，切换延迟 <10ms，单张推理 1-2s，满足产线实时检测需求。
 
-- 第十八届“挑战杯”揭榜挂帅专项赛道城市排水管道智能作业机器人系统研究赛题 (2023.05) - 擂主得主  
-  18th "Challenge Cup" Special Prize
-- 第十四届全国周培源大学生力学竞赛（个人赛） (2023.05) - 国家三等奖  
-  14th National Zhou Peiyuan College Student Mechanics Competition - National Third Prize
-- 第十三届全国大学生奥林匹克数学竞赛（冬季赛） (2023.01) - 非数学类优秀奖  
-  13th National College Student Olympic Mathematics Competition - Excellence Award
-- 美国大学生数学建模大赛 (2022.02) - S奖  
-  Mathematical Contest in Modeling - S Award
-- 校结构力学“静定结构内力图”大赛 (2022.05) - 二等奖  
-  School Structure Mechanics Competition - Second Prize
+#### 基于 SAM 的泡沫检测与绵密度量化系统
+*核心技术栈：视觉基础模型 / PEFT*
 
----
+- **项目背景：**面向日化行业泡沫质量评估需求，基于 **SAM3.1（约 850M）**视觉大模型，构建端到端自动评估系统（手臂分割 → 泡沫实例分割 → 绵密度量化），替代传统人工打分评估。
+- **LoRA 参数高效微调：**针对小样本数据集（500 张标注样本）场景，对 ViT Backbone、DETR Encoder/Decoder、Mask Decoder 注入 LoRA（rank=16），可训参数仅约 **11M（占基座 1.3%）**；设计在线增强管线（翻折/旋转/裁剪/色彩抖动），泡沫分割 F1@0.50 较零样本提升约 **18%**，有效缓解小样本过拟合。
+- **多因子绵密度量化：**设计三因子融合评分模型——几何因子（覆盖率+填充率）、光度因子（泡沫-皮肤亮度差+白度比例）、纹理因子（多尺度泡孔检测+泡孔密度/均匀性），加权融合输出 L1~L5 等级，与人工评级一致性 **85%+**。
 
-## 实习与社会实践 / Internships & Social Practice
+## 项目 / 科研经历
 
-- 华中科技大学图书馆助管 (2023.09–2024.05)  
-  Library Assistant at HUST Library
-- 中国建筑第三工程局有限公司实习生 (2023.07–2023.08)  
-  Intern at China State Construction Engineering Corporation Third Bureau
-- “湖南省汝城县沙洲村乡村振兴”返家乡社会实践队 队长 (2021.01)  
-  Leader of "Rural Revitalization of Shazhou Village" social practice team
-- “武汉市杜堂村乡村振兴”暑假三下乡思政课社会实践队 队员 (2021.07)  
-  Member of "Rural Revitalization of Dutang Village" summer social practice team
+### 面向水下场景理解的视觉特征增强 MLLM
+*多模态大模型 · 2024.11 – 2025.04*
 
----
+- **项目背景：**面向水下低光、浑浊、偏色等退化场景，基于 LLaVA-1.5 / Qwen2.5-VL 构建多模态理解框架，覆盖粗/细粒度分类、检测、计数、指代定位、图像描述、VQA 等 **8 类任务**，支持图像/区域/目标级的**统一指令交互**。
+- **数据工程：**整合公开水下数据集，构建约 **15.8 万张图像、145 万组图文** QA 指令数据；针对检测、分类等任务设计规则模板生成，开放语言标签引入 MLLM 生成，结合质量筛选与人工复核流程，提升数据覆盖度与问答一致性。
+- **核心方法：**基于水下成像模型将退化拆解为**后向散射干扰 + 吸收衰减**；通过最低平均 RGB patch 定位暗 token，利用**交叉注意力**估计散射响应，结合深度特征预测吸收权重，在特征空间恢复退化视觉信息。
+- **训练结果：**4 卡 A800-80GB 联合训练 **LoRA（rank=128）+ vision-language 投影层 + 视觉特征增强模块**；相对 baseline（通用 MLLM），实现分类 **+5.6%**、Grounding PR@0.5 **+4.3** 等性能提升，在低光、偏色等退化子集上增益稳定。
 
-## 主要能力与技能认证 / Skills & Certifications
+### 基于 FLUX 的多视角同步生成图像系统
+*多模态生成 / 扩散模型 · 2026.01 – 2026.04*
 
-- CET6: 545 | CET4: 548 | 全国计算机等级考试二级C++、Python，三级、四级网络技术：通过  
-  National Computer Rank Examination Level 2 C++, Python, Level 3, Level 4 Network Technology: Passed
-- 熟练掌握 C、C++、Python、MATLAB 等主流编程语言和经典算法框架  
-  Proficient in C, C++, Python, MATLAB and classical algorithm frameworks
-- 能熟练运用 CAD、ANSYS、EndNote、LaTeX 等工具进行分析、建模、仿真和文献管理  
-  Proficient in CAD, ANSYS, EndNote, LaTeX for analysis, simulation, and literature management
-- 熟悉模式识别、机器学习、深度学习、Linux 操作系统等前沿知识  
-  Familiar with pattern recognition, machine learning, deep learning, Linux OS
-- 有充分的人工智能和计算机科学与技术专业基础，并有计算机视觉项目经历  
-  Solid foundation in AI and computer science, with project experience in computer vision
-- 数理基础扎实，具有较强的力学功底，了解智能建造方向  
-  Strong foundation in mathematics and physics, with solid mechanics background and understanding of intelligent construction
+- **项目背景：**针对通用文生图模型在多视角生成中容易出现主体身份漂移、局部细节错位等问题，基于 **FLUX.1-dev（4B）**搭建多视角同步生成系统，利用 UE 渲染得到的多视角数据进行训练。
+- **多视角同步建模：**在 FLUX Transformer 中插入轻量级多视角同步模块，将不同视角的 image tokens 重组为多视角特征表示，融合 12 维相机外参与视角位置编码，建立跨视角 token 级信息交互，实现 N-view 间全局语义与局部细节联合建模。
+- **稳定训练策略：**冻结 FLUX.1-dev 主干参数，单卡 4090-48G 训练新增模块；采用残差分支零初始化、间隔式插入同步层和单视角复制训练策略，使模型训练初期接近原始输出，再逐步学习跨视角信息交互对齐能力。
+- **实验与效果验证：**跨视角匹配点数量提升约 **1.6×**，跨视角 CLIP 相似度提升 **5%–8%**；CLIP-T 基本保持稳定，FID 增幅控制在 **10%** 以内；多图间局部细节更加一致。
 
----
+## 专业能力
 
-## 学生工作与志愿服务 / Student Work & Volunteering
+- 熟练掌握 **Python、C/C++** 等语言及 **swift、transformers、diffusers、ollama、LangChain** 等 AI 领域常用框架。
+- 深刻理解**多模态对齐、大模型后训练、参数微调、模型部署**等 AI 核心原理，具备 **AIGC/多模态**相关项目实践经验。
+- 熟练使用 Claude Code、Codex、Cursor 等 AI 辅助开发工具，长期关注 **AI 智能体、具身智能、RL** 等前沿方向。
 
-- 图书馆下属学生社团“知行学社”会长兼团支部书记 (2022.03–2023.03)  
-  President and Secretary of "Zhixing Society" student association
-- 大学生创新创业中心创业实践部成员 (2022.09–2023.09)  
-  Member of Entrepreneurship Practice Department
-- 华中科技大学土木与水利工程学院学生会学业发展支持中心成员 (2020.09–2021.09)  
-  Member of Academic Development Support Center
-- 大学生创业学校：点石创校第13期 (2023.09–11)  
-  HUST Entrepreneurship School: Dianshi Entrepreneurship School 13th Session
-- 青马工程青禾干部训练营 (2020.10–12)  
-  Qingma Project Qinghe Cadre Training Camp
-- “鸿鹄计划”研究生新生骨干训练营 (2024.08–12)  
-  "Honghu Plan" Graduate Freshman Backbone Training Camp
-- 2022级新生迎新志愿者 (2022.09)  
-  Volunteer for welcoming new students
+## 竞赛经历
 
----
+- 第十八届"挑战杯"揭榜挂帅专项赛 | 城市排水管道智能作业机器人系统研究 —— **总决赛擂主**（2023.09）
+- "华为杯"第二十二届中国研究生数学建模竞赛 —— **全国二等奖**（2025.09）
 
-## 个人陈述 / Personal Statement
+## 联系 & 赞赏
 
-- **学术与专业背景 / Academic & Professional Background**  
-  我是一名热爱计算机科学与技术的研究生，拥有扎实的数学和物理基础，擅长编程和算法设计。我的研究兴趣主要集中在人工智能、计算机视觉和模式识别领域，曾参与多个创新项目，并在各类竞赛中取得优异成绩。  
-  I am a passionate graduate student in computer science and technology, with a solid foundation in mathematics and physics, skilled in programming and algorithm design. My research interests focus on artificial intelligence, computer vision, and pattern recognition. I have participated in several innovative projects and achieved excellent results in various competitions.
-
-- **个人品质与能力 / Personal Qualities & Abilities**  
-  我性格开朗，乐于助人，具备良好的团队合作精神和沟通能力。在校期间，积极参与学生工作和志愿服务活动，锻炼了组织能力与领导能力。  
-  I am cheerful and helpful, with strong teamwork and communication skills. During my studies, I actively participated in student work and volunteer activities, which enhanced my organizational and leadership abilities.
-
-- **发展目标与展望 / Goals & Vision**  
-  我希望通过不断学习和实践，持续提升专业技能，为社会发展贡献力量。未来将继续深入计算机视觉和智能建造等领域的学习与研究，探索创新，推动科技进步。  
-  I hope to continuously improve my professional skills through ongoing learning and practice, contributing to social development. In the future, I will further explore and research in computer vision and intelligent construction, striving for innovation and technological advancement.
-
-- **合作与交流 / Collaboration & Communication**  
-  希望与更多志同道合的朋友交流合作，共同成长、共同进步，为社会和科技的发展贡献自己的力量。  
-  I look forward to communicating and collaborating with more like-minded peers, growing and progressing together, and contributing to the development of society and technology.
-
-  ---
-
-## 联系&赞赏 / Contact & Appreciation
-<img src="../assets/images/wechat.jpg" alt="Wechat" width="240" height="280">
-<img src="../assets/images/QQ.jpg" alt="QQ" width="240" height="280">
-<img src="../assets/images/reward-code.jpg" alt="Reward Code" width="240" height="280">
-<img src="../assets/images/zifubao.png" alt="支付宝" width="240" height="280">
-
-<div style="text-align: center; margin-top: 20px;">
-  <p>如果您觉得我的工作对您有所帮助，愿意请我喝杯奶茶，请扫码打赏</p>
-  <p>If you find my work helpful and would like to treat me to a bubble tea<br>please scan the code to donate.</p>
-  <p>欢迎随时联系我！</p>
-  <p>please feel free to reach out!</p>
+<div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:1rem 0;">
+  <figure>
+    <img src="/assets/images/wechat.jpg" alt="Wechat" width="240" height="280" loading="lazy" decoding="async">
+    <figcaption>微信</figcaption>
+  </figure>
+  <figure>
+    <img src="/assets/images/QQ.jpg" alt="QQ" width="240" height="280" loading="lazy" decoding="async">
+    <figcaption>QQ</figcaption>
+  </figure>
+  <figure>
+    <img src="/assets/images/reward-code.jpg" alt="Reward Code" width="240" height="280" loading="lazy" decoding="async">
+    <figcaption>赞赏码</figcaption>
+  </figure>
+  <figure>
+    <img src="/assets/images/zifubao.png" alt="支付宝" width="240" height="280" loading="lazy" decoding="async">
+    <figcaption>支付宝</figcaption>
+  </figure>
 </div>
+
+<p style="text-align:center;margin-top:1.5rem;">如果您觉得我的工作对您有所帮助，愿意请我喝杯奶茶，请扫码打赏；也欢迎随时联系我！</p>

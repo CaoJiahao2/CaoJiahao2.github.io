@@ -1,7 +1,7 @@
 ---
 title:  "机器学习概述"
 header:
-  teaser: "/assets/images/500x300.png"
+  teaser: "/assets/images/og-default.png"
 categories: 
     - machine learning
     - tutorial

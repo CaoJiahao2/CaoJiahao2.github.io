@@ -2,7 +2,7 @@
 
 CaoJiahao:
   name   : "Cao Jiahao"
-  bio    : "Ph.D. student in AI, focusing on computer vision and deep learning. Passionate about sharing knowledge and building open-source projects."
+  bio    : "Master's student in Software Engineering at HUST, focusing on multimodal LLMs, AIGC, computer vision, and AI applications. Passionate about sharing knowledge and building open-source projects."
   avatar : "/assets/images/profile.jpg"
   links:
     - label: "Email"

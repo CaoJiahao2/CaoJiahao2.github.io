@@ -27,6 +27,9 @@ layout: default
       {%- when "lunr" -%}
         <input type="text" id="search" class="search-input" placeholder="{{ site.data.ui-text[site.locale].search_placeholder_text | default: 'Enter your search term...' }}" />
         <div id="results" class="results"></div>
+      {%- when "custom" -%}
+        <input type="text" id="search" class="search-input" placeholder="{{ site.data.ui-text[site.locale].search_placeholder_text | default: '输入关键词搜索文章、标签、分类...' }}" />
+        <div id="results" class="results"></div>
       {%- when "google" -%}
         <form onsubmit="return googleCustomSearchExecute();" id="cse-search-box-form-id">
         <input type="text" id="cse-search-input-box-id" class="search-input" placeholder="{{ site.data.ui-text[site.locale].search_placeholder_text | default: 'Enter your search term...' }}" />

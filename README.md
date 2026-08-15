@@ -1,98 +1,67 @@
-# 最先进 LLM 与 MLLM 及图像/视频生成模型调研（2025 年版）
+# CaoJiahao2.github.io — 个人主页
 
-> 本文档系统梳理了 2025 年最新的开源与闭源大语言模型（LLM）、多模态语言模型（MLLM），以及图像/视频生成模型，按照模型类型与开放程度进行分类，并提供权威链接。
+Cao Jiahao 的个人主页，基于 [Jekyll](https://jekyllrb.com/) 与 [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) 主题构建，通过 GitHub Pages 部署。
 
----
+## 站点结构
 
-## 目录
+站点包含以下主要栏目（导航栏入口）：
 
-1. [文本型 LLM（Text-only LLM）](#1-文本型-llmtext-only-llm)
+- **首页** `/` —— 欢迎语与最新文章列表
+- **博客** `/blog/` —— 全部博客文章（`_posts/`）
+- **观点** `/idea/` —— 观点集合（`_idea/`）
+- **资源** `/resources/` —— 资源集合（`_resources/`）
+- **科研** `/research/` —— 科研集合（`_research/`）
+- **生活** `/life/` —— 生活集合（`_life/`）
+- **光影** `/photography/` —— 摄影集合（`_photography/`）
+- **关于我** `/about/` —— 中文简历，另有 `/about-en/` 英文版
 
-   * [1.1 开源模型](#11-开源模型)
-   * [1.2 闭源模型](#12-闭源模型)
-2. [多模态语言模型 MLLM](#2-多模态语言模型-mllm)
+## 本地构建
 
-   * [2.1 开源模型](#21-开源模型)
-   * [2.2 闭源模型](#22-闭源模型)
-3. [图像/视频生成模型](#3-图像视频生成模型)
+本地使用与 GitHub Pages 一致的环境（通过 `github-pages` gem）：
 
-   * [3.1 开源模型](#31-开源模型)
-   * [3.2 闭源模型](#32-闭源模型)
-4. [总结与建议](#4-总结与建议)
+```bash
+bundle install
+bundle exec jekyll serve   # 本地预览 http://127.0.0.1:4000
+bundle exec jekyll build   # 构建到 _site/
+```
 
----
+### 常见问题
 
-## 1. 文本型 LLM（Text-only LLM）
+- 安装依赖较慢时，可参照 GitHub 官方文档配置 Ruby 与 Bundler。
+- 若 gem 安装失败，尝试 `bundle update` 或更换镜像源。
 
-### 1.1 开源模型
+## 如何新增内容
 
-* **[Meta LLaMA 3](https://ai.meta.com/llama/)**：包括 8B 与 70B 两种规模，训练数据包含多语种与代码，支持 128K context。
-* **[Mistral AI（Mixtral 8x7B、Mistral Small/Medium）](https://mistral.ai/news/mixtral-of-experts/)**：强大的 MoE 架构开源模型，推理效率优，开源社区活跃。
-* **[Falcon 180B](https://huggingface.co/tiiuae/falcon-180B)**：由 TII 发布的大规模 Transformer，表现优异。
-* **[DeepSeek-V2](https://github.com/deepseek-ai/DeepSeek-V2)**：来自清华背景团队的研究模型，强调推理能力与压缩效率。
-* **[DBRX (Databricks)](https://databricks.com/blog/introducing-dbrx-a-general-purpose-open-llm)**：MoE 架构，性能优于 LLaMA 2。
-* **[Qwen 系列（Qwen 1.5/2.5/3）](https://github.com/QwenLM/Qwen)**：阿里出品，支持中文、代码、多模态输入。
-* **[GPT-J / GPT-NeoX-20B](https://github.com/EleutherAI/gpt-neox)**：EleutherAI 社区实现的 GPT 替代品。
+- **博客文章**：在 `_posts/` 下新建 `YYYY-MM-DD-slug.md`，front matter 参考现有文章（`layout: single`、`categories`、`tags` 等）。
+- **集合文章**：在对应集合目录（如 `_research/`、`_life/`）下新建文档，front matter 参考 `_resources/2025-07-02-resources.md`。
+- **页面**：在 `_pages/` 下新建 `.md`，通过 `permalink` 控制访问路径。
 
-### 1.2 闭源模型
+## 配置说明
 
-* **[GPT-4 / GPT-4o (OpenAI)](https://openai.com/index/gpt-4o/)**：支持文本、图像、音频的高级模型，推理能力极强。
-* **[Claude 3 (Anthropic)](https://www.anthropic.com/index/claude)**：支持 200K 上下文，逻辑、推理任务表现优秀。
-* **[Gemini 1.5/2.5 (Google DeepMind)](https://deepmind.google/technologies/gemini/)**：支持长上下文和多模态能力。
-* **[ERNIE 4.0/4.5 Turbo（百度）](https://wenxin.baidu.com/ernie/)**：大语言模型 + 知识增强的代表。
+- 站点元信息、导航、评论、搜索等均在 `_config.yml` 中配置。
+- **评论（Giscus）**：评论使用 Giscus，需先在仓库启用 Discussions，然后在 [giscus.app](https://giscus.app) 生成 `repo_id` / `category_id`，填入 `_config.yml` 的 `comments.giscus` 对应字段。
+- **搜索**：站内搜索为轻量自定义方案，索引由 Jekyll 在构建时生成于 `/search.json`，支持中文匹配。
 
----
+## 部署
 
-## 2. 多模态语言模型 MLLM
+推送 `master`（或 `main`）分支后，GitHub 自动通过 GitHub Pages 构建并发布。仓库设置中的 Pages 需指向正确的分支与目录（通常为 `/ (root)`）。
 
-### 2.1 开源模型
+## 目录速览
 
-* **[InternVL3-78B](https://github.com/OpenGVLab/InternVL)**：多模态对齐效果强，表现出色。
-* **[Aria (Shanghai AI Lab)](https://github.com/aria-vision/aria-7b)**：支持图文并茂的推理。
-* **[Qwen-VL / Qwen-Omni 系列](https://github.com/QwenLM/Qwen-VL)**：多模态理解与生成能力均衡，支持图像、音频、视频。
-* **[LLaVA-Next / LLaVA-1.5](https://github.com/haotian-liu/LLaVA)**：与 LLaMA 相结合的多模态视觉问答模型。
-* **[VILA / VIM (Xverse)](https://github.com/X-PLUG/VILA)**：全模态对齐能力强，支持 VQA、视频问答等任务。
-* **[VILA-1.5](https://github.com/X-PLUG/VILA)**：通用型视觉语言基础模型。
+```
+_pages/       页面（关于、科研、生活、光影等）
+_posts/       博客文章
+_idea/        观点集合
+_resources/   资源集合
+_research/    科研集合（待补充内容）
+_life/        生活集合（待补充内容）
+_photography/ 摄影集合（待补充内容）
+_includes/    主题组件
+_layouts/     页面布局
+_sass/        Sass 样式
+assets/       图片、CSS、JS 资源
+```
 
-### 2.2 闭源模型
+## 许可
 
-* **[GPT-4o (OpenAI)](https://openai.com/index/gpt-4o/)**：OpenAI 全模态旗舰，支持实时语音、图像、文本混合输入。
-* **[Gemini 2.5 (Google)](https://deepmind.google/technologies/gemini/)**：支持文图音视频一体化处理。
-* **[Claude 3.5 Sonnet/Opus (Anthropic)](https://www.anthropic.com/index/claude)**：可用于视觉理解、表格推理等复杂任务。
-* **[ERNIE X1 / 4.5 Turbo（百度）](https://wenxin.baidu.com/ernie/)**：文图音视频一体支持，嵌入飞桨生态。
-
----
-
-## 3. 图像/视频生成模型
-
-### 3.1 开源模型
-
-* **[Stable Diffusion XL](https://stability.ai/news/stable-diffusion-xl-release)**：最流行的开源文本生成图像模型之一。
-* **[SD Turbo](https://github.com/Stability-AI/stable-diffusion-turbo)**：实时推理优化，适合部署与互动。
-* **[PixArt-α (2024)](https://huggingface.co/PixArt-alpha)**：基于 DiT 架构，生成质量接近 MidJourney。
-* **[Sora 风格开源模型（如 Moonshot-Vid / Open-Sora）](https://github.com/AILab-CVC/Open-Sora)**：模仿 OpenAI Sora 的视频生成模型。
-* **[AnimateDiff](https://github.com/guoyww/AnimateDiff)**：基于 StableDiffusion 动画生成器。
-* **[VideoCrafter2](https://github.com/VideoCrafter/VideoCrafter2)**：文本生成视频的强大开源方案。
-* **[ModelScope T2V](https://modelscope.cn/models/damo/text-to-video-synthesis/summary)**：阿里达摩院视频生成模型。
-
-### 3.2 闭源模型
-
-* **[Sora (OpenAI)](https://openai.com/sora)**：文本到高清视频生成的强模型，闭源但展示能力惊人。
-* **[Pika Labs](https://www.pika.art/)**：实时视频生成功能，支持语义控制与风格迁移。
-* **[Runway Gen-2](https://runwayml.com/)**：视频编辑与生成工具，深受艺术家欢迎。
-* **[Google Lumiere](https://google-research.github.io/lumiere/)**：先进的视频生成模型，基于时空一致性优化。
-* **[Kling AI（字节跳动）](https://klingai.com/)**：视频生成接近 Sora 的水准，尚处于灰度内测阶段。
-
----
-
-## 4. 总结与建议
-
-* 如果你追求 **最强性能 + 最多模态能力**，可选择 GPT-4o、Gemini、Claude 3.5。
-* 偏好 **可控性 + 自主训练部署**，建议使用 Qwen、InternVL、Mistral、LLaVA 系列。
-* 在图像/视频生成方面，**Stable Diffusion XL + AnimateDiff + VideoCrafter2** 是最佳开源路线，闭源方向可持续关注 **Sora / Lumiere / Kling**。
-* 多模态时代已经来临，建议提前构建包括图像/文本/音频/视频的 **统一推理链路**，为构建 Agent 与 Embodied AI 做准备。
-
----
-
-*本报告持续更新，后续将纳入评测指标（MMMU、MMLU、MT-Bench 等）、推理速度、部署可行性、应用案例等方面。*
-> 联系与协作：欢迎通过 [OpenAI API](https://platform.openai.com) 或 [Hugging Face](https://huggingface.co/models) 获取模型接口与文档。
+个人主页内容归作者所有；主题代码基于 [MIT License](LICENSE) 的 Minimal Mistakes。

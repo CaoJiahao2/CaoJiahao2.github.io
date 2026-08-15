@@ -14,5 +14,7 @@ main:
     url: "/life/"
   - title: "光影"
     url: "/photography/"
+  - title: "搜索"
+    url: "/search/"
   - title: "关于我"
     url: "/about/"

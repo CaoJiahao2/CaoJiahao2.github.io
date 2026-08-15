@@ -1,7 +1,7 @@
 ---
 title:  "研究生阅读深度学习学术文献的技巧与策略"
 header:
-  teaser: "/assets/images/500x300.png"
+  teaser: "/assets/images/og-default.png"
 categories: 
   - research
   - deep learning

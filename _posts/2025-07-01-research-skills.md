@@ -1,7 +1,7 @@
 ---
 title:  "深度学习研究全流程技能指南"
 header:
-  teaser: "/assets/images/500x300.png"
+  teaser: "/assets/images/og-default.png"
 categories: 
   - research
   - deep learning

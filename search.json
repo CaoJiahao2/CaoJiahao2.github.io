@@ -1,0 +1,16 @@
+---
+layout: none
+sitemap: false
+---
+[{% assign all_docs = "" | split: "," %}
+{% for c in site.collections %}{% assign all_docs = all_docs | concat: c.docs %}{% endfor %}
+{% for doc in site.pages %}{% if doc.title and doc.sitemap != false %}{% assign all_docs = all_docs | push: doc %}{% endif %}{% endfor %}
+{% for doc in all_docs %}{% unless doc.search == false %}{% unless forloop.first %},{% endunless %}
+  {
+    "title": {{ doc.title | jsonify }},
+    "url": {{ doc.url | relative_url | jsonify }},
+    "excerpt": {{ doc.content | strip_html | normalize_whitespace | truncate: 200 | jsonify }},
+    "tags": {{ doc.tags | jsonify }},
+    "categories": {{ doc.categories | jsonify }},
+    "teaser": {{ doc.header.teaser | default: site.teaser | relative_url | jsonify }}
+  }{% endunless %}{% endfor %}]

@@ -1,7 +1,7 @@
 ---
 title:  "机器学习与深度学习学习资源与可视化平台汇总"
 header:
-  teaser: "/assets/images/500x300.png"
+  teaser: "/assets/images/og-default.png"
 categories: 
     - AI
     - 模型
