@@ -67,11 +67,11 @@ show_date: true
 
 ### 2.2 CLM（因果语言模型）
 
-CLM 是当前 LLM 的标准选择。给定输入序列 $\mathbf{x} = (x_1, x_2, \ldots, x_T)$，模型逐个预测下一个 token，训练目标为最大化对数似然：
+CLM 是当前 LLM 的标准选择。给定输入序列 {::nomarkdown}$\mathbf{x} = (x_1, x_2, \ldots, x_T)${:/nomarkdown}，模型逐个预测下一个 token，训练目标为最大化对数似然：
 
 $$\mathcal{L}_{CLM}(\theta) = \max_{\theta} \sum_{t=1}^{T} \log P_\theta(x_t \mid x_{<t})$$
 
-其中 $x_{<t} = (x_1, \ldots, x_{t-1})$ 表示前 $t-1$ 个 token。在实现上，损失等价于对所有位置的交叉熵：
+其中 {::nomarkdown}$x_{<t} = (x_1, \ldots, x_{t-1})${:/nomarkdown} 表示前 {::nomarkdown}$t-1${:/nomarkdown} 个 token。在实现上，损失等价于对所有位置的交叉熵：
 
 $$\mathcal{L} = -\frac{1}{T} \sum_{t=1}^{T} \log P_\theta(x_t \mid x_{<t})$$
 
@@ -91,7 +91,7 @@ BERT 引入的 MLM 随机遮盖输入中 15% 的 token，让模型预测被遮�
 
 $$\mathcal{L}_{MLM} = -\sum_{i \in \mathcal{M}} \log P_\theta(x_i \mid \mathbf{x}_{\backslash \mathcal{M}})$$
 
-其中 $\mathcal{M}$ 是被遮盖的位置集合，$\mathbf{x}_{\backslash \mathcal{M}}$ 是未被遮盖的 token。
+其中 {::nomarkdown}$\mathcal{M}${:/nomarkdown} 是被遮盖的位置集合，{::nomarkdown}$\mathbf{x}_{\backslash \mathcal{M}}${:/nomarkdown} 是未被遮盖的 token。
 
 由于 MLM 依赖双向上下文，天然适合理解任务，但不适合生成。MLM 的另一个局限是训练-推理不匹配（训练时看到 [MASK]，推理时没有）。
 
@@ -254,11 +254,11 @@ OpenAI 的 Kaplan 等人最早系统研究了 LLM 的 Scaling 行为。主要发
 
 - 模型性能与**模型参数量**、**数据量**、**计算量**三个因素呈幂律关系
 - 在当时条件下，结论是「参数优先」——给定计算预算，应优先增大模型而非数据
-- 跨两个数量级的拟合表明，损失 $L$ 与各因素满足：
+- 跨两个数量级的拟合表明，损失 {::nomarkdown}$L${:/nomarkdown} 与各因素满足：
 
 $$L(N) = \left(\frac{N_c}{N}\right)^{\alpha_N}$$
 
-其中 $N$ 是参数量，$N_c$ 和 $\alpha_N$ 是拟合常数。
+其中 {::nomarkdown}$N${:/nomarkdown} 是参数量，{::nomarkdown}$N_c${:/nomarkdown} 和 {::nomarkdown}$\alpha_N${:/nomarkdown} 是拟合常数。
 
 ### 4.2 Chinchilla Scaling Laws（Hoffmann 2022）
 
@@ -266,10 +266,10 @@ DeepMind 的 Hoffmann 等人对 Kaplan 的结论进行了重要修正：
 
 **核心发现**：参数与数据应**同步增长**，而非参数优先。Kaplan 低估了数据的重要性，原因在于其只分析了少量训练步数。
 
-**Chinchilla 最优**：给定计算预算 $C$（FLOPs），最优分配为：
+**Chinchilla 最优**：给定计算预算 {::nomarkdown}$C${:/nomarkdown}（FLOPs），最优分配为：
 
-- 参数 $N_{opt} \propto C^{0.5}$
-- 数据 $D_{opt} \propto C^{0.5}$
+- 参数 {::nomarkdown}$N_{opt} \propto C^{0.5}${:/nomarkdown}
+- 数据 {::nomarkdown}$D_{opt} \propto C^{0.5}${:/nomarkdown}
 - 约 **20 token / 参数**
 
 **通用损失公式**：
@@ -278,10 +278,10 @@ $$L(N, D) = E + \frac{A}{N^\alpha} + \frac{B}{D^\beta}$$
 
 其中：
 
-- $E$：不可约损失（irreducible loss），反映数据分布的固有熵
-- $A/N^\alpha$：模型容量有限带来的损失
-- $B/D^\beta$：数据量有限带来的损失
-- $\alpha \approx 0.34$，$\beta \approx 0.28$（Chinchilla 拟合结果）
+- {::nomarkdown}$E${:/nomarkdown}：不可约损失（irreducible loss），反映数据分布的固有熵
+- {::nomarkdown}$A/N^\alpha${:/nomarkdown}：模型容量有限带来的损失
+- {::nomarkdown}$B/D^\beta${:/nomarkdown}：数据量有限带来的损失
+- {::nomarkdown}$\alpha \approx 0.34${:/nomarkdown}，{::nomarkdown}$\beta \approx 0.28${:/nomarkdown}（Chinchilla 拟合结果）
 
 **参数效率对照**：
 
@@ -307,7 +307,7 @@ $$L(N, D) = E + \frac{A}{N^\alpha} + \frac{B}{D^\beta}$$
 
 $$L(N, D, E) = E + \frac{A}{N^\alpha} + \frac{B}{D^\beta}\cdot f(E)$$
 
-其中 $E$ 是 epoch 数，$f(E)$ 是重复衰减函数——随 epoch 增加而上升，但渐近趋缓。
+其中 {::nomarkdown}$E${:/nomarkdown} 是 epoch 数，{::nomarkdown}$f(E)${:/nomarkdown} 是重复衰减函数——随 epoch 增加而上升，但渐近趋缓。
 
 **实践启示**：
 - 优先扩充数据来源，而非重复训练
@@ -333,7 +333,7 @@ Wei 等人（2022）观察到，某些能力在模型规模跨越特定阈值后
 | 超参数 | 典型值 | 说明 |
 |--------|--------|------|
 | 优化器 | AdamW | 带解耦权重衰减的 Adam |
-| $\beta_1, \beta_2$ | 0.9, 0.95 | 动量参数 |
+| {::nomarkdown}$\beta_1, \beta_2${:/nomarkdown} | 0.9, 0.95 | 动量参数 |
 | 权重衰减 | 0.1 | 大模型常用较大权重衰减 |
 | 梯度裁剪 | 1.0 | 按全局范数裁剪 |
 | 峰值学习率 | 1e-4 ~ 3e-4（小模型）/ 6e-5 ~ 1.5e-4（大模型） | 模型越大，lr 越低 |

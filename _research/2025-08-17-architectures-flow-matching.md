@@ -36,8 +36,8 @@ show_date: true
 
 **Flow Matching**（Lipman et al., 2023）与 **Rectified Flow**（Liu et al., 2023）提供了一条更直接的路径：
 
-- 用简单线性插值把"数据 $x_0$" 与"噪声 $x_1$" 连接；
-- 让神经网络预测**速度场** $v_\theta(x_t, t)$，而不是"噪声 $\epsilon$"或"分数 $\nabla \log p_t$"；
+- 用简单线性插值把"数据 {::nomarkdown}$x_0${:/nomarkdown}" 与"噪声 {::nomarkdown}$x_1${:/nomarkdown}" 连接；
+- 让神经网络预测**速度场** {::nomarkdown}$v_\theta(x_t, t)${:/nomarkdown}，而不是"噪声 {::nomarkdown}$\epsilon${:/nomarkdown}"或"分数 {::nomarkdown}$\nabla \log p_t${:/nomarkdown}"；
 - 训练目标简单、采样步数少、与 ODE 求解器兼容。
 
 SD3、Flux、π0、Wan 2.1 等 2024–2025 主流生成模型都基于这一思想。
@@ -52,13 +52,13 @@ CNF 定义一个连续可微的微分方程：
 
 $$\frac{dx}{dt} = v_\theta(x, t), \quad x(0) = x_0$$
 
-由 $x_0$ 沿 ODE 演化到 $x(1)$。对任意时刻 $t$：
+由 {::nomarkdown}$x_0${:/nomarkdown} 沿 ODE 演化到 {::nomarkdown}$x(1)${:/nomarkdown}。对任意时刻 {::nomarkdown}$t${:/nomarkdown}：
 
 $$x(t) = x_0 + \int_0^t v_\theta(x(s), s) \, ds$$
 
 ### 2.2 与生成模型的关系
 
-只要让 $x(0)$ 服从"目标分布"、$x(1)$ 服从"简单分布"（如高斯），这个 ODE 就是一个生成模型。Flow Matching 直接学习 $v_\theta$。
+只要让 {::nomarkdown}$x(0)${:/nomarkdown} 服从"目标分布"、{::nomarkdown}$x(1)${:/nomarkdown} 服从"简单分布"（如高斯），这个 ODE 就是一个生成模型。Flow Matching 直接学习 {::nomarkdown}$v_\theta${:/nomarkdown}。
 
 ---
 
@@ -66,17 +66,17 @@ $$x(t) = x_0 + \int_0^t v_\theta(x(s), s) \, ds$$
 
 ### 3.1 概率路径与速度场
 
-定义一族概率路径 $p_t(x)$，连接数据分布 $p_0$ 与噪声分布 $p_1$。对应的速度场 $v_t(x)$ 满足：
+定义一族概率路径 {::nomarkdown}$p_t(x)${:/nomarkdown}，连接数据分布 {::nomarkdown}$p_0${:/nomarkdown} 与噪声分布 {::nomarkdown}$p_1${:/nomarkdown}。对应的速度场 {::nomarkdown}$v_t(x)${:/nomarkdown} 满足：
 
 $$\frac{dx}{dt} = v_t(x), \quad \frac{\partial p_t}{\partial t} = -\nabla \cdot (p_t v_t)$$
 
 ### 3.2 Flow Matching 目标
 
-训练 $v_\theta(x, t)$ 逼近真实速度场 $v_t(x)$：
+训练 {::nomarkdown}$v_\theta(x, t)${:/nomarkdown} 逼近真实速度场 {::nomarkdown}$v_t(x)${:/nomarkdown}：
 
 $$\mathcal{L}_{\text{FM}} = \mathbb{E}_{t \sim U(0,1),\, x \sim p_t(x)} \left[\| v_\theta(x, t) - v_t(x) \|^2 \right]$$
 
-这是 Flow Matching 的一般定义。它看起来很简单，但直接计算 $v_t(x)$ 通常很困难。
+这是 Flow Matching 的一般定义。它看起来很简单，但直接计算 {::nomarkdown}$v_t(x)${:/nomarkdown} 通常很困难。
 
 ---
 
@@ -84,7 +84,7 @@ $$\mathcal{L}_{\text{FM}} = \mathbb{E}_{t \sim U(0,1),\, x \sim p_t(x)} \left[\|
 
 ### 4.1 条件化简化
 
-把整条路径"条件化"在样本对 $(x_0, x_1)$ 上：给定 $x_0 \sim p_0, x_1 \sim p_1$，定义条件路径
+把整条路径"条件化"在样本对 {::nomarkdown}$(x_0, x_1)${:/nomarkdown} 上：给定 {::nomarkdown}$x_0 \sim p_0, x_1 \sim p_1${:/nomarkdown}，定义条件路径
 
 $$p_t(x \mid x_0, x_1) = \mathcal{N}(x;\, \mu_t(x_0, x_1),\, \sigma_t^2(x_0, x_1))$$
 
@@ -121,15 +121,15 @@ for batch:
 
 ### 5.1 速度场与分数函数
 
-在扩散模型里我们学习分数函数 $s_\theta(x_t, t) \approx \nabla_{x_t} \log p_t(x_t)$，它们满足：
+在扩散模型里我们学习分数函数 {::nomarkdown}$s_\theta(x_t, t) \approx \nabla_{x_t} \log p_t(x_t)${:/nomarkdown}，它们满足：
 
 $$v_t(x_t) = \frac{\dot{\sigma}_t}{\sigma_t} x_t + \dot{\mu}_t - \dot{\sigma}_t \sigma_t \nabla_{x_t} \log p_t(x_t)$$
 
-其中 $\mu_t, \sigma_t$ 是边缘分布的均值与标准差。给定分数函数，可以"反过来"得到速度场。
+其中 {::nomarkdown}$\mu_t, \sigma_t${:/nomarkdown} 是边缘分布的均值与标准差。给定分数函数，可以"反过来"得到速度场。
 
 ### 5.2 DDPM 重新解释
 
-DDPM 训练 $\epsilon_\theta(x_t, t) \approx \epsilon$ 的损失等价于训练分数函数：
+DDPM 训练 {::nomarkdown}$\epsilon_\theta(x_t, t) \approx \epsilon${:/nomarkdown} 的损失等价于训练分数函数：
 
 $$\mathcal{L}_{\text{diff}} = \mathbb{E}\left[\| \epsilon - \epsilon_\theta(x_t, t) \|^2\right] = c(t) \mathbb{E}\left[\| \nabla_{x_t} \log p_t - \nabla_{x_t} \log p_\theta(x_t) \|^2\right]$$
 
@@ -139,7 +139,7 @@ $$\mathcal{L}_{\text{diff}} = \mathbb{E}\left[\| \epsilon - \epsilon_\theta(x_t,
 
 | 维度 | Diffusion (DDPM) | Flow Matching |
 |------|------------------|---------------|
-| 训练目标 | 预测噪声 $\epsilon$ | 预测速度场 $v$ |
+| 训练目标 | 预测噪声 {::nomarkdown}$\epsilon${:/nomarkdown} | 预测速度场 {::nomarkdown}$v${:/nomarkdown} |
 | 训练稳定性 | 良好，依赖噪声调度 | 通常更好，路径直接 |
 | 路径选择 | 灵活 | 通常线性插值 |
 | 采样器 | DDPM/SDE/DDIM | ODE（Euler、Heun、Dopri5） |
@@ -154,14 +154,14 @@ $$\mathcal{L}_{\text{diff}} = \mathbb{E}\left[\| \epsilon - \epsilon_\theta(x_t,
 
 $$\frac{dx_t}{dt} = x_1 - x_0$$
 
-直接回归 $x_1 - x_0$，训练稳定、收敛快。
+直接回归 {::nomarkdown}$x_1 - x_0${:/nomarkdown}，训练稳定、收敛快。
 
 ### 6.2 Reflow
 
 把训练好的 Rectified Flow 模型用作"教师"，把它的 ODE 轨迹重新"拉直"：
 
-- 用教师模型从 $x_1$ 积分到 $x_0$；
-- 把 $(x_0, x_1)$ 对重新收集为新的训练数据；
+- 用教师模型从 {::nomarkdown}$x_1${:/nomarkdown} 积分到 {::nomarkdown}$x_0${:/nomarkdown}；
+- 把 {::nomarkdown}$(x_0, x_1)${:/nomarkdown} 对重新收集为新的训练数据；
 - 重新训练。
 
 经过多轮 Reflow 后，ODE 轨迹几乎是一条直线，可以用极少的步数（如 1–4 步）采样得到高质量结果。
@@ -176,7 +176,7 @@ Reflow 是少步采样的关键训练技巧，避免 Consistency Model / Progres
 
 ### 7.1 ODE 求解器
 
-推理时用 ODE 求解器从 $t=1$ 积分到 $t=0$：
+推理时用 ODE 求解器从 {::nomarkdown}$t=1${:/nomarkdown} 积分到 {::nomarkdown}$t=0${:/nomarkdown}：
 
 | 求解器 | 步数 | 精度 |
 |--------|------|------|
@@ -194,7 +194,7 @@ Reflow 是少步采样的关键训练技巧，避免 Consistency Model / Progres
 
 ### 7.3 渐进蒸馏
 
-逐步把 $N$ 步模型蒸馏成 $N/2$ 步，重复直到目标步数。SD3-Turbo、Flux-Schnell 等都用了类似技巧。
+逐步把 {::nomarkdown}$N${:/nomarkdown} 步模型蒸馏成 {::nomarkdown}$N/2${:/nomarkdown} 步，重复直到目标步数。SD3-Turbo、Flux-Schnell 等都用了类似技巧。
 
 ---
 

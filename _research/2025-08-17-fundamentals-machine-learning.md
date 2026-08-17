@@ -43,7 +43,7 @@ show_date: true
 
 ### 1. 有监督学习（Supervised Learning）
 
-- **定义**：在训练过程中，数据包含输入 $ x $ 与对应的标注 $ y $，目标是学习一个从输入到输出的映射函数 $ f: x \rightarrow y $。
+- **定义**：在训练过程中，数据包含输入 {::nomarkdown}$ x ${:/nomarkdown} 与对应的标注 {::nomarkdown}$ y ${:/nomarkdown}，目标是学习一个从输入到输出的映射函数 {::nomarkdown}$ f: x \rightarrow y ${:/nomarkdown}。
 - **任务类型**：
   - **分类（Classification）**：
     - 二分类：如垃圾邮件检测、医疗诊断
@@ -136,20 +136,20 @@ show_date: true
 - **定义**：用于衡量模型好坏的标准，指导模型参数的学习方向。
 - **损失函数（Loss Function）**：
   - **分类任务**：
-    - 0-1损失：$ L(y, \hat{y}) = \mathbb{I}(y \neq \hat{y}) $
-    - 交叉熵损失：$ L(y, \hat{y}) = -\sum_{i} y_i \log(\hat{y}_i) $
-    - Hinge损失（SVM）：$ L(y, \hat{y}) = \max(0, 1 - y\hat{y}) $
+    - 0-1损失：{::nomarkdown}$ L(y, \hat{y}) = \mathbb{I}(y \neq \hat{y}) ${:/nomarkdown}
+    - 交叉熵损失：{::nomarkdown}$ L(y, \hat{y}) = -\sum_{i} y_i \log(\hat{y}_i) ${:/nomarkdown}
+    - Hinge损失（SVM）：{::nomarkdown}$ L(y, \hat{y}) = \max(0, 1 - y\hat{y}) ${:/nomarkdown}
   - **回归任务**：
-    - 均方误差（MSE）：$ L(y, \hat{y}) = \frac{1}{2}(y - \hat{y})^2 $
-    - 平均绝对误差（MAE）：$ L(y, \hat{y}) = |y - \hat{y}| $
+    - 均方误差（MSE）：{::nomarkdown}$ L(y, \hat{y}) = \frac{1}{2}(y - \hat{y})^2 ${:/nomarkdown}
+    - 平均绝对误差（MAE）：{::nomarkdown}$ L(y, \hat{y}) = |y - \hat{y}| ${:/nomarkdown}
     - Huber损失：结合MSE和MAE的优点
 - **风险函数（Risk Function）**：
-  - **经验风险**：$ R_{emp}(f) = \frac{1}{N} \sum_{i=1}^{N} L(y_i, f(x_i)) $
-  - **结构风险**：$ R_{srm}(f) = R_{emp}(f) + \lambda \Omega(f) $
-  - 其中 $ \Omega(f) $ 是正则化项，$ \lambda $ 是正则化系数
+  - **经验风险**：{::nomarkdown}$ R_{emp}(f) = \frac{1}{N} \sum_{i=1}^{N} L(y_i, f(x_i)) ${:/nomarkdown}
+  - **结构风险**：{::nomarkdown}$ R_{srm}(f) = R_{emp}(f) + \lambda \Omega(f) ${:/nomarkdown}
+  - 其中 {::nomarkdown}$ \Omega(f) ${:/nomarkdown} 是正则化项，{::nomarkdown}$ \lambda ${:/nomarkdown} 是正则化系数
 - **正则化技术**：
-  - **L1正则化**：$ \Omega(w) = \|w\|_1 = \sum_{i} |w_i| $（特征选择）
-  - **L2正则化**：$ \Omega(w) = \|w\|_2^2 = \sum_{i} w_i^2 $（权重衰减）
+  - **L1正则化**：{::nomarkdown}$ \Omega(w) = \|w\|_1 = \sum_{i} |w_i| ${:/nomarkdown}（特征选择）
+  - **L2正则化**：{::nomarkdown}$ \Omega(w) = \|w\|_2^2 = \sum_{i} w_i^2 ${:/nomarkdown}（权重衰减）
   - **弹性网络**：L1和L2的结合
   - **Dropout**：随机置零部分神经元
 - **目标函数设计原则**：
@@ -162,11 +162,11 @@ show_date: true
 - **定义**：用于最小化损失函数、求解模型参数的具体方法和步骤。
 - **优化算法分类**：
   - **一阶方法**：基于梯度信息
-    - **梯度下降（GD）**：$ w_{t+1} = w_t - \eta \nabla L(w_t) $
+    - **梯度下降（GD）**：{::nomarkdown}$ w_{t+1} = w_t - \eta \nabla L(w_t) ${:/nomarkdown}
     - **随机梯度下降（SGD）**：每次使用单个样本或小批量
     - **小批量梯度下降（Mini-batch GD）**：平衡效率和稳定性
   - **二阶方法**：使用二阶导数信息
-    - **牛顿法**：$ w_{t+1} = w_t - H^{-1} \nabla L(w_t) $
+    - **牛顿法**：{::nomarkdown}$ w_{t+1} = w_t - H^{-1} \nabla L(w_t) ${:/nomarkdown}
     - **拟牛顿法**：BFGS、L-BFGS等
 - **自适应优化器**：
   - **AdaGrad**：自适应调整学习率
@@ -196,12 +196,12 @@ show_date: true
 ### §1.4.1 训练误差与测试误差
 
 - **训练误差（Training Error）**：模型在训练集上的误差，反映模型对训练数据的拟合程度。
-  - 数学表示：$ E_{train} = \frac{1}{N_{train}} \sum_{i=1}^{N_{train}} L(y_i, f(x_i)) $
+  - 数学表示：{::nomarkdown}$ E_{train} = \frac{1}{N_{train}} \sum_{i=1}^{N_{train}} L(y_i, f(x_i)) ${:/nomarkdown}
 - **验证误差（Validation Error）**：模型在验证集上的误差，用于模型选择和超参数调优。
 - **测试误差（Test Error）**：模型在独立测试集上的误差，反映模型的真实泛化能力。
-  - 数学表示：$ E_{test} = \frac{1}{N_{test}} \sum_{i=1}^{N_{test}} L(y_i, f(x_i)) $
+  - 数学表示：{::nomarkdown}$ E_{test} = \frac{1}{N_{test}} \sum_{i=1}^{N_{test}} L(y_i, f(x_i)) ${:/nomarkdown}
 - **泛化误差（Generalization Error）**：模型对未知数据的期望误差。
-  - $ E_{generalization} = \mathbb{E}_{(x,y) \sim P}[L(y, f(x))] $
+  - {::nomarkdown}$ E_{generalization} = \mathbb{E}_{(x,y) \sim P}[L(y, f(x))] ${:/nomarkdown}
 
 **误差分析**：
 - 理想情况：训练误差和测试误差都较小且接近

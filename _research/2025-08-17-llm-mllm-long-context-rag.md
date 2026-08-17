@@ -49,7 +49,7 @@ Transformer 的位置编码为训练长度内的位置设计。当推理序列�
 
 ### 2.2 注意力计算复杂度
 
-标准自注意力的复杂度为 $O(n^2)$，其中 $n$ 为序列长度。当 $n$ 从 4K 扩展到 1M 时，计算量增加 $62500$ 倍。必须配合高效注意力或分布式注意力。
+标准自注意力的复杂度为 {::nomarkdown}$O(n^2)${:/nomarkdown}，其中 {::nomarkdown}$n${:/nomarkdown} 为序列长度。当 {::nomarkdown}$n${:/nomarkdown} 从 4K 扩展到 1M 时，计算量增加 {::nomarkdown}$62500${:/nomarkdown} 倍。必须配合高效注意力或分布式注意力。
 
 ### 2.3 中间丢失（Lost in the Middle）
 
@@ -63,7 +63,7 @@ $$
 \text{KV Cache} = 2 \times n_{\text{layers}} \times n \times d_{\text{head}} \times n_{\text{head}} \times b
 $$
 
-其中 $b$ 为 batch size。长上下文推理时 KV Cache 成为显存瓶颈。
+其中 {::nomarkdown}$b${:/nomarkdown} 为 batch size。长上下文推理时 KV Cache 成为显存瓶颈。
 
 ---
 
@@ -77,7 +77,7 @@ $$
 p' = \frac{L_{\text{train}}}{L_{\text{target}}} \cdot p
 $$
 
-其中 $p$ 为原始位置，$p'$ 为插值后位置。PI 不引入新的位置编码，仅需少量微调即可将上下文窗口扩展 2-8 倍。
+其中 {::nomarkdown}$p${:/nomarkdown} 为原始位置，{::nomarkdown}$p'${:/nomarkdown} 为插值后位置。PI 不引入新的位置编码，仅需少量微调即可将上下文窗口扩展 2-8 倍。
 
 ### 3.2 NTK-Aware 插值
 
@@ -120,7 +120,7 @@ LongRoPE 将 LLaMA2 扩展到 2M Token 上下文，且在短上下文任务上�
 
 ### 4.1 Flash Attention
 
-Flash Attention（Dao et al., 2022）通过 tiling 和重计算将注意力计算从 $O(n^2)$ 显存降为 $O(n)$，同时利用 GPU SRAM 减少 HBM 读写。FlashAttention-2 和 3 进一步优化了并行度和计算效率，是长上下文训练的基础算子。
+Flash Attention（Dao et al., 2022）通过 tiling 和重计算将注意力计算从 {::nomarkdown}$O(n^2)${:/nomarkdown} 显存降为 {::nomarkdown}$O(n)${:/nomarkdown}，同时利用 GPU SRAM 减少 HBM 读写。FlashAttention-2 和 3 进一步优化了并行度和计算效率，是长上下文训练的基础算子。
 
 ### 4.2 Ring Attention
 
@@ -140,7 +140,7 @@ Ring Attention 使上下文长度可随设备数线性扩展，是 Gemini 等百
 
 ### 4.4 KV Cache 压缩
 
-- **GQA（Grouped Query Attention）**：多个 Query 头共享一组 KV 头，将 KV Cache 减少 $n_{\text{head}}/n_{\text{group}}$ 倍。
+- **GQA（Grouped Query Attention）**：多个 Query 头共享一组 KV 头，将 KV Cache 减少 {::nomarkdown}$n_{\text{head}}/n_{\text{group}}${:/nomarkdown} 倍。
 - **MLA（Multi-head Latent Attention）**：将 KV 投影到低维隐空间后压缩缓存（DeepSeek-V2）。
 - **KV Cache 量化与驱逐**：对 KV Cache 进行低比特量化，或驱逐不重要的 KV 对（H2O、StreamingLLM）。
 - **StreamingLLM**：保留注意力池（attention sink）+ 滑动窗口，支持无限长度流式推理，但不具备全局理解能力。
@@ -167,7 +167,7 @@ Ring Attention 使上下文长度可随设备数线性扩展，是 Gemini 等百
 **查询阶段（在线）**：
 
 1. 将用户查询编码为向量。
-2. 在向量数据库中进行近邻搜索，返回 Top-$K$ 相关块。
+2. 在向量数据库中进行近邻搜索，返回 Top-{::nomarkdown}$K${:/nomarkdown} 相关块。
 3. 将检索结果与查询拼接为 prompt。
 4. LLM 基于上下文生成回答。
 
@@ -228,7 +228,7 @@ $$
 
 ### 6.1 Rerank（重排序）
 
-第一阶段检索（召回）追求高召回率，返回 Top-$K$（如 100）个候选。Reranker 对候选逐一精排，取 Top-$N$（如 5）：
+第一阶段检索（召回）追求高召回率，返回 Top-{::nomarkdown}$K${:/nomarkdown}（如 100）个候选。Reranker 对候选逐一精排，取 Top-{::nomarkdown}$N${:/nomarkdown}（如 5）：
 
 - **Cross-Encoder Reranker**：将查询和文档拼接后输入 Transformer，输出相关性分数。精度高但速度慢，适合小规模精排。
 - **Cohere Rerank / BGE-Reranker**：代表性预训练 Reranker 模型。

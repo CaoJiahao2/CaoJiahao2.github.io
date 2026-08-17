@@ -82,8 +82,8 @@ $$
 
 VQ-GAN（Esser et al., 2021）用 CNN 编码器将图像压缩为离散 Token 网格：
 
-1. 编码器将图像映射为连续特征图 $z \in \mathbb{R}^{h \times w \times d}$。
-2. 每个空间位置在码本 $\mathcal{C} \in \mathbb{R}^{K \times d}$ 中查找最近向量，得到离散索引。
+1. 编码器将图像映射为连续特征图 {::nomarkdown}$z \in \mathbb{R}^{h \times w \times d}${:/nomarkdown}。
+2. 每个空间位置在码本 {::nomarkdown}$\mathcal{C} \in \mathbb{R}^{K \times d}${:/nomarkdown} 中查找最近向量，得到离散索引。
 3. 解码器从离散 Token 重建图像。
 
 $$
@@ -96,7 +96,7 @@ $$
 \mathcal{L}_{\text{VQ}} = \|\text{sg}[z] - z_q\|^2 + \beta \|z - \text{sg}[z_q]\|^2
 $$
 
-其中 $\text{sg}$ 为停止梯度操作。
+其中 {::nomarkdown}$\text{sg}${:/nomarkdown} 为停止梯度操作。
 
 ### 3.3 VQ 模型的改进
 

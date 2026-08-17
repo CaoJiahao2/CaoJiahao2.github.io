@@ -171,7 +171,7 @@ Tokenizer
 
 ## 3. Prefill 阶段 {#3}
 
-假设用户输入长度为 $L$：
+假设用户输入长度为 {::nomarkdown}$L${:/nomarkdown}：
 
 ```text
 x_1, x_2, ..., x_L
@@ -179,7 +179,7 @@ x_1, x_2, ..., x_L
 
 Prefill 会一次性将整个 Prompt 输入模型。
 
-如果隐藏层维度为 $d$，模型中的线性层通常会出现类似：
+如果隐藏层维度为 {::nomarkdown}$d${:/nomarkdown}，模型中的线性层通常会出现类似：
 
 $$
 [L,d]\times[d,4d]
@@ -187,7 +187,7 @@ $$
 
 这样的矩阵乘法。
 
-由于 $L$ 往往可以达到几百、几千甚至几万，GPU 可以在大量 token 上并行执行矩阵运算，因此 Prefill 阶段通常能够较充分地利用 Tensor Core。
+由于 {::nomarkdown}$L${:/nomarkdown} 往往可以达到几百、几千甚至几万，GPU 可以在大量 token 上并行执行矩阵运算，因此 Prefill 阶段通常能够较充分地利用 Tensor Core。
 
 所以：
 
@@ -254,7 +254,7 @@ $$
 O=AV
 $$
 
-其中 Causal Mask 保证第 $i$ 个 token 只能看到：
+其中 Causal Mask 保证第 {::nomarkdown}$i${:/nomarkdown} 个 token 只能看到：
 
 $$
 x_1,\dots,x_i
@@ -336,7 +336,7 @@ $$
 V_1,\dots,V_t
 $$
 
-现在只需要对新 token $x_{t+1}$ 计算：
+现在只需要对新 token {::nomarkdown}$x_{t+1}${:/nomarkdown} 计算：
 
 $$
 q_{t+1},k_{t+1},v_{t+1}
@@ -401,11 +401,11 @@ $$
 其中：
 
 - 2：分别表示 K 和 V；
-- $N_{\text{layer}}$：Transformer 层数；
-- $L$：上下文 token 数；
-- $N_{\text{kv-head}}$：KV Head 数量；
-- $d_{\text{head}}$：每个 Attention Head 的维度；
-- $B$：每个元素占用的字节数。
+- {::nomarkdown}$N_{\text{layer}}${:/nomarkdown}：Transformer 层数；
+- {::nomarkdown}$L${:/nomarkdown}：上下文 token 数；
+- {::nomarkdown}$N_{\text{kv-head}}${:/nomarkdown}：KV Head 数量；
+- {::nomarkdown}$d_{\text{head}}${:/nomarkdown}：每个 Attention Head 的维度；
+- {::nomarkdown}$B${:/nomarkdown}：每个元素占用的字节数。
 
 例如 FP16 / BF16：
 
@@ -619,7 +619,7 @@ $$
 [B,d]\times[d,4d]
 $$
 
-随着 $B$ 增大，矩阵乘法效率明显提高。
+随着 {::nomarkdown}$B${:/nomarkdown} 增大，矩阵乘法效率明显提高。
 
 所以 Serving 系统的一个核心任务是：
 
@@ -1468,7 +1468,7 @@ $$
 
 ### 33.3 Top-k
 
-只保留概率最高的 $k$ 个 token。
+只保留概率最高的 {::nomarkdown}$k${:/nomarkdown} 个 token。
 
 例如：
 

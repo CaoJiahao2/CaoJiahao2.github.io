@@ -60,7 +60,7 @@ $$
 C(\mathbf{r}) = \int_{t_n}^{t_f} T(t) \sigma(\mathbf{r}(t)) \mathbf{c}(\mathbf{r}(t), \mathbf{d}) \, dt
 $$
 
-其中 $T(t) = \exp\left(-\int_{t_n}^{t} \sigma(\mathbf{r}(s)) \, ds\right)$ 是透射率，$\sigma$ 是密度，$\mathbf{c}$ 是视角依赖的颜色。
+其中 {::nomarkdown}$T(t) = \exp\left(-\int_{t_n}^{t} \sigma(\mathbf{r}(s)) \, ds\right)${:/nomarkdown} 是透射率，{::nomarkdown}$\sigma${:/nomarkdown} 是密度，{::nomarkdown}$\mathbf{c}${:/nomarkdown} 是视角依赖的颜色。
 
 ---
 
@@ -68,7 +68,7 @@ $$
 
 ### 3.1 基本原理
 
-NeRF（Mildenhall et al., 2020）用 MLP 将 3D 位置 $\mathbf{x}=(x,y,z)$ 和视角方向 $\mathbf{d}=(\theta,\phi)$ 映射为密度 $\sigma$ 和颜色 $\mathbf{c}=(r,g,b)$：
+NeRF（Mildenhall et al., 2020）用 MLP 将 3D 位置 {::nomarkdown}$\mathbf{x}=(x,y,z)${:/nomarkdown} 和视角方向 {::nomarkdown}$\mathbf{d}=(\theta,\phi)${:/nomarkdown} 映射为密度 {::nomarkdown}$\sigma${:/nomarkdown} 和颜色 {::nomarkdown}$\mathbf{c}=(r,g,b)${:/nomarkdown}：
 
 $$
 (\sigma, \mathbf{c}) = F_\Theta(\mathbf{x}, \mathbf{d})
@@ -88,7 +88,7 @@ $$
 \gamma(p) = (\sin(2^0 \pi p), \cos(2^0 \pi p), \ldots, \sin(2^{L-1} \pi p), \cos(2^{L-1} \pi p))
 $$
 
-这使得 MLP 能表示高频的颜色和几何变化。位置编码的频率数 $L$ 控制可表示的细节级别。
+这使得 MLP 能表示高频的颜色和几何变化。位置编码的频率数 {::nomarkdown}$L${:/nomarkdown} 控制可表示的细节级别。
 
 ### 3.3 分层采样
 
@@ -108,7 +108,7 @@ NeRF 采用粗-细两网络策略：
 | DVGO | 显式体素 + 后期密度平滑 |
 | Plenoxels | 无 MLP，直接优化稀疏体素 |
 
-Instant NGP 的可训练多分辨率哈希编码是关键突破：每个空间位置在 $L$ 个分辨率层级上查询哈希表中的可学习特征，插值后拼接送入小型 MLP，实现了速度与质量的兼顾。
+Instant NGP 的可训练多分辨率哈希编码是关键突破：每个空间位置在 {::nomarkdown}$L${:/nomarkdown} 个分辨率层级上查询哈希表中的可学习特征，插值后拼接送入小型 MLP，实现了速度与质量的兼顾。
 
 ---
 
@@ -118,10 +118,10 @@ Instant NGP 的可训练多分辨率哈希编码是关键突破：每个空间�
 
 3D Gaussian Splatting（Kerbl et al., 2023）用一组显式的 3D 高斯椭球体表示场景，每个高斯由以下参数定义：
 
-- 位置 $\boldsymbol{\mu} \in \mathbb{R}^3$
-- 协方差矩阵 $\boldsymbol{\Sigma} \in \mathbb{R}^{3 \times 3}$（由缩放 $\mathbf{s}$ 和旋转 $\mathbf{q}$ 参数化）
-- 不透明度 $\alpha \in [0,1]$
-- 球谐系数（视角依赖颜色）$SH \in \mathbb{R}^k$
+- 位置 {::nomarkdown}$\boldsymbol{\mu} \in \mathbb{R}^3${:/nomarkdown}
+- 协方差矩阵 {::nomarkdown}$\boldsymbol{\Sigma} \in \mathbb{R}^{3 \times 3}${:/nomarkdown}（由缩放 {::nomarkdown}$\mathbf{s}${:/nomarkdown} 和旋转 {::nomarkdown}$\mathbf{q}${:/nomarkdown} 参数化）
+- 不透明度 {::nomarkdown}$\alpha \in [0,1]${:/nomarkdown}
+- 球谐系数（视角依赖颜色）{::nomarkdown}$SH \in \mathbb{R}^k${:/nomarkdown}
 
 协方差矩阵分解为旋转和缩放：
 
@@ -129,7 +129,7 @@ $$
 \boldsymbol{\Sigma} = \mathbf{R} \mathbf{S} \mathbf{S}^\top \mathbf{R}^\top
 $$
 
-其中 $\mathbf{R}$ 由四元数 $\mathbf{q}$ 构建，$\mathbf{S}$ 是对角缩放矩阵。
+其中 {::nomarkdown}$\mathbf{R}${:/nomarkdown} 由四元数 {::nomarkdown}$\mathbf{q}${:/nomarkdown} 构建，{::nomarkdown}$\mathbf{S}${:/nomarkdown} 是对角缩放矩阵。
 
 ### 4.2 可微光栅化
 
@@ -137,7 +137,7 @@ $$
 
 1. 将 3D 高斯投影到 2D 图像平面。
 2. 对每个屏幕瓦片，按深度排序高斯。
-3. 按 $\alpha$-blending 公式从前到后混合颜色：
+3. 按 {::nomarkdown}$\alpha${:/nomarkdown}-blending 公式从前到后混合颜色：
 
 $$
 C = \sum_{i=1}^{N} c_i \alpha_i \prod_{j=1}^{i-1}(1 - \alpha_j)
@@ -151,7 +151,7 @@ $$
 
 - **欠重建区域**（位置梯度大）：克隆或分裂小高斯，增加密度。
 - **过密区域**（覆盖过大）：分裂大高斯为两个更小的高斯。
-- **低不透明度高斯**：定期剪枝 $\alpha$ 过低的高斯。
+- **低不透明度高斯**：定期剪枝 {::nomarkdown}$\alpha${:/nomarkdown} 过低的高斯。
 
 这使表示从 SfM 初始化的稀疏点云逐步增长到数百万个高斯，自适应地捕捉场景细节。
 
@@ -188,7 +188,7 @@ $$
 \nabla_\theta \mathcal{L}_{\text{SDS}} = \mathbb{E}_{t,\epsilon}\left[w(t)\left(\epsilon_\phi(\mathbf{x}_t; t, y) - \epsilon\right) \frac{\partial \mathbf{x}}{\partial \theta}\right]
 $$
 
-其中 $\mathbf{x} = g(\theta)$ 是从 3D 参数 $\theta$ 渲染的图像，$\epsilon_\phi$ 是扩散模型预测的噪声，$y$ 是文本提示。直观理解：扩散模型"告诉"3D 渲染结果"应该往哪个方向调整才能更像文本描述"。
+其中 {::nomarkdown}$\mathbf{x} = g(\theta)${:/nomarkdown} 是从 3D 参数 {::nomarkdown}$\theta${:/nomarkdown} 渲染的图像，{::nomarkdown}$\epsilon_\phi${:/nomarkdown} 是扩散模型预测的噪声，{::nomarkdown}$y${:/nomarkdown} 是文本提示。直观理解：扩散模型"告诉"3D 渲染结果"应该往哪个方向调整才能更像文本描述"。
 
 ### 5.2 代表性方法
 
@@ -241,7 +241,7 @@ NeRF 和 3DGS 都是 per-scene 优化：每个场景需要单独训练。前馈�
 
 - **D-NeRF**：引入时间维度，建模形变场（canonical space → deformed space）。
 - **HexPlane**：将 4D 时空体素分解为六个平面，高效表示动态场景。
-- **K-Planes**：统一的 $d$-维平面分解，支持静态/动态场景。
+- **K-Planes**：统一的 {::nomarkdown}$d${:/nomarkdown}-维平面分解，支持静态/动态场景。
 
 ### 7.2 动态 3DGS
 

@@ -26,7 +26,7 @@ show_date: true
 
 ## 1 行为克隆 (BC) {#1}
 
-BC 从专家演示数据集 $\mathcal{D} = \{(o_i, a_i)\}$ 中监督学习策略。
+BC 从专家演示数据集 {::nomarkdown}$\mathcal{D} = \{(o_i, a_i)\}${:/nomarkdown} 中监督学习策略。
 
 ### 1.1 损失函数
 
@@ -53,7 +53,7 @@ Diffusion Policy 把动作序列建模为去噪扩散过程，直接在动作空
 
 ### 2.2 训练
 
-给定观测 $o$，对动作轨迹 $a_0$（即 $a_{t:t+H}$）加噪得到 $a_k$，训练网络 $\epsilon_\theta$ 预测注入的噪声：
+给定观测 {::nomarkdown}$o${:/nomarkdown}，对动作轨迹 {::nomarkdown}$a_0${:/nomarkdown}（即 {::nomarkdown}$a_{t:t+H}${:/nomarkdown}）加噪得到 {::nomarkdown}$a_k${:/nomarkdown}，训练网络 {::nomarkdown}$\epsilon_\theta${:/nomarkdown} 预测注入的噪声：
 
 $$\mathcal{L}_{\text{diff}} = \mathbb{E}_{\epsilon, k, a_0}\left[\|\epsilon - \epsilon_\theta(a_k, k, o)\|^2\right]$$
 
@@ -81,7 +81,7 @@ $$\mathcal{L}_{\text{diff}} = \mathbb{E}_{\epsilon, k, a_0}\left[\|\epsilon - \e
 
 $$\mathcal{L}_{\text{FM}} = \mathbb{E}_{t, a_0, a_1, a_t}\left[\|v_\theta(a_t, t, o) - (a_1 - a_0)\|^2\right]$$
 
-其中 $a_0$ 是专家动作分布，$a_1$ 是噪声，$a_t = (1-t) a_0 + t a_1$。推理时从 $t=1$ 用 ODE 求解器积分到 $t=0$。
+其中 {::nomarkdown}$a_0${:/nomarkdown} 是专家动作分布，{::nomarkdown}$a_1${:/nomarkdown} 是噪声，{::nomarkdown}$a_t = (1-t) a_0 + t a_1${:/nomarkdown}。推理时从 {::nomarkdown}$t=1${:/nomarkdown} 用 ODE 求解器积分到 {::nomarkdown}$t=0${:/nomarkdown}。
 
 ### 3.2 与 Diffusion Policy 的对比
 

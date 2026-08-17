@@ -65,10 +65,10 @@ Transformer 采用经典的 **Encoder-Decoder** 结构：
 - 三个子层均使用残差连接 + Layer Normalization
 
 关键维度参数（论文 base 模型）：
-- 模型维度 $d_{model} = 512$
-- 注意力头数 $h = 8$
-- FFN 中间维度 $d_{ff} = 2048$
-- Encoder/Decoder 层数 $N = 6$
+- 模型维度 {::nomarkdown}$d_{model} = 512${:/nomarkdown}
+- 注意力头数 {::nomarkdown}$h = 8${:/nomarkdown}
+- FFN 中间维度 {::nomarkdown}$d_{ff} = 2048${:/nomarkdown}
+- Encoder/Decoder 层数 {::nomarkdown}$N = 6${:/nomarkdown}
 
 ---
 
@@ -80,22 +80,22 @@ Self-Attention 允许序列中的每个位置都关注（attend to）序列中�
 
 ### 3.2 Scaled Dot-Product Attention
 
-给定输入序列 $X \in \mathbb{R}^{n \times d_{model}}$，通过三个线性变换生成 Query、Key、Value：
+给定输入序列 {::nomarkdown}$X \in \mathbb{R}^{n \times d_{model}}${:/nomarkdown}，通过三个线性变换生成 Query、Key、Value：
 
 $$Q = XW^Q, \quad K = XW^K, \quad V = XW^V$$
 
-其中 $W^Q, W^K \in \mathbb{R}^{d_{model} \times d_k}$，$W^V \in \mathbb{R}^{d_{model} \times d_v}$。通常 $d_k = d_v = d_{model} / h = 64$。
+其中 {::nomarkdown}$W^Q, W^K \in \mathbb{R}^{d_{model} \times d_k}${:/nomarkdown}，{::nomarkdown}$W^V \in \mathbb{R}^{d_{model} \times d_v}${:/nomarkdown}。通常 {::nomarkdown}$d_k = d_v = d_{model} / h = 64${:/nomarkdown}。
 
 注意力计算：
 
 $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
 
-**缩放因子 $\sqrt{d_k}$ 的作用**：当 $d_k$ 较大时，点积结果的值域变大，导致 softmax 梯度进入极小区域。除以 $\sqrt{d_k}$ 使方差保持为 1，保证梯度稳定。
+**缩放因子 {::nomarkdown}$\sqrt{d_k}${:/nomarkdown} 的作用**：当 {::nomarkdown}$d_k${:/nomarkdown} 较大时，点积结果的值域变大，导致 softmax 梯度进入极小区域。除以 {::nomarkdown}$\sqrt{d_k}${:/nomarkdown} 使方差保持为 1，保证梯度稳定。
 
 ### 3.3 计算复杂度
 
-- 矩阵乘法 $QK^T$：$O(n^2 \cdot d_k)$
-- 空间复杂度：$O(n^2)$（存储注意力矩阵）
+- 矩阵乘法 {::nomarkdown}$QK^T${:/nomarkdown}：{::nomarkdown}$O(n^2 \cdot d_k)${:/nomarkdown}
+- 空间复杂度：{::nomarkdown}$O(n^2)${:/nomarkdown}（存储注意力矩阵）
 - 这是 Transformer 处理长序列的主要瓶颈
 
 ### 3.4 注意力可视化示例
@@ -118,7 +118,7 @@ mat    [0.1, 0.0, 0.1, 0.2, 0.2, 0.4]
 
 ### 4.1 动机
 
-单个注意力头只能关注一种模式。Multi-Head Attention 将 $Q, K, V$ 投影到 $h$ 个不同的子空间，并行计算注意力，使模型能同时关注不同位置的不同表示子空间。
+单个注意力头只能关注一种模式。Multi-Head Attention 将 {::nomarkdown}$Q, K, V${:/nomarkdown} 投影到 {::nomarkdown}$h${:/nomarkdown} 个不同的子空间，并行计算注意力，使模型能同时关注不同位置的不同表示子空间。
 
 ### 4.2 数学形式
 
@@ -127,9 +127,9 @@ $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \ldots, \text{head}_h
 $$\text{head}_i = \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$
 
 其中：
-- $W_i^Q, W_i^K \in \mathbb{R}^{d_{model} \times d_k}$
-- $W_i^V \in \mathbb{R}^{d_{model} \times d_v}$
-- $W^O \in \mathbb{R}^{h \cdot d_v \times d_{model}}$
+- {::nomarkdown}$W_i^Q, W_i^K \in \mathbb{R}^{d_{model} \times d_k}${:/nomarkdown}
+- {::nomarkdown}$W_i^V \in \mathbb{R}^{d_{model} \times d_v}${:/nomarkdown}
+- {::nomarkdown}$W^O \in \mathbb{R}^{h \cdot d_v \times d_{model}}${:/nomarkdown}
 
 ### 4.3 实际意义
 
@@ -155,12 +155,12 @@ $$PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$
 
 $$PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{model}}}\right)$$
 
-其中 $pos$ 是位置索引，$i$ 是维度索引。
+其中 {::nomarkdown}$pos${:/nomarkdown} 是位置索引，{::nomarkdown}$i${:/nomarkdown} 是维度索引。
 
 **关键性质**：
-- 对于固定偏移 $k$，$PE_{pos+k}$ 可以表示为 $PE_{pos}$ 的线性函数（因为三角恒等式），这有助于模型学习相对位置关系
+- 对于固定偏移 {::nomarkdown}$k${:/nomarkdown}，{::nomarkdown}$PE_{pos+k}${:/nomarkdown} 可以表示为 {::nomarkdown}$PE_{pos}${:/nomarkdown} 的线性函数（因为三角恒等式），这有助于模型学习相对位置关系
 - 不同频率的正弦波覆盖了从短距离到长距离的位置模式
-- 值域在 $[-1, 1]$ 之间，数值稳定
+- 值域在 {::nomarkdown}$[-1, 1]${:/nomarkdown} 之间，数值稳定
 
 ### 5.3 其他位置编码方案
 
@@ -187,10 +187,10 @@ $$\text{FFN}(x) = \text{GELU}(xW_1 + b_1)W_2 + b_2$$
 
 $$\text{SwiGLU}(x) = \underbrace{\text{Swish}(xW_1)}_{\text{gate}} \odot \underbrace{(xW_3)}_{\text{value}}, \qquad \text{FFN}_{LLaMA}(x) = \text{SwiGLU}(x)W_2$$
 
-其中 $\text{Swish}(x) = x\sigma(x)$，$\odot$ 为逐元素乘。相比 ReLU FFN，GLU 变体在相近参数量下通常在语言建模上更优，是 LLaMA、Mistral、Qwen 等的主流选择。
+其中 {::nomarkdown}$\text{Swish}(x) = x\sigma(x)${:/nomarkdown}，{::nomarkdown}$\odot${:/nomarkdown} 为逐元素乘。相比 ReLU FFN，GLU 变体在相近参数量下通常在语言建模上更优，是 LLaMA、Mistral、Qwen 等的主流选择。
 
-- $W_1 \in \mathbb{R}^{d_{model} \times d_{ff}}$，$W_2 \in \mathbb{R}^{d_{ff} \times d_{model}}$
-- 中间维度 $d_{ff}$ 通常是 $d_{model}$ 的 4 倍
+- {::nomarkdown}$W_1 \in \mathbb{R}^{d_{model} \times d_{ff}}${:/nomarkdown}，{::nomarkdown}$W_2 \in \mathbb{R}^{d_{ff} \times d_{model}}${:/nomarkdown}
+- 中间维度 {::nomarkdown}$d_{ff}${:/nomarkdown} 通常是 {::nomarkdown}$d_{model}${:/nomarkdown} 的 4 倍
 - FFN 可以看作两个 1×1 卷积，对每个位置独立应用
 
 **FFN 的作用**：
@@ -216,7 +216,7 @@ $$\text{output} = \text{LayerNorm}(x + \text{Sublayer}(x))$$
 
 $$\text{LayerNorm}(x) = \gamma \cdot \frac{x - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta$$
 
-其中 $\mu$ 和 $\sigma^2$ 在最后一个维度上计算。
+其中 {::nomarkdown}$\mu${:/nomarkdown} 和 {::nomarkdown}$\sigma^2${:/nomarkdown} 在最后一个维度上计算。
 
 **RMSNorm（LLaMA 等现代模型）**：去掉均值归一化，仅保留缩放，计算更省且训练稳定：
 
@@ -269,7 +269,7 @@ Linear + Softmax → Output probabilities
 
 ### 9.1 Masked Self-Attention
 
-通过上三角掩码矩阵将未来位置的注意力分数设为 $-\infty$，使 softmax 后权重为 0：
+通过上三角掩码矩阵将未来位置的注意力分数设为 {::nomarkdown}$-\infty${:/nomarkdown}，使 softmax 后权重为 0：
 
 ```
 Attention(Q, K, V) = softmax(QK^T/√d_k + M)V
@@ -296,7 +296,7 @@ Decoder 的 Cross-Attention 层中：
 
 | 超参数 | 值 |
 |--------|-----|
-| 优化器 | Adam ($\beta_1=0.9, \beta_2=0.98, \epsilon=10^{-9}$) |
+| 优化器 | Adam ({::nomarkdown}$\beta_1=0.9, \beta_2=0.98, \epsilon=10^{-9}${:/nomarkdown}) |
 | 学习率调度 | Warmup + Inverse Square Root Decay |
 | Warmup 步数 | 4000 |
 | Dropout | 0.1 |
@@ -313,7 +313,7 @@ $$lr = d_{model}^{-0.5} \cdot \min(step\_num^{-0.5}, step\_num \cdot warmup\_ste
 ### 10.3 推理
 
 - 自回归解码（Autoregressive Decoding）
-- Beam Search（论文使用 beam size = 4，长度惩罚 $\alpha = 0.6$）
+- Beam Search（论文使用 beam size = 4，长度惩罚 {::nomarkdown}$\alpha = 0.6${:/nomarkdown}）
 
 ---
 
@@ -340,9 +340,9 @@ $$lr = d_{model}^{-0.5} \cdot \min(step\_num^{-0.5}, step\_num \cdot warmup\_ste
 
 | 变体 | 复杂度 | 原理 |
 |------|--------|------|
-| Sparse Attention | $O(n\sqrt{n})$ | 只关注部分位置 |
-| Linformer | $O(n)$ | 低秩投影 K, V |
-| Reformer | $O(n\log n)$ | LSH 近似 |
+| Sparse Attention | {::nomarkdown}$O(n\sqrt{n})${:/nomarkdown} | 只关注部分位置 |
+| Linformer | {::nomarkdown}$O(n)${:/nomarkdown} | 低秩投影 K, V |
+| Reformer | {::nomarkdown}$O(n\log n)${:/nomarkdown} | LSH 近似 |
 | Flash Attention | 同复杂度，但 IO 最优 | 利用 GPU 内存层次结构 |
 | Multi-Query Attention | 减少 KV 头 | 多个 Q 头共享一组 K, V |
 | Grouped-Query Attention | 折中方案 | 将 Q 头分组，每组共享 K, V |
@@ -359,13 +359,13 @@ $$lr = d_{model}^{-0.5} \cdot \min(step\_num^{-0.5}, step\_num \cdot warmup\_ste
 | **Ring Attention** | 将 KV 分块分布在多设备并循环传输，attention 计算与通信重叠 | 支持超长上下文（百万级 token） |
 | **Sliding Window + 长上下文** | 局部窗口注意力 + 少量全局 token | 长序列显存可控 |
 
-**MLA 示意**：设 $\mathbf{c}_t = W^{DKV} \mathbf{h}_t$ 为压缩的 KV latent，推理时仅缓存 $\mathbf{c}_t$（远小于完整 K/V），注意力时再上投影恢复 $\mathbf{k}_t, \mathbf{v}_t$。
+**MLA 示意**：设 {::nomarkdown}$\mathbf{c}_t = W^{DKV} \mathbf{h}_t${:/nomarkdown} 为压缩的 KV latent，推理时仅缓存 {::nomarkdown}$\mathbf{c}_t${:/nomarkdown}（远小于完整 K/V），注意力时再上投影恢复 {::nomarkdown}$\mathbf{k}_t, \mathbf{v}_t${:/nomarkdown}。
 
 ### 11.6 线性注意力与状态空间模型（SSM）
 
-标准 attention 的 $O(n^2)$ 复杂度是长序列的瓶颈。**线性注意力/SSM** 通过将注意力改写为可递推的线性形式，把复杂度降到 $O(n)$：
+标准 attention 的 {::nomarkdown}$O(n^2)${:/nomarkdown} 复杂度是长序列的瓶颈。**线性注意力/SSM** 通过将注意力改写为可递推的线性形式，把复杂度降到 {::nomarkdown}$O(n)${:/nomarkdown}：
 
-- **Mamba（S6）**：引入输入依赖的选择性扫描，隐藏状态 $h_t$ 按 $\mathbf{h}_t = \bar{\mathbf{A}}_t \mathbf{h}_{t-1} + \bar{\mathbf{B}}_t \mathbf{x}_t$ 递推，$\bar{\mathbf{A}}, \bar{\mathbf{B}}$ 由输入生成。
+- **Mamba（S6）**：引入输入依赖的选择性扫描，隐藏状态 {::nomarkdown}$h_t${:/nomarkdown} 按 {::nomarkdown}$\mathbf{h}_t = \bar{\mathbf{A}}_t \mathbf{h}_{t-1} + \bar{\mathbf{B}}_t \mathbf{x}_t${:/nomarkdown} 递推，{::nomarkdown}$\bar{\mathbf{A}}, \bar{\mathbf{B}}${:/nomarkdown} 由输入生成。
 - **Mamba-2 / SSD**：将选择性 SSM 与结构化矩阵乘法统一，可用 GPU 矩阵乘法高效实现。
 - **RWKV / xLSTM / Gated DeltaNet**：RNN 式线性递推 + 门控，兼顾并行训练与线性推理。
 - **Jamba / Samba**：SSM 与 attention 的混合架构，兼顾长程建模与内容检索。

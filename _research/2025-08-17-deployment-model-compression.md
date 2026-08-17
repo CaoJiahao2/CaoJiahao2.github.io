@@ -58,27 +58,27 @@ show_date: true
 | FP32 | 32 | 8 | 23 | 大 | 高 |
 | FP16 | 16 | 5 | 10 | 中 | 中 |
 | BF16 | 16 | 8 | 7 | 大 | 低 |
-| INT8 | 8 | - | - | $[-128,127]$ | 等距 |
-| INT4 | 4 | - | - | $[-8,7]$ | 等距 |
+| INT8 | 8 | - | - | {::nomarkdown}$[-128,127]${:/nomarkdown} | 等距 |
+| INT4 | 4 | - | - | {::nomarkdown}$[-8,7]${:/nomarkdown} | 等距 |
 
 **BF16 vs FP16**：BF16 牺牲尾数位换取与 FP32 相同的指数位（8 位），动态范围大、训练稳定，但精度低于 FP16；FP16 精度高但易溢出。训练常选 BF16，推理可选 FP16 或更低。
 
 ### 2.2 量化基本映射
 
-将浮点张量 $x$ 量化为定点整数 $\hat{x}$：
+将浮点张量 {::nomarkdown}$x${:/nomarkdown} 量化为定点整数 {::nomarkdown}$\hat{x}${:/nomarkdown}：
 
 $$
 \hat{x} = \text{round}\left(\frac{x}{s}\right) + z
 $$
 
-其中 $s$ 为 scale（缩放因子），$z$ 为 zero-point（零点偏移）。反量化近似为：
+其中 {::nomarkdown}$s${:/nomarkdown} 为 scale（缩放因子），{::nomarkdown}$z${:/nomarkdown} 为 zero-point（零点偏移）。反量化近似为：
 
 $$
 x \approx s\,(\hat{x} - z)
 $$
 
-- **对称量化**（$z=0$）：原点 0 对应整数 0，范围关于 0 对称，常用于权重（权重分布通常近似零均值）。
-- **非对称量化**（$z \ne 0$）：可覆盖任意区间，常用于激活（如 ReLU 后非负分布，最小值不为 0）。
+- **对称量化**（{::nomarkdown}$z=0${:/nomarkdown}）：原点 0 对应整数 0，范围关于 0 对称，常用于权重（权重分布通常近似零均值）。
+- **非对称量化**（{::nomarkdown}$z \ne 0${:/nomarkdown}）：可覆盖任意区间，常用于激活（如 ReLU 后非负分布，最小值不为 0）。
 
 ### 2.3 对称量化示例
 
@@ -96,10 +96,10 @@ x =  2.10  → clip 到 127                    → 反量化 ≈  2.000 (饱和)
 
 ### 2.4 量化误差与粒度
 
-量化误差 $e = x - s(\hat{x}-z)$ 主要来自**舍入**与**饱和**两类。降低误差的常用手段是改变量化粒度：
+量化误差 {::nomarkdown}$e = x - s(\hat{x}-z)${:/nomarkdown} 主要来自**舍入**与**饱和**两类。降低误差的常用手段是改变量化粒度：
 
-- **per-tensor**：整张量共用一组 $(s,z)$，开销小但易被离群点拖累；
-- **per-channel**：每个输出通道单独一组 $(s,z)$，权重常采用，精度更稳但需额外存储 scale。
+- **per-tensor**：整张量共用一组 {::nomarkdown}$(s,z)${:/nomarkdown}，开销小但易被离群点拖累；
+- **per-channel**：每个输出通道单独一组 {::nomarkdown}$(s,z)${:/nomarkdown}，权重常采用，精度更稳但需额外存储 scale。
 
 对于激活，由于范围随输入变化，常用 per-tensor（或 per-token，LLM 场景按 token 维度统计）。
 
@@ -171,13 +171,13 @@ LLM 体量大、重训昂贵，因此面向 LLM 的低比特量化以 **PTQ + �
 
 ### 4.1 GPTQ
 
-GPTQ (Frantar et al., 2022) 基于**二阶信息**逐层贪心量化权重。对每层权重矩阵 $W$，按列逐个量化，并用**未量化部分的二阶信息（近似 Hessian $H$）补偿已量化的误差**。直觉上，量化第 $i$ 列后产生的误差会通过未量化列的更新被抵消：
+GPTQ (Frantar et al., 2022) 基于**二阶信息**逐层贪心量化权重。对每层权重矩阵 {::nomarkdown}$W${:/nomarkdown}，按列逐个量化，并用**未量化部分的二阶信息（近似 Hessian {::nomarkdown}$H${:/nomarkdown}）补偿已量化的误差**。直觉上，量化第 {::nomarkdown}$i${:/nomarkdown} 列后产生的误差会通过未量化列的更新被抵消：
 
 $$
 w_{\text{new}} \leftarrow w - \frac{1}{[H^{-1}]_{ii}}\,H^{-1}_{:,i}\,\delta_i
 $$
 
-其中 $\delta_i$ 为第 $i$ 列量化引入的误差，$H^{-1}_{:,i}$ 是 Hessian 逆的第 $i$ 列。上式是逐列补偿的简化形式，实际按 block 更新。
+其中 {::nomarkdown}$\delta_i${:/nomarkdown} 为第 {::nomarkdown}$i${:/nomarkdown} 列量化引入的误差，{::nomarkdown}$H^{-1}_{:,i}${:/nomarkdown} 是 Hessian 逆的第 {::nomarkdown}$i${:/nomarkdown} 列。上式是逐列补偿的简化形式，实际按 block 更新。
 
 - 常用 3-4 bit 权重；
 - 精度高、掉点小，但需逐层计算 Hessian 逆，流程略复杂；
@@ -187,13 +187,13 @@ $$
 
 AWQ (Lin et al., 2023) 的核心观察是**并非所有权重同等重要**：当某通道对应的激活幅度大时，该通道的权重对输出更敏感（salient channels）。AWQ 不去算 Hessian，而是通过 **per-channel scaling** 保护这些显著权重：
 
-对权重列 $w$ 与激活 $x$，引入通道缩放因子 $s$（$s>1$ 对显著通道放大）：
+对权重列 {::nomarkdown}$w${:/nomarkdown} 与激活 {::nomarkdown}$x${:/nomarkdown}，引入通道缩放因子 {::nomarkdown}$s${:/nomarkdown}（{::nomarkdown}$s>1${:/nomarkdown} 对显著通道放大）：
 
 $$
 Y = (x)\,(w) \;\Rightarrow\; Y = (x \cdot s)\,(w \cdot s^{-1})
 $$
 
-放大 $x\cdot s$ 后再量化 $w\cdot s^{-1}$，使显著权重的量化误差被相对缩小（因为 $s^{-1}$ 把权重拉回原值时误差按 $s$ 缩放）。保护误差直觉：显著通道量化误差从 $\Delta w$ 降为约 $\Delta w / s$。
+放大 {::nomarkdown}$x\cdot s${:/nomarkdown} 后再量化 {::nomarkdown}$w\cdot s^{-1}${:/nomarkdown}，使显著权重的量化误差被相对缩小（因为 {::nomarkdown}$s^{-1}${:/nomarkdown} 把权重拉回原值时误差按 {::nomarkdown}$s${:/nomarkdown} 缩放）。保护误差直觉：显著通道量化误差从 {::nomarkdown}$\Delta w${:/nomarkdown} 降为约 {::nomarkdown}$\Delta w / s${:/nomarkdown}。
 
 - 仅需少量校准数据估计显著通道；
 - 速度快、易于实现，4-bit 掉点极小；
@@ -201,13 +201,13 @@ $$
 
 ### 4.3 SmoothQuant
 
-SmoothQuant (Xiao et al., 2022) 直面 LLM 的**迁移难度不对称**：权重分布平缓、易量化；激活有离群值、难量化。思路是用平滑因子 $s$ 把激活的难度**转移到权重**上：
+SmoothQuant (Xiao et al., 2022) 直面 LLM 的**迁移难度不对称**：权重分布平缓、易量化；激活有离群值、难量化。思路是用平滑因子 {::nomarkdown}$s${:/nomarkdown} 把激活的难度**转移到权重**上：
 
 $$
 Y = (X)(W) = (X \cdot s^{-1})\cdot(s \cdot W)
 $$
 
-选择 $s$ 使 $X\cdot s^{-1}$ 的离群值被压平（激活变易量化），而 $s\cdot W$ 的范围仍可被权重量化吸收（权重难度的余量更大）。$s$ 通常按通道、基于激活与权重的最值比自适应求解。
+选择 {::nomarkdown}$s${:/nomarkdown} 使 {::nomarkdown}$X\cdot s^{-1}${:/nomarkdown} 的离群值被压平（激活变易量化），而 {::nomarkdown}$s\cdot W${:/nomarkdown} 的范围仍可被权重量化吸收（权重难度的余量更大）。{::nomarkdown}$s${:/nomarkdown} 通常按通道、基于激活与权重的最值比自适应求解。
 
 - 实现 W8A8（权重 INT8、激活 INT8）的稳定量化；
 - 无需重训、可融合进推理框架；
@@ -229,7 +229,7 @@ $$
 
 ### 5.1 BitNet 与 1.58-bit
 
-BitNet (Wang et al., 2023) 将权重**二值化**为 $\{-1,+1\}$，矩阵乘退化为加减与累加，显存与能耗极低；但二值信息量太少，精度恢复难。后续 **BitNet b1.58** 把权重扩展为三值 $\{-1,0,+1\}$（即 1.58-bit，$\log_2 3 \approx 1.58$）：
+BitNet (Wang et al., 2023) 将权重**二值化**为 {::nomarkdown}$\{-1,+1\}${:/nomarkdown}，矩阵乘退化为加减与累加，显存与能耗极低；但二值信息量太少，精度恢复难。后续 **BitNet b1.58** 把权重扩展为三值 {::nomarkdown}$\{-1,0,+1\}${:/nomarkdown}（即 1.58-bit，{::nomarkdown}$\log_2 3 \approx 1.58${:/nomarkdown}）：
 
 $$
 w_b \in \{-1, 0, +1\}
@@ -260,7 +260,7 @@ $$
 
 ### 6.2 结构化剪枝
 
-直接以**整通道/整 head**为单位剪枝，剪后仍是稠密结构，硬件可直接加速。典型思路是对 BatchNorm 的 $\gamma$ 参数做 $L_1$ 稀疏正则，$\gamma$ 趋 0 的通道被认为不重要而被整通道移除：
+直接以**整通道/整 head**为单位剪枝，剪后仍是稠密结构，硬件可直接加速。典型思路是对 BatchNorm 的 {::nomarkdown}$\gamma${:/nomarkdown} 参数做 {::nomarkdown}$L_1${:/nomarkdown} 稀疏正则，{::nomarkdown}$\gamma${:/nomarkdown} 趋 0 的通道被认为不重要而被整通道移除：
 
 $$
 \mathcal{L} = \mathcal{L}_{\text{task}} + \lambda \sum_i |\gamma_i|
@@ -285,7 +285,7 @@ $$
 | 稀疏上限 | 高（90%+） | 中（~50%） |
 | 硬件加速 | 难（需专用稀疏库/2:4） | 直接加速 |
 | 实现难度 | 中（需 mask 与稀疏存储） | 低（移除整通道即可） |
-| 典型代表 | Deep Compression, Lottery Ticket | 通道剪枝、BN-$\gamma$ 稀疏 |
+| 典型代表 | Deep Compression, Lottery Ticket | 通道剪枝、BN-{::nomarkdown}$\gamma${:/nomarkdown} 稀疏 |
 
 ---
 
@@ -293,19 +293,19 @@ $$
 
 ### 7.1 经典 KD (Hinton et al., 2015)
 
-让学生模型 $s$ 模仿教师 $t$ 的**软标签 (soft labels)**。教师 logits $z_t$ 经温度 $T$ 软化后蒸馏，损失为硬标签交叉熵与软标签 KL 的加权和：
+让学生模型 {::nomarkdown}$s${:/nomarkdown} 模仿教师 {::nomarkdown}$t${:/nomarkdown} 的**软标签 (soft labels)**。教师 logits {::nomarkdown}$z_t${:/nomarkdown} 经温度 {::nomarkdown}$T${:/nomarkdown} 软化后蒸馏，损失为硬标签交叉熵与软标签 KL 的加权和：
 
 $$
 \mathcal{L}_{\text{KD}} = (1-\alpha)\,\text{CE}\bigl(y,\,\sigma(z_s)\bigr) + \alpha\,T^2\,\text{KL}\Bigl(\sigma(z_t/T)\,\|\,\sigma(z_s/T)\Bigr)
 $$
 
-- 温度 $T$：放大 logits 的相对差异，使"暗知识 (dark knowledge)"——非正确类的相对概率——被学生学到；$T^2$ 用以补偿温度对 KL 梯度尺度的缩放。
-- $\alpha$：权衡硬标签（真值）与软标签（教师）。
+- 温度 {::nomarkdown}$T${:/nomarkdown}：放大 logits 的相对差异，使"暗知识 (dark knowledge)"——非正确类的相对概率——被学生学到；{::nomarkdown}$T^2${:/nomarkdown} 用以补偿温度对 KL 梯度尺度的缩放。
+- {::nomarkdown}$\alpha${:/nomarkdown}：权衡硬标签（真值）与软标签（教师）。
 
 ### 7.2 任务蒸馏 vs 特征蒸馏
 
 - **任务蒸馏 (logit distillation)**：仅在最终输出层对齐，学生模仿教师的预测分布（即上式）。
-- **特征蒸馏 (FitNets, Romero et al., 2014)**：在**中间层隐表示**上对齐，让学生隐层 $h_s$ 经变换后匹配教师隐层 $h_t$：
+- **特征蒸馏 (FitNets, Romero et al., 2014)**：在**中间层隐表示**上对齐，让学生隐层 {::nomarkdown}$h_s${:/nomarkdown} 经变换后匹配教师隐层 {::nomarkdown}$h_t${:/nomarkdown}：
 
 $$
 \mathcal{L}_{\text{FitNet}} = \bigl\|\,\phi(h_s) - h_t\,\bigr\|_2^2

@@ -47,7 +47,7 @@ show_date: true
 
 ### 2.1 为什么需要 KV Cache
 
-自回归生成时，每个新 token 的 Attention 需要所有历史 token 的 Key 和 Value。如不缓存，每次都需要重新计算，复杂度为 $O(n^2)$。
+自回归生成时，每个新 token 的 Attention 需要所有历史 token 的 Key 和 Value。如不缓存，每次都需要重新计算，复杂度为 {::nomarkdown}$O(n^2)${:/nomarkdown}。
 
 **KV Cache 方案**：将已计算的 Key 和 Value 缓存起来，新 token 只需要计算当前 token 的 Attention。
 
@@ -55,10 +55,10 @@ show_date: true
 
 $$\text{KV Cache 大小} = 2 \times \text{层数} \times n_{kv} \times \text{头维度} \times \text{序列长度} \times \text{精度字节数}$$
 
-其中 $n_{kv}$ 是 **KV 头数**：MHA 中 $n_{kv} = n_{head}$，MQA 中 $n_{kv} = 1$，GQA 中 $1 \leq n_{kv} < n_{head}$。
+其中 {::nomarkdown}$n_{kv}${:/nomarkdown} 是 **KV 头数**：MHA 中 {::nomarkdown}$n_{kv} = n_{head}${:/nomarkdown}，MQA 中 {::nomarkdown}$n_{kv} = 1${:/nomarkdown}，GQA 中 {::nomarkdown}$1 \leq n_{kv} < n_{head}${:/nomarkdown}。
 
 以 LLaMA-7B 为例（32 层，32 头，头维度 128，seq_len=2048，FP16）：
-- KV Cache = $2 \times 32 \times 32 \times 128 \times 2048 \times 2 = 1 \text{ GB}$
+- KV Cache = {::nomarkdown}$2 \times 32 \times 32 \times 128 \times 2048 \times 2 = 1 \text{ GB}${:/nomarkdown}
 
 长序列时 KV Cache 成为瓶颈。seq_len=128K 时可达 ~64 GB。
 
@@ -66,7 +66,7 @@ $$\text{KV Cache 大小} = 2 \times \text{层数} \times n_{kv} \times \text{头
 
 | 技术 | 原理 | 效果 |
 |------|------|------|
-| Multi-Query Attention (MQA) | 多个 Q 头共享一组 K, V | KV Cache 减少 $h$ 倍 |
+| Multi-Query Attention (MQA) | 多个 Q 头共享一组 K, V | KV Cache 减少 {::nomarkdown}$h${:/nomarkdown} 倍 |
 | Grouped-Query Attention (GQA) | Q 头分组共享 K, V | 折中方案 |
 | **Multi-head Latent Attention (MLA)** | 对 KV 做低秩压缩（DeepSeek-V2/V3），缓存压缩 latent | KV Cache 大幅下降（可达 90%+），推理成本显著降低 |
 | PagedAttention | 分页管理 KV Cache | 减少碎片，提高利用率 |
@@ -79,7 +79,7 @@ $$\text{KV Cache 大小} = 2 \times \text{层数} \times n_{kv} \times \text{头
 
 ### 3.1 核心问题
 
-标准 Attention 实现中，$QK^T$ 矩阵 ($n \times n$) 需要写入 HBM（高带宽显存）再读回，导致大量 I/O。
+标准 Attention 实现中，{::nomarkdown}$QK^T${:/nomarkdown} 矩阵 ({::nomarkdown}$n \times n${:/nomarkdown}) 需要写入 HBM（高带宽显存）再读回，导致大量 I/O。
 
 ### 3.2 Flash Attention 原理
 
@@ -239,7 +239,7 @@ Continuous Batching：每个 decode 步后，完成的请求立即释放资源�
 
 ### 6.2 加速原理
 
-目标模型每次验证 $K$ 个 token 只需一次前向传播。如果 draft model 准确率足够高，平均每步可接受 $\alpha K$ 个 token，加速比为 $\alpha K$。
+目标模型每次验证 {::nomarkdown}$K${:/nomarkdown} 个 token 只需一次前向传播。如果 draft model 准确率足够高，平均每步可接受 {::nomarkdown}$\alpha K${:/nomarkdown} 个 token，加速比为 {::nomarkdown}$\alpha K${:/nomarkdown}。
 
 ### 6.3 常见实现
 
@@ -251,7 +251,7 @@ Continuous Batching：每个 decode 步后，完成的请求立即释放资源�
 
 ### 6.4 MLA 与 PD 分离（2024–2025 前沿）
 
-**MLA（DeepSeek-V2/V3）**：将每层的 K、V 压缩为低秩 latent $\mathbf{c}_t = W^{DKV}\mathbf{h}_t \in \mathbb{R}^{d_c}$（$d_c \ll d_{kv}$），推理时只需缓存 $\mathbf{c}_t$ 与少量解耦的旋转位置项，KV 显存可降低一个数量级，同时保持甚至超越 MHA 的效果。
+**MLA（DeepSeek-V2/V3）**：将每层的 K、V 压缩为低秩 latent {::nomarkdown}$\mathbf{c}_t = W^{DKV}\mathbf{h}_t \in \mathbb{R}^{d_c}${:/nomarkdown}（{::nomarkdown}$d_c \ll d_{kv}${:/nomarkdown}），推理时只需缓存 {::nomarkdown}$\mathbf{c}_t${:/nomarkdown} 与少量解耦的旋转位置项，KV 显存可降低一个数量级，同时保持甚至超越 MHA 的效果。
 
 **PD 分离（Prefill-Decode Disaggregation）**：由于 Prefill 阶段是计算密集型、Decode 阶段是显存/带宽密集型，将两者部署到不同机器：
 

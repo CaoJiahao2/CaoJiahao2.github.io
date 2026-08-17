@@ -46,15 +46,15 @@ $$\min_{\theta} \ \mathcal{L}(\theta) = \frac{1}{N}\sum_{i=1}^N \ell(f_\theta(x_
 
 ### 2.2 光滑与强凸
 
-- **L-光滑**：梯度 Lipschitz，$\|\nabla f(x) - \nabla f(y)\| \le L\|x-y\|$；
-- **μ-强凸**：$f(y) \ge f(x) + \nabla f(x)^\top(y-x) + \frac{\mu}{2}\|y-x\|^2$。
+- **L-光滑**：梯度 Lipschitz，{::nomarkdown}$\|\nabla f(x) - \nabla f(y)\| \le L\|x-y\|${:/nomarkdown}；
+- **μ-强凸**：{::nomarkdown}$f(y) \ge f(x) + \nabla f(x)^\top(y-x) + \frac{\mu}{2}\|y-x\|^2${:/nomarkdown}。
 
 光滑与强凸刻画了损失曲面的"形状"，决定收敛速度。
 
 ### 2.3 无约束 vs 有约束
 
-- 无约束：$\min f(x)$；
-- 有约束：$\min f(x) \ \text{s.t.} \ g_i(x) \le 0, \ h_j(x) = 0$。
+- 无约束：{::nomarkdown}$\min f(x)${:/nomarkdown}；
+- 有约束：{::nomarkdown}$\min f(x) \ \text{s.t.} \ g_i(x) \le 0, \ h_j(x) = 0${:/nomarkdown}。
 
 ---
 
@@ -66,19 +66,19 @@ $$x_{t+1} = x_t - \eta \nabla f(x_t)$$
 
 ### 3.2 光滑函数的收敛
 
-对 $L$-光滑 $f$，取 $\eta = 1/L$：
+对 {::nomarkdown}$L${:/nomarkdown}-光滑 {::nomarkdown}$f${:/nomarkdown}，取 {::nomarkdown}$\eta = 1/L${:/nomarkdown}：
 
 $$f(x_t) - f(x^*) \le \frac{L\|x_0 - x^*\|^2}{2t}$$
 
-即误差 $O(1/t)$。**梯度下降不要求凸性也能保证梯度趋于 0**（收敛到驻点）。
+即误差 {::nomarkdown}$O(1/t)${:/nomarkdown}。**梯度下降不要求凸性也能保证梯度趋于 0**（收敛到驻点）。
 
 ### 3.3 强凸函数的线性收敛
 
-对 $L$-光滑且 $\mu$-强凸，取最优步长 $\eta = 2/(L+\mu)$：
+对 {::nomarkdown}$L${:/nomarkdown}-光滑且 {::nomarkdown}$\mu${:/nomarkdown}-强凸，取最优步长 {::nomarkdown}$\eta = 2/(L+\mu)${:/nomarkdown}：
 
 $$f(x_t) - f(x^*) \le \left(\frac{\kappa - 1}{\kappa + 1}\right)^{2t} \left(f(x_0) - f(x^*)\right)$$
 
-条件数 $\kappa = L/\mu$：$\kappa$ 越小收敛越快。这解释了为什么**预处理（preconditioning）与归一化**能加速收敛。
+条件数 {::nomarkdown}$\kappa = L/\mu${:/nomarkdown}：{::nomarkdown}$\kappa${:/nomarkdown} 越小收敛越快。这解释了为什么**预处理（preconditioning）与归一化**能加速收敛。
 
 ### 3.4 动量（Momentum）
 
@@ -92,7 +92,7 @@ $$v_{t+1} = \beta v_t + \nabla f(x_t), \quad x_{t+1} = x_t - \eta v_{t+1}$$
 
 ### 4.1 凸集与凸函数
 
-凸集：集合内任意两点的连线仍在集合内。凸函数：$f(\lambda x + (1-\lambda)y) \le \lambda f(x) + (1-\lambda)f(y)$。
+凸集：集合内任意两点的连线仍在集合内。凸函数：{::nomarkdown}$f(\lambda x + (1-\lambda)y) \le \lambda f(x) + (1-\lambda)f(y)${:/nomarkdown}。
 
 ### 4.2 拉格朗日对偶
 
@@ -100,16 +100,16 @@ $$v_{t+1} = \beta v_t + \nabla f(x_t), \quad x_{t+1} = x_t - \eta v_{t+1}$$
 
 $$\mathcal{L}(x, \lambda, \nu) = f(x) + \sum_i \lambda_i g_i(x) + \sum_j \nu_j h_j(x)$$
 
-对偶问题给出原问题最优值的下界：$d^* \le p^*$。强对偶成立时 $d^* = p^*$（Slater 条件）。
+对偶问题给出原问题最优值的下界：{::nomarkdown}$d^* \le p^*${:/nomarkdown}。强对偶成立时 {::nomarkdown}$d^* = p^*${:/nomarkdown}（Slater 条件）。
 
 ### 4.3 KKT 条件
 
 凸问题最优解的必要充分条件：
 
-1. **平稳性**：$\nabla_x \mathcal{L} = 0$；
-2. **原始可行**：$g_i(x) \le 0, \ h_j(x) = 0$；
-3. **对偶可行**：$\lambda_i \ge 0$；
-4. **互补松弛**：$\lambda_i g_i(x) = 0$。
+1. **平稳性**：{::nomarkdown}$\nabla_x \mathcal{L} = 0${:/nomarkdown}；
+2. **原始可行**：{::nomarkdown}$g_i(x) \le 0, \ h_j(x) = 0${:/nomarkdown}；
+3. **对偶可行**：{::nomarkdown}$\lambda_i \ge 0${:/nomarkdown}；
+4. **互补松弛**：{::nomarkdown}$\lambda_i g_i(x) = 0${:/nomarkdown}。
 
 应用：SVM 对偶、WGAN 对偶、带约束的优化问题。
 
@@ -128,7 +128,7 @@ $$\mathcal{L}(x, \lambda, \nu) = f(x) + \sum_i \lambda_i g_i(x) + \sum_j \nu_j h
 
 $$\tilde{g} = \frac{1}{B}\sum_{i \in \mathcal{B}} \nabla \ell(f_\theta(x_i), y_i), \quad \theta \leftarrow \theta - \eta \tilde{g}$$
 
-由大数定律，$\mathbb{E}[\tilde{g}] = \nabla \mathcal{L}(\theta)$，即**无偏估计**。
+由大数定律，{::nomarkdown}$\mathbb{E}[\tilde{g}] = \nabla \mathcal{L}(\theta)${:/nomarkdown}，即**无偏估计**。
 
 ### 5.2 收敛分析
 
@@ -136,7 +136,7 @@ $$\tilde{g} = \frac{1}{B}\sum_{i \in \mathcal{B}} \nabla \ell(f_\theta(x_i), y_i
 
 $$\min_{t \le T} \mathbb{E}\|\nabla f(x_t)\|^2 = O\left(\frac{1}{\sqrt{T}}\right)$$
 
-受噪声项 $O(\sigma^2)$ 限制，需通过衰减学习率或批量增大来降低方差。
+受噪声项 {::nomarkdown}$O(\sigma^2)${:/nomarkdown} 限制，需通过衰减学习率或批量增大来降低方差。
 
 ### 5.3 批量大小与学习率
 
@@ -187,7 +187,7 @@ $$x_{t+1} = x_t - \eta\left(\frac{\hat{m}_t}{\sqrt{\hat{v}_t}+\epsilon} + \lambd
 
 ### 7.1 牛顿法
 
-用 Hessian 矩阵 $\nabla^2 f(x)$ 做二次近似：
+用 Hessian 矩阵 {::nomarkdown}$\nabla^2 f(x)${:/nomarkdown} 做二次近似：
 
 $$x_{t+1} = x_t - \eta \left[\nabla^2 f(x_t)\right]^{-1} \nabla f(x_t)$$
 
@@ -203,7 +203,7 @@ $$x_{t+1} = x_t - \eta \left[\nabla^2 f(x_t)\right]^{-1} \nabla f(x_t)$$
 
 $$F(\theta) = \mathbb{E}\left[\nabla_\theta \log p_\theta \cdot \nabla_\theta \log p_\theta^\top\right]$$
 
-自然梯度 $F^{-1}\nabla f$ 与 KL 散度相关，是 RL（TRPO）与变分推断的理论基础（见 `reinforcement-learning.md`）。
+自然梯度 {::nomarkdown}$F^{-1}\nabla f${:/nomarkdown} 与 KL 散度相关，是 RL（TRPO）与变分推断的理论基础（见 `reinforcement-learning.md`）。
 
 ---
 

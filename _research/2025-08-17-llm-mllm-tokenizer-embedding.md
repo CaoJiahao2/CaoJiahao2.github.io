@@ -43,7 +43,7 @@ show_date: true
 原始文本 → Tokenizer → [token ids] → Embedding Lookup → [dense vectors] → Transformer
 ```
 
-每个 token 先被映射为一个整数 ID，再通过嵌入层（Embedding Layer）查找得到 $d$ 维稠密向量。这个向量是模型后续所有计算的起点，分词质量直接影响下游性能。
+每个 token 先被映射为一个整数 ID，再通过嵌入层（Embedding Layer）查找得到 {::nomarkdown}$d${:/nomarkdown} 维稠密向量。这个向量是模型后续所有计算的起点，分词质量直接影响下游性能。
 
 ### 1.3 为什么关注分词
 
@@ -106,7 +106,7 @@ BPE 合并过程示例（词表大小 = 3 次合并）：
 
 **核心思想**：与 BPE 同样是合并式算法，但选择合并对的标准不是频率，而是**语言模型似然增益**。
 
-WordPiece 选择使训练语料似然 $P(\text{corpus})$ 提高最大的符号对进行合并。具体而言，对于候选对 $(a, b)$，计算：
+WordPiece 选择使训练语料似然 {::nomarkdown}$P(\text{corpus})${:/nomarkdown} 提高最大的符号对进行合并。具体而言，对于候选对 {::nomarkdown}$(a, b)${:/nomarkdown}，计算：
 
 $$score(a, b) = \frac{count(a, b)}{count(a) \times count(b)}$$
 
@@ -135,11 +135,11 @@ BERT 使用 WordPiece 词表，大小为 30,522。中文通常被切成单字或
 **训练过程**：
 
 1. 初始化一个足够大的种子词表（如所有字符 + 常见子串）。
-2. 固定词表，用 EM 算法估计每个 token 的 Unigram 概率 $p(x_i)$。
+2. 固定词表，用 EM 算法估计每个 token 的 Unigram 概率 {::nomarkdown}$p(x_i)${:/nomarkdown}。
 3. 对每个 token 计算「去掉它后似然损失多少」，损失最小的 token 被删除。
 4. 重复步骤 2-3，直到词表缩小到预设大小。
 
-在给定词表的条件下，一个句子 $X = (x_1, x_2, \ldots, x_M)$ 的概率为：
+在给定词表的条件下，一个句子 {::nomarkdown}$X = (x_1, x_2, \ldots, x_M)${:/nomarkdown} 的概率为：
 
 $$P(X) = \prod_{i=1}^{M} p(x_i)$$
 
@@ -196,7 +196,7 @@ SentencePiece 不分语言，直接将所有语料混合训练，这对多语言
 
 ### 3.1 嵌入层
 
-嵌入层（Embedding Layer）是一个可学习的查找表 $E \in \mathbb{R}^{V \times d}$，其中 $V$ 是词表大小，$d$ 是嵌入维度。它把每个 token ID 映射为一个 $d$ 维稠密向量：
+嵌入层（Embedding Layer）是一个可学习的查找表 {::nomarkdown}$E \in \mathbb{R}^{V \times d}${:/nomarkdown}，其中 {::nomarkdown}$V${:/nomarkdown} 是词表大小，{::nomarkdown}$d${:/nomarkdown} 是嵌入维度。它把每个 token ID 映射为一个 {::nomarkdown}$d${:/nomarkdown} 维稠密向量：
 
 $$e_i = E[i, :] \in \mathbb{R}^d$$
 
@@ -239,13 +239,13 @@ for i in ids:
 
 ### 3.3 嵌入层参数量
 
-词表大小 $V$ 直接影响嵌入层的参数量：
+词表大小 {::nomarkdown}$V${:/nomarkdown} 直接影响嵌入层的参数量：
 
 $$N_{embed} = V \times d$$
 
-同时，输出层（LM Head）通常共享嵌入层权重（weight tying），参数量为 $V \times d$。对于大词表，这是不可忽略的显存消耗：
+同时，输出层（LM Head）通常共享嵌入层权重（weight tying），参数量为 {::nomarkdown}$V \times d${:/nomarkdown}。对于大词表，这是不可忽略的显存消耗：
 
-| 模型 | 词表大小 $V$ | 嵌入维度 $d$ | 嵌入参数量 |
+| 模型 | 词表大小 {::nomarkdown}$V${:/nomarkdown} | 嵌入维度 {::nomarkdown}$d${:/nomarkdown} | 嵌入参数量 |
 |------|-------------|-------------|-----------|
 | GPT-2 | 50,257 | 768 | ~38.6M |
 | LLaMA 2 | 32,000 | 4,096 | ~131M |
@@ -285,14 +285,14 @@ You are a helpful assistant.<|im_end|>
 
 ### 4.1 词表大小的权衡
 
-词表大小 $V$ 是分词器设计中最关键的参数：
+词表大小 {::nomarkdown}$V${:/nomarkdown} 是分词器设计中最关键的参数：
 
 | 词表倾向 | 优势 | 劣势 |
 |----------|------|------|
-| **大词表**（$V \geq 100K$） | 每个 token 涵盖更多信息，序列更短，推理更快 | 嵌入层参数量大，长尾 token 训练不充分，泛化差 |
-| **小词表**（$V \leq 32K$） | 嵌入层轻量，罕见词也能由子词组合覆盖 | 序列变长，推理成本上升，信息密度低 |
+| **大词表**（{::nomarkdown}$V \geq 100K${:/nomarkdown}） | 每个 token 涵盖更多信息，序列更短，推理更快 | 嵌入层参数量大，长尾 token 训练不充分，泛化差 |
+| **小词表**（{::nomarkdown}$V \leq 32K${:/nomarkdown}） | 嵌入层轻量，罕见词也能由子词组合覆盖 | 序列变长，推理成本上升，信息密度低 |
 
-当前主流 LLM 收敛到 $V = 32K \sim 152K$。LLaMA 3 将词表从 32K 扩到 128K 后，同等文本的 token 数减少了约 15%，在长上下文场景下节省显著。
+当前主流 LLM 收敛到 {::nomarkdown}$V = 32K \sim 152K${:/nomarkdown}。LLaMA 3 将词表从 32K 扩到 128K 后，同等文本的 token 数减少了约 15%，在长上下文场景下节省显著。
 
 ### 4.2 中文与代码场景的词表优化
 
@@ -358,18 +358,18 @@ model.set_output_embeddings(new_embed)  # weight tying
 
 两种训练架构：
 
-- **Skip-gram**：给定中心词 $w_t$，预测上下文词 $w_{t-k}, \ldots, w_{t+k}$。适合小数据集。
+- **Skip-gram**：给定中心词 {::nomarkdown}$w_t${:/nomarkdown}，预测上下文词 {::nomarkdown}$w_{t-k}, \ldots, w_{t+k}${:/nomarkdown}。适合小数据集。
 - **CBOW（Continuous Bag-of-Words）**：给定上下文词，预测中心词。训练更快，适合大数据集。
 
-核心思想是通过预测任务学习词的分布式表示，语义相近的词在向量空间中距离更近。经典算术关系：$vec(\text{king}) - vec(\text{man}) + vec(\text{woman}) \approx vec(\text{queen})$。
+核心思想是通过预测任务学习词的分布式表示，语义相近的词在向量空间中距离更近。经典算术关系：{::nomarkdown}$vec(\text{king}) - vec(\text{man}) + vec(\text{woman}) \approx vec(\text{queen})${:/nomarkdown}。
 
 **GloVe（Pennington et al., 2014）**：
 
-Global Vectors 结合了全局矩阵分解和局部上下文窗口两种方法。基于词-词共现矩阵 $X$（$X_{ij}$ 表示词 $j$ 在词 $i$ 的上下文中出现的次数），优化目标：
+Global Vectors 结合了全局矩阵分解和局部上下文窗口两种方法。基于词-词共现矩阵 {::nomarkdown}$X${:/nomarkdown}（{::nomarkdown}$X_{ij}${:/nomarkdown} 表示词 {::nomarkdown}$j${:/nomarkdown} 在词 {::nomarkdown}$i${:/nomarkdown} 的上下文中出现的次数），优化目标：
 
 $$J = \sum_{i,j=1}^{V} f(X_{ij}) \left(w_i^T \tilde{w}_j + b_i + \tilde{b}_j - \log X_{ij} \right)^2$$
 
-其中 $f(X_{ij})$ 是加权函数，衰减高频词的影响。GloVe 在词类比和相似度任务上优于 Word2Vec。
+其中 {::nomarkdown}$f(X_{ij})${:/nomarkdown} 是加权函数，衰减高频词的影响。GloVe 在词类比和相似度任务上优于 Word2Vec。
 
 **静态词向量的局限**：
 

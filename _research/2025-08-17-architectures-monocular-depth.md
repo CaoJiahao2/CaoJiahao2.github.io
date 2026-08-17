@@ -46,17 +46,17 @@ show_date: true
 
 ### 1.3 仿射不变性
 
-单目深度的"尺度-平移模糊"：给定 $(d, a)$，实际深度 $D = a \cdot d + b$，$a, b$ 未知。需要相机内参或真实度量才能恢复。
+单目深度的"尺度-平移模糊"：给定 {::nomarkdown}$(d, a)${:/nomarkdown}，实际深度 {::nomarkdown}$D = a \cdot d + b${:/nomarkdown}，{::nomarkdown}$a, b${:/nomarkdown} 未知。需要相机内参或真实度量才能恢复。
 
 ---
 
 ## 2 评价指标 {#2}
 
-设预测深度为 $\hat{d}_i$，真实为 $d_i$，$N$ 为像素数：
+设预测深度为 {::nomarkdown}$\hat{d}_i${:/nomarkdown}，真实为 {::nomarkdown}$d_i${:/nomarkdown}，{::nomarkdown}$N${:/nomarkdown} 为像素数：
 
-- **AbsRel**：$\frac{1}{N} \sum_i \frac{|\hat{d}_i - d_i|}{d_i}$
-- **RMSE**：$\sqrt{\frac{1}{N} \sum_i (\hat{d}_i - d_i)^2}$
-- **δ₁ / δ₂ / δ₃**：满足 $\max(\hat{d}_i/d_i, d_i/\hat{d}_i) < 1.25$ 等阈值的像素比例；
+- **AbsRel**：{::nomarkdown}$\frac{1}{N} \sum_i \frac{|\hat{d}_i - d_i|}{d_i}${:/nomarkdown}
+- **RMSE**：{::nomarkdown}$\sqrt{\frac{1}{N} \sum_i (\hat{d}_i - d_i)^2}${:/nomarkdown}
+- **δ₁ / δ₂ / δ₃**：满足 {::nomarkdown}$\max(\hat{d}_i/d_i, d_i/\hat{d}_i) < 1.25${:/nomarkdown} 等阈值的像素比例；
 - **SiLog**：尺度不变对数误差，对尺度-平移模糊鲁棒：
 
 $$\text{SiLog} = \frac{1}{N} \sum_i \left( \log \hat{d}_i - \log d_i \right)^2 - \frac{1}{N^2} \left( \sum_i (\log \hat{d}_i - \log d_i) \right)^2$$
@@ -171,7 +171,7 @@ Metric3D 关注"零样本度量深度"，支持多种相机模型（针孔、广
 
 $$\mathcal{L}_{\text{si}} = \frac{1}{N} \sum_i \left( \hat{d}_i - \alpha d_i - \beta \right)^2$$
 
-其中 $\alpha, \beta$ 在每个 mini-batch 内最小二乘拟合。
+其中 {::nomarkdown}$\alpha, \beta${:/nomarkdown} 在每个 mini-batch 内最小二乘拟合。
 
 ### 6.3 多数据集混合训练
 

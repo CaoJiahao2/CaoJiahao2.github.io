@@ -67,16 +67,16 @@ Meng et al. (2022) 通过因果追踪（Causal Tracing）证明，Transformer LL
 
 ROME（Rank-One Model Editing, Meng et al., 2022）将 MLP 层视为线性联想记忆，通过秩为一的权重修改插入新知识。
 
-对于第 $l$ 层 MLP 的第二线性层 $W_{\text{proj}}^{(l)}$，ROME 求解：
+对于第 {::nomarkdown}$l${:/nomarkdown} 层 MLP 的第二线性层 {::nomarkdown}$W_{\text{proj}}^{(l)}${:/nomarkdown}，ROME 求解：
 
 $$
 W'_{\text{proj}} = W_{\text{proj}} + (\mathbf{v}^* - W_{\text{proj}} \mathbf{k}) \frac{\mathbf{k}^\top}{\mathbf{k}^\top \mathbf{k}}
 $$
 
 其中：
-- $\mathbf{k}$ 是主体（subject，如"巴黎"）在该层的键表示。
-- $\mathbf{v}^*$ 是目标客体（object，如"法国"）在最后一层的表示。
-- 修改后的 $W'$ 满足 $W' \mathbf{k} = \mathbf{v}^*$，即当输入键为 $\mathbf{k}$ 时输出目标值。
+- {::nomarkdown}$\mathbf{k}${:/nomarkdown} 是主体（subject，如"巴黎"）在该层的键表示。
+- {::nomarkdown}$\mathbf{v}^*${:/nomarkdown} 是目标客体（object，如"法国"）在最后一层的表示。
+- 修改后的 {::nomarkdown}$W'${:/nomarkdown} 满足 {::nomarkdown}$W' \mathbf{k} = \mathbf{v}^*${:/nomarkdown}，即当输入键为 {::nomarkdown}$\mathbf{k}${:/nomarkdown} 时输出目标值。
 
 ROME 一次编辑一条知识，且仅修改一个 MLP 层。
 
@@ -94,7 +94,7 @@ $$
 \min_{\Delta} \|\Delta K - (V^* - W K)\|_F^2 + \lambda \|\Delta\|_F^2
 $$
 
-其中 $K$ 是所有编辑键的矩阵，$V^*$ 是对应目标值矩阵。
+其中 {::nomarkdown}$K${:/nomarkdown} 是所有编辑键的矩阵，{::nomarkdown}$V^*${:/nomarkdown} 是对应目标值矩阵。
 
 ### 3.3 其他编辑方法
 
@@ -181,7 +181,7 @@ $$
 \mathcal{L}_{\text{EWC}} = \mathcal{L}_{\text{new}} + \lambda \sum_i F_i (\theta_i - \theta_i^*)^2
 $$
 
-其中 $F_i$ 是 Fisher 信息矩阵的对角线元素。
+其中 {::nomarkdown}$F_i${:/nomarkdown} 是 Fisher 信息矩阵的对角线元素。
 - **LoRA / 参数高效方法**：只更新少量参数，降低遗忘风险。
 - **回放（Replay）**：在训练中定期回放旧数据子集。
 

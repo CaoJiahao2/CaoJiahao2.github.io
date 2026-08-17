@@ -73,13 +73,13 @@ $$
 
 ### 2.3 数据规模与 Chinchilla 定律
 
-Chinchilla（Hoffmann et al., 2022）通过系统的缩放实验得出：在给定计算量 $C$ 下，最优参数量 $N$ 和训练 Token 数 $D$ 满足：
+Chinchilla（Hoffmann et al., 2022）通过系统的缩放实验得出：在给定计算量 {::nomarkdown}$C${:/nomarkdown} 下，最优参数量 {::nomarkdown}$N${:/nomarkdown} 和训练 Token 数 {::nomarkdown}$D${:/nomarkdown} 满足：
 
 $$
 N \propto C^{0.5}, \quad D \propto C^{0.5}
 $$
 
-即计算量翻倍时，参数量和数据量各增加约 $\sqrt{2} \approx 1.41$ 倍。经验法则是：每个参数对应约 20 个训练 Token。后续研究（如 DeepSeek、Llama 3）发现，在数据质量足够高时，用更多 Token（up to 10-20T）训练更小模型仍有收益。
+即计算量翻倍时，参数量和数据量各增加约 {::nomarkdown}$\sqrt{2} \approx 1.41${:/nomarkdown} 倍。经验法则是：每个参数对应约 20 个训练 Token。后续研究（如 DeepSeek、Llama 3）发现，在数据质量足够高时，用更多 Token（up to 10-20T）训练更小模型仍有收益。
 
 ---
 
@@ -95,7 +95,7 @@ $$
 
 ### 3.2 基于困惑度的过滤
 
-用一个高质量语料训练的 $n$-gram 或小型语言模型对文档评分，过滤高困惑度（低质量）和过低困惑度（可能是模板/重复内容）的文档：
+用一个高质量语料训练的 {::nomarkdown}$n${:/nomarkdown}-gram 或小型语言模型对文档评分，过滤高困惑度（低质量）和过低困惑度（可能是模板/重复内容）的文档：
 
 $$
 \text{PPL}(d) = \exp\left(-\frac{1}{|d|}\sum_{i=1}^{|d|} \log P(w_i | w_{<i})\right)
@@ -108,7 +108,7 @@ GPT-3、LLaMA 等均使用了基于困惑度的过滤。
 训练一个二分类器区分"高质量"（维基百科、书籍）和"低质量"（未过滤网页）文档，对所有语料评分并阈值过滤。
 
 - **FineWeb（Penedo et al., 2024）**：使用基于 BERT 的分类器，以维基百科为正样本、随机网页为负样本。
-- **DSIR**：通过重要性采样选择与目标分布（如维基百科）$n$-gram 分布匹配的文档。
+- **DSIR**：通过重要性采样选择与目标分布（如维基百科）{::nomarkdown}$n${:/nomarkdown}-gram 分布匹配的文档。
 - **Text Quality Classifier**：可基于启发式规则标注训练数据，再训练分类器实现规模化过滤。
 
 ### 3.4 生成式质量评估
@@ -132,7 +132,7 @@ GPT-3、LLaMA 等均使用了基于困惑度的过滤。
 |------|------|------|
 | URL 级 | 精确 URL 匹配 | 整页 |
 | 文档级 | MinHash + LSH | 近似重复文档 |
-| 段落/句子级 | $n$-gram 精确匹配 | 重复段落 |
+| 段落/句子级 | {::nomarkdown}$n${:/nomarkdown}-gram 精确匹配 | 重复段落 |
 | 行级 | 哈希精确匹配 | 重复行 |
 
 ### 4.3 MinHash + LSH
@@ -143,7 +143,7 @@ $$
 J(A, B) = \frac{|A \cap B|}{|A \cup B|}
 $$
 
-将文档表示为 $n$-gram 集合，计算 MinHash 签名，再通过 LSH（Locality-Sensitive Hashing）将相似度高于阈值的文档哈希到同一桶中，实现近似线性时间的近重复检测。LLaMA、GPT-3 等均使用 MinHash 做文档级去重。
+将文档表示为 {::nomarkdown}$n${:/nomarkdown}-gram 集合，计算 MinHash 签名，再通过 LSH（Locality-Sensitive Hashing）将相似度高于阈值的文档哈希到同一桶中，实现近似线性时间的近重复检测。LLaMA、GPT-3 等均使用 MinHash 做文档级去重。
 
 ### 4.4 子串去重
 
@@ -273,7 +273,7 @@ $$
 
 ### 8.2 检测方法
 
-- **$n$-gram 重叠**：检查评测样本与训练语料的 $n$-gram 重叠率（如 13-gram）。
+- **{::nomarkdown}$n${:/nomarkdown}-gram 重叠**：检查评测样本与训练语料的 {::nomarkdown}$n${:/nomarkdown}-gram 重叠率（如 13-gram）。
 - **前缀匹配**：检查评测题目开头是否出现在训练数据中。
 - **嵌入相似度**：用嵌入模型检测语义级重叠。
 - **成员推断攻击**：统计模型对训练/非训练样本的困惑度差异。

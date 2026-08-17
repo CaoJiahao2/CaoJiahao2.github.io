@@ -45,17 +45,17 @@ show_date: true
 
 ### 2.2 InfoNCE 损失推导
 
-Oord 等人提出的 InfoNCE [2] 是 CLIP 损失的直接来源。考虑一个 batch 含 $N$ 个图文对，图像经编码器得到 $z_i^v$、文本经编码器得到 $z_i^t$（均做 L2 归一化，使内积即 cosine 相似度）。CLIP 采用对称形式的 InfoNCE：
+Oord 等人提出的 InfoNCE [2] 是 CLIP 损失的直接来源。考虑一个 batch 含 {::nomarkdown}$N${:/nomarkdown} 个图文对，图像经编码器得到 {::nomarkdown}$z_i^v${:/nomarkdown}、文本经编码器得到 {::nomarkdown}$z_i^t${:/nomarkdown}（均做 L2 归一化，使内积即 cosine 相似度）。CLIP 采用对称形式的 InfoNCE：
 
 $$
 \mathcal{L}_{\text{CLIP}}=-\frac{1}{2N}\sum_{i=1}^{N}\left[\log\frac{\exp(z_i^v\cdot z_i^t/\tau)}{\sum_{j=1}^{N}\exp(z_i^v\cdot z_j^t/\tau)}+\log\frac{\exp(z_i^v\cdot z_i^t/\tau)}{\sum_{j=1}^{N}\exp(z_j^v\cdot z_i^t/\tau)}\right]
 $$
 
-其中前一项是"图像到文本"方向、后一项是"文本到图像"方向的 softmax 交叉熵，$\tau$ 是可学习的温度系数。
+其中前一项是"图像到文本"方向、后一项是"文本到图像"方向的 softmax 交叉熵，{::nomarkdown}$\tau${:/nomarkdown} 是可学习的温度系数。
 
-**温度系数 $\tau$ 的作用**：$\tau$ 控制 softmax 的"锐度"。$\tau$ 越小，分布越尖锐，模型对正样本的置信度要求越高、对负样本的惩罚越强；$\tau$ 过小又会导致梯度集中在少数最难负样本上、训练不稳定。CLIP 将 $\tau$ 初始化为 $1/\sqrt{d}$ 量级并作为可学习参数联合优化。
+**温度系数 {::nomarkdown}$\tau${:/nomarkdown} 的作用**：{::nomarkdown}$\tau${:/nomarkdown} 控制 softmax 的"锐度"。{::nomarkdown}$\tau${:/nomarkdown} 越小，分布越尖锐，模型对正样本的置信度要求越高、对负样本的惩罚越强；{::nomarkdown}$\tau${:/nomarkdown} 过小又会导致梯度集中在少数最难负样本上、训练不稳定。CLIP 将 {::nomarkdown}$\tau${:/nomarkdown} 初始化为 {::nomarkdown}$1/\sqrt{d}${:/nomarkdown} 量级并作为可学习参数联合优化。
 
-**为何需要大 batch**：softmax 形式的 InfoNCE 的负样本来自同一 batch 内的其他样本，有效负样本数约为 $N-1$。负样本越多、越多样，对比任务越难、学到的表征越具判别力。CLIP 训练时 batch size 高达 32768，这正是其性能的关键之一——也意味着训练成本极高、复现困难。
+**为何需要大 batch**：softmax 形式的 InfoNCE 的负样本来自同一 batch 内的其他样本，有效负样本数约为 {::nomarkdown}$N-1${:/nomarkdown}。负样本越多、越多样，对比任务越难、学到的表征越具判别力。CLIP 训练时 batch size 高达 32768，这正是其性能的关键之一——也意味着训练成本极高、复现困难。
 
 ### 2.3 CLIP 架构
 
@@ -63,7 +63,7 @@ CLIP [1] 采用经典的双塔结构：
 
 - **图像塔**：ViT 或 ResNet，将图像编码为特征向量；
 - **文本塔**：Transformer encoder，将文本（受最大长度限制，如 77 token）编码为特征向量；
-- **投影头**：两侧各一个线性投影，将特征映射到统一的 $d$ 维空间（如 512 或 768）；
+- **投影头**：两侧各一个线性投影，将特征映射到统一的 {::nomarkdown}$d${:/nomarkdown} 维空间（如 512 或 768）；
 - **损失**：对称 InfoNCE 对比损失。
 
 CLIP 最令人瞩目的能力是**零样本分类（zero-shot classification）**：把每个类别名构造成一句 prompt（如 `"a photo of a {label}."`），用 CLIP 文本塔编码所有类别的 prompt、用图像塔编码待分类图像，取 cosine 相似度最高的类别即可。这一范式让 CLIP 在不微调的情况下，于 ImageNet 上达到与有监督 ResNet 相当的水平，开启了"用自然语言做分类头"的新范式。
@@ -76,7 +76,7 @@ $$
 \mathcal{L}=-\sum_{i=1}^{N}\log\sigma\left(z_i^v\cdot z_i^t\cdot s+b\right)
 $$
 
-其中 $s$ 是可学习的 scale、$b$ 是可学习的 bias，$\sigma$ 为 sigmoid。每个图文对独立地被判定为"匹配/不匹配"，负样本不再通过 batch 内的归一化项引入，而是通过显式构造的负样本对（同一 batch 内 $i\neq j$ 的组合视为负样本，但各自独立计算）。
+其中 {::nomarkdown}$s${:/nomarkdown} 是可学习的 scale、{::nomarkdown}$b${:/nomarkdown} 是可学习的 bias，{::nomarkdown}$\sigma${:/nomarkdown} 为 sigmoid。每个图文对独立地被判定为"匹配/不匹配"，负样本不再通过 batch 内的归一化项引入，而是通过显式构造的负样本对（同一 batch 内 {::nomarkdown}$i\neq j${:/nomarkdown} 的组合视为负样本，但各自独立计算）。
 
 | 维度 | CLIP | SigLIP |
 |---|---|---|
@@ -111,7 +111,7 @@ Dosovitskiy 等人在 2021 年提出的 ViT [4] 把图像当成"句子"处理：
 [CLS] 的输出 → 图像全局表示 (或保留全部 token 序列)
 ```
 
-ViT 的一个关键特性是：**序列长度与 patch 数线性相关**。对 $224\times 224$、$p=16$ 的常见配置，序列长度为 $196$；若分辨率提到 $448\times 448$，则序列长度暴增至 $784$，自注意力的计算量随序列长度平方增长。这正是后续高分辨率 MLLM 必须解决"序列长度爆炸"的根源。
+ViT 的一个关键特性是：**序列长度与 patch 数线性相关**。对 {::nomarkdown}$224\times 224${:/nomarkdown}、{::nomarkdown}$p=16${:/nomarkdown} 的常见配置，序列长度为 {::nomarkdown}$196${:/nomarkdown}；若分辨率提到 {::nomarkdown}$448\times 448${:/nomarkdown}，则序列长度暴增至 {::nomarkdown}$784${:/nomarkdown}，自注意力的计算量随序列长度平方增长。这正是后续高分辨率 MLLM 必须解决"序列长度爆炸"的根源。
 
 ### 3.2 CLIP-ViT 作为多模态默认视觉塔
 
@@ -119,13 +119,13 @@ CLIP 训练完成后，其视觉塔已经与文本语义对齐，因此天然适
 
 ### 3.3 高分辨率与 anyres 策略
 
-真实图像分辨率千差万变，而 ViT 的位置编码和序列长度都对分辨率敏感。早期 MLLM 把图像直接 resize 到 $224$ 或 $336$，但这会丢失文档/图表中的细小文字与结构。LLaVA-NeXT [7] 等工作提出的 **anyres（any resolution）策略** 给出了一种折中：
+真实图像分辨率千差万变，而 ViT 的位置编码和序列长度都对分辨率敏感。早期 MLLM 把图像直接 resize 到 {::nomarkdown}$224${:/nomarkdown} 或 {::nomarkdown}$336${:/nomarkdown}，但这会丢失文档/图表中的细小文字与结构。LLaVA-NeXT [7] 等工作提出的 **anyres（any resolution）策略** 给出了一种折中：
 
-- 将原图按长边切成 $2\times 2$ 等网格（如 $2\times 2$、$1\times 4$、$4\times 1$，按宽高比自适应选择）；
+- 将原图按长边切成 {::nomarkdown}$2\times 2${:/nomarkdown} 等网格（如 {::nomarkdown}$2\times 2${:/nomarkdown}、{::nomarkdown}$1\times 4${:/nomarkdown}、{::nomarkdown}$4\times 1${:/nomarkdown}，按宽高比自适应选择）；
 - 每个 crop 单独过一次视觉塔，再加上一个降采样的全局 crop；
 - 把所有 crop 的 token 拼接送入连接器。
 
-这样既保留了局部高分辨率细节，又复用了低分辨率预训练编码器，无需重新训练 ViT。代价是 token 数随 grid 数量倍增（如 $2\times 2$ 即 5 倍 token），给 LLM 的上下文长度带来压力。
+这样既保留了局部高分辨率细节，又复用了低分辨率预训练编码器，无需重新训练 ViT。代价是 token 数随 grid 数量倍增（如 {::nomarkdown}$2\times 2${:/nomarkdown} 即 5 倍 token），给 LLM 的上下文长度带来压力。
 
 ---
 
@@ -163,10 +163,10 @@ BLIP-2 [5] 提出 Q-Former 来桥接**冻结的视觉编码器**与**冻结的 L
 
 Q-Former 的关键设计是：**输出 token 数 K 固定，与输入分辨率无关**。这带来两个工程价值：
 
-1. 解耦了视觉塔的序列长度与 LLM 的输入长度，无论用多大的图像，送入 LLM 的视觉 token 都是 $K$ 个；
+1. 解耦了视觉塔的序列长度与 LLM 的输入长度，无论用多大的图像，送入 LLM 的视觉 token 都是 {::nomarkdown}$K${:/nomarkdown} 个；
 2. 训练时可冻结昂贵的 ViT 和 LLM，只训练 Q-Former（参数量很小），极大降低训练成本。
 
-代价是 $K$ 个 token 是一种"信息瓶颈"——所有视觉信息必须被压缩进 $K$ 个表示，对细粒度任务（OCR、文档理解）可能造成信息损失。
+代价是 {::nomarkdown}$K${:/nomarkdown} 个 token 是一种"信息瓶颈"——所有视觉信息必须被压缩进 {::nomarkdown}$K${:/nomarkdown} 个表示，对细粒度任务（OCR、文档理解）可能造成信息损失。
 
 ### 4.4 线性 Projector（LLaVA）
 

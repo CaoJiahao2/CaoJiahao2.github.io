@@ -40,7 +40,7 @@ show_date: true
 
 $$\text{IoU} = \frac{|A \cap B|}{|A \cup B|}$$
 
-其中 $A$ 为预测框，$B$ 为真实框。IoU 取值 $[0, 1]$，通常设定阈值（如 0.5）判断预测是否正确。
+其中 {::nomarkdown}$A${:/nomarkdown} 为预测框，{::nomarkdown}$B${:/nomarkdown} 为真实框。IoU 取值 {::nomarkdown}$[0, 1]${:/nomarkdown}，通常设定阈值（如 0.5）判断预测是否正确。
 
 **mAP（mean Average Precision）** 是目标检测的核心评价指标：
 
@@ -49,7 +49,7 @@ $$\text{IoU} = \frac{|A \cap B|}{|A \cup B|}$$
 - **mAP@0.5**：IoU 阈值为 0.5 时的 mAP（Pascal VOC 标准）。
 - **mAP@0.5:0.95**：在 0.5 到 0.95 之间以 0.05 为步长取 10 个 IoU 阈值，分别计算 mAP 后取平均（COCO 主指标，更严格）。
 
-此外，COCO 还提供 AP$_{S}$、AP$_{M}$、AP$_{L}$（小/中/大目标的 AP），以及 AR（Average Recall）。
+此外，COCO 还提供 AP{::nomarkdown}$_{S}${:/nomarkdown}、AP{::nomarkdown}$_{M}${:/nomarkdown}、AP{::nomarkdown}$_{L}${:/nomarkdown}（小/中/大目标的 AP），以及 AR（Average Recall）。
 
 ### 1.3 方法分类
 
@@ -97,34 +97,34 @@ Faster R-CNN 是两阶段方法的里程碑，首次用 RPN（Region Proposal Ne
 
 在特征图的每个空间位置，预置多种尺度和宽高比的参考框，称为 Anchor。RPN 不直接预测绝对坐标，而是预测相对于 Anchor 的偏移量，这大大降低了回归难度。
 
-例如，在 FPN 的每一层，每个位置预置 3 种宽高比（$\{1:2, 1:1, 2:1\}$）和 3 种尺度（$\{2^0, 2^{1/3}, 2^{2/3}\}$），共 9 个 Anchor。对于 5 层 FPN 特征图，每张图像可产生约 200k 个 Anchor。
+例如，在 FPN 的每一层，每个位置预置 3 种宽高比（{::nomarkdown}$\{1:2, 1:1, 2:1\}${:/nomarkdown}）和 3 种尺度（{::nomarkdown}$\{2^0, 2^{1/3}, 2^{2/3}\}${:/nomarkdown}），共 9 个 Anchor。对于 5 层 FPN 特征图，每张图像可产生约 200k 个 Anchor。
 
 #### RPN 损失
 
 RPN 对每个 Anchor 做两件事：
 
 - **二分类**：判断该 Anchor 是前景（有目标）还是背景（无目标）。正样本定义为与任意真实框 IoU > 0.7 的 Anchor，负样本为 IoU < 0.3 的 Anchor。
-- **框回归**：预测 Anchor 到匹配真实框的偏移量 $(\Delta x, \Delta y, \Delta w, \Delta h)$。
+- **框回归**：预测 Anchor 到匹配真实框的偏移量 {::nomarkdown}$(\Delta x, \Delta y, \Delta w, \Delta h)${:/nomarkdown}。
 
 RPN 总损失为：
 
 $$L_{\text{RPN}} = \frac{1}{N_{cls}}\sum_i L_{cls}(p_i, p_i^*) + \lambda \frac{1}{N_{reg}}\sum_i p_i^* L_{reg}(t_i, t_i^*)$$
 
-其中 $p_i^*$ 为真实标签（1 表示前景），$L_{cls}$ 为二分类交叉熵，$L_{reg}$ 为 Smooth L1 损失。
+其中 {::nomarkdown}$p_i^*${:/nomarkdown} 为真实标签（1 表示前景），{::nomarkdown}$L_{cls}${:/nomarkdown} 为二分类交叉熵，{::nomarkdown}$L_{reg}${:/nomarkdown} 为 Smooth L1 损失。
 
 #### RoI Align
 
 RoI Pooling 在将候选区域映射到固定尺寸特征时，会进行两次量化取整，导致特征与原始图像像素的错位。RoI Align（Mask R-CNN 提出）使用双线性插值替代量化，消除了这个误差，对小目标检测提升尤为明显。
 
 具体步骤：
-1. 将 RoI 均匀划分为 $k \times k$ 个 bin；
+1. 将 RoI 均匀划分为 {::nomarkdown}$k \times k${:/nomarkdown} 个 bin；
 2. 在每个 bin 内采样 4 个点（通过双线性插值计算特征值）；
 3. 对每个 bin 做 Max/Average Pooling。
 
 #### 检测头
 
 对每个 RoI 特征，检测头输出：
-- 多类别分类概率（$C+1$ 类，含背景）；
+- 多类别分类概率（{::nomarkdown}$C+1${:/nomarkdown} 类，含背景）；
 - 每个类别的边界框精修偏移量。
 
 现代检测头常采用「解耦头」设计，将分类和回归分支分开，彼此独立。
@@ -211,27 +211,27 @@ SSD（Single Shot MultiBox Detector）在多个尺度的特征图上分别进行
 
 ### 3.4 Focal Loss 与 RetinaNet
 
-单阶段方法在训练时，大量候选位置（约 $10^4 \sim 10^5$）几乎全为背景，标准交叉熵损失被简单负样本主导，导致训练不稳定。
+单阶段方法在训练时，大量候选位置（约 {::nomarkdown}$10^4 \sim 10^5${:/nomarkdown}）几乎全为背景，标准交叉熵损失被简单负样本主导，导致训练不稳定。
 
 **Focal Loss**（RetinaNet 提出）通过降权易分样本来解决这个问题：
 
 $$FL(p_t) = -\alpha_t (1 - p_t)^\gamma \log p_t$$
 
 其中：
-- $p_t$：模型对正确类别的预测概率；
-- $\alpha_t$：类别权重因子，平衡正负样本（通常 $\alpha \approx 0.25$）；
-- $\gamma$：聚焦参数（通常 $\gamma = 2$），$\gamma$ 越大，易分样本的权重越低。
+- {::nomarkdown}$p_t${:/nomarkdown}：模型对正确类别的预测概率；
+- {::nomarkdown}$\alpha_t${:/nomarkdown}：类别权重因子，平衡正负样本（通常 {::nomarkdown}$\alpha \approx 0.25${:/nomarkdown}）；
+- {::nomarkdown}$\gamma${:/nomarkdown}：聚焦参数（通常 {::nomarkdown}$\gamma = 2${:/nomarkdown}），{::nomarkdown}$\gamma${:/nomarkdown} 越大，易分样本的权重越低。
 
-当 $\gamma = 0$ 时 Focal Loss 退化为带权重的交叉熵。当 $\gamma = 2$、$p_t = 0.9$ 时，该样本的损失被缩小 $(1-0.9)^2 = 100$ 倍；而 $p_t = 0.1$ 的难样本几乎不受影响。这是 RetinaNet 首次在精度上追平两阶段方法的关键。
+当 {::nomarkdown}$\gamma = 0${:/nomarkdown} 时 Focal Loss 退化为带权重的交叉熵。当 {::nomarkdown}$\gamma = 2${:/nomarkdown}、{::nomarkdown}$p_t = 0.9${:/nomarkdown} 时，该样本的损失被缩小 {::nomarkdown}$(1-0.9)^2 = 100${:/nomarkdown} 倍；而 {::nomarkdown}$p_t = 0.1${:/nomarkdown} 的难样本几乎不受影响。这是 RetinaNet 首次在精度上追平两阶段方法的关键。
 
 ### 3.5 Anchor-free 范式
 
 传统方法依赖预置 Anchor，需要精心设计 Anchor 的尺度、宽高比等超参数。Anchor-free 方法直接预测目标的关键点：
 
 **FCOS（Fully Convolutional One-Stage）**：
-- 对特征图每个前景点，直接预测该点到目标框四条边的距离 $(l, t, r, b)$；
+- 对特征图每个前景点，直接预测该点到目标框四条边的距离 {::nomarkdown}$(l, t, r, b)${:/nomarkdown}；
 - 引入 **Center-ness** 分支，预测该点距离目标中心的程度，用于抑制偏离中心的低质量预测框；
-- Center-ness 分数：$\sqrt{\frac{\min(l, r)}{\max(l, r)} \times \frac{\min(t, b)}{\max(t, b)}}$，越接近中心越接近 1。
+- Center-ness 分数：{::nomarkdown}$\sqrt{\frac{\min(l, r)}{\max(l, r)} \times \frac{\min(t, b)}{\max(t, b)}}${:/nomarkdown}，越接近中心越接近 1。
 
 **CenterNet**：
 - 将目标表示为边界框中心点的热图（Heatmap） + 宽高；
@@ -294,16 +294,16 @@ Mosaic 增强是 YOLOv4/v5 系列的标配，有效提升了小目标和遮挡�
 
 | 损失函数 | 公式/思想 | 特点 |
 |---------|----------|------|
-| Smooth L1 | 分段函数，$|x| < 1$ 时用 $0.5x^2$，否则 $|x| - 0.5$ | 对异常值鲁棒，但与 IoU 不对齐 |
-| IoU Loss | $L = 1 - \text{IoU}$ | 直接优化 IoU，尺度不变 |
-| GIoU Loss | $L = 1 - \text{IoU} + \frac{|C - A \cup B|}{|C|}$ | 解决无重叠时梯度消失 |
+| Smooth L1 | 分段函数，{::nomarkdown}$|x| < 1${:/nomarkdown} 时用 {::nomarkdown}$0.5x^2${:/nomarkdown}，否则 {::nomarkdown}$|x| - 0.5${:/nomarkdown} | 对异常值鲁棒，但与 IoU 不对齐 |
+| IoU Loss | {::nomarkdown}$L = 1 - \text{IoU}${:/nomarkdown} | 直接优化 IoU，尺度不变 |
+| GIoU Loss | {::nomarkdown}$L = 1 - \text{IoU} + \frac{|C - A \cup B|}{|C|}${:/nomarkdown} | 解决无重叠时梯度消失 |
 | CIoU Loss | 考虑中心距离 + 宽高比一致性 | YOLOv4 起广泛使用，收敛更快 |
 
 CIoU（Complete IoU）损失公式：
 
 $$L_{\text{CIoU}} = 1 - \text{IoU} + \frac{\rho^2(b, b^{gt})}{c^2} + \alpha v$$
 
-其中 $\rho$ 为预测框与真实框中心的欧氏距离，$c$ 为包围两框的最小矩形对角线长度，$v$ 衡量宽高比一致性，$\alpha$ 为平衡系数。
+其中 {::nomarkdown}$\rho${:/nomarkdown} 为预测框与真实框中心的欧氏距离，{::nomarkdown}$c${:/nomarkdown} 为包围两框的最小矩形对角线长度，{::nomarkdown}$v${:/nomarkdown} 衡量宽高比一致性，{::nomarkdown}$\alpha${:/nomarkdown} 为平衡系数。
 
 ### 5.3 NMS 与 Soft-NMS
 
@@ -316,7 +316,7 @@ $$L_{\text{CIoU}} = 1 - \text{IoU} + \frac{\rho^2(b, b^{gt})}{c^2} + \alpha v$$
 
 $$s_i = s_i \cdot e^{-\frac{\text{IoU}(M, b_i)^2}{\sigma}}$$
 
-其中 $M$ 为当前最高分框，$b_i$ 为被抑制的框。Soft-NMS 在密集场景下保留更多检测，提升召回率。
+其中 {::nomarkdown}$M${:/nomarkdown} 为当前最高分框，{::nomarkdown}$b_i${:/nomarkdown} 为被抑制的框。Soft-NMS 在密集场景下保留更多检测，提升召回率。
 
 ### 5.4 采样策略与正负样本分配
 

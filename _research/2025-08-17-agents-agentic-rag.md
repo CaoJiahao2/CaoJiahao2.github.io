@@ -54,7 +54,7 @@ RAG（Retrieval-Augmented Generation）通过在生成前从外部知识库检�
 
 $$\cos(\mathbf{a},\mathbf{b})=\frac{\mathbf{a}\cdot\mathbf{b}}{\|\mathbf{a}\|\|\mathbf{b}\|}$$
 
-其中 $\mathbf{a}\cdot\mathbf{b}$ 为向量内积，$\|\mathbf{a}\|$ 为向量 $L_2$ 范数。
+其中 {::nomarkdown}$\mathbf{a}\cdot\mathbf{b}${:/nomarkdown} 为向量内积，{::nomarkdown}$\|\mathbf{a}\|${:/nomarkdown} 为向量 {::nomarkdown}$L_2${:/nomarkdown} 范数。
 
 常用向量数据库：FAISS、Milvus、Qdrant、Chroma、pgvector。
 

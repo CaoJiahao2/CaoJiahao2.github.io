@@ -121,7 +121,7 @@ $$
 \mathbf{x}_{l+1} = \mathbf{x}_0 (\mathbf{w}_l^\top \mathbf{x}_l + b_l) + \mathbf{x}_l
 $$
 
-每一层增加一阶交叉，$L$ 层可学习到 $L+1$ 阶交叉，且参数高效。
+每一层增加一阶交叉，{::nomarkdown}$L${:/nomarkdown} 层可学习到 {::nomarkdown}$L+1${:/nomarkdown} 阶交叉，且参数高效。
 
 ### 3.5 DIN（阿里, 2018）
 
@@ -134,7 +134,7 @@ $$
 \mathbf{v}_U(A) = f(\mathbf{v}_A) = \sum_{i=1}^{N} w(\mathbf{e}_i, \mathbf{v}_A) \mathbf{e}_i = \sum_{i=1}^{N} a(\mathbf{e}_i, \mathbf{v}_A) \mathbf{e}_i
 $$
 
-其中注意力权重 $a$ 由前馈网络计算，$\mathbf{e}_i$ 是历史物品 Embedding，$\mathbf{v}_A$ 是候选物品 Embedding。
+其中注意力权重 {::nomarkdown}$a${:/nomarkdown} 由前馈网络计算，{::nomarkdown}$\mathbf{e}_i${:/nomarkdown} 是历史物品 Embedding，{::nomarkdown}$\mathbf{v}_A${:/nomarkdown} 是候选物品 Embedding。
 
 ### 3.6 DIEN（阿里, 2019）
 
@@ -160,7 +160,7 @@ $$
 y_k = \sum_{i=1}^{n} g_k^{(i)} f_i(x)
 $$
 
-其中 $f_i$ 是第 $i$ 个专家网络，$g_k^{(i)}$ 是第 $k$ 个任务对专家 $i$ 的门控权重。不同任务可以选择性地利用共享专家，平衡相关性与冲突。
+其中 {::nomarkdown}$f_i${:/nomarkdown} 是第 {::nomarkdown}$i${:/nomarkdown} 个专家网络，{::nomarkdown}$g_k^{(i)}${:/nomarkdown} 是第 {::nomarkdown}$k${:/nomarkdown} 个任务对专家 {::nomarkdown}$i${:/nomarkdown} 的门控权重。不同任务可以选择性地利用共享专家，平衡相关性与冲突。
 
 ### 4.3 PLE
 
@@ -175,7 +175,7 @@ Progressive Layered Extraction（腾讯, 2020）区分共享专家和任务专�
 
 多目标模型输出多个预估值后，需融合为最终排序分：
 
-- **加权求和**：$score = w_1 p_{\text{click}} + w_2 p_{\text{convert}} + \ldots$
+- **加权求和**：{::nomarkdown}$score = w_1 p_{\text{click}} + w_2 p_{\text{convert}} + \ldots${:/nomarkdown}
 - **帕累托优化**：寻找多目标 Pareto 最优。
 - **LLM 重排**：用大模型综合多目标信号和内容理解做最终排序。
 

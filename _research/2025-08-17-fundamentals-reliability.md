@@ -43,7 +43,7 @@ ML 系统的不确定性来源：
 
 ### 2.1 数据漂移（Data Drift / Covariate Shift）
 
-输入特征分布 $P(X)$ 发生变化，但 $P(Y|X)$ 不变：
+输入特征分布 {::nomarkdown}$P(X)${:/nomarkdown} 发生变化，但 {::nomarkdown}$P(Y|X)${:/nomarkdown} 不变：
 
 $$
 P_{\text{train}}(X) \neq P_{\text{serve}}(X), \quad P(Y|X) \text{ 不变}
@@ -60,7 +60,7 @@ $$
 
 ### 2.2 概念漂移（Concept Drift）
 
-特征与标签的关系 $P(Y|X)$ 发生变化：
+特征与标签的关系 {::nomarkdown}$P(Y|X)${:/nomarkdown} 发生变化：
 
 $$
 P_{\text{train}}(Y|X) \neq P_{\text{serve}}(Y|X)

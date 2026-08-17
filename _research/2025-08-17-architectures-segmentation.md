@@ -58,13 +58,13 @@ show_date: true
 
 $$\text{mIoU} = \frac{1}{C}\sum_{c=1}^{C}\frac{\text{TP}_c}{\text{TP}_c + \text{FP}_c + \text{FN}_c}$$
 
-其中 $C$ 为类别数，$\text{TP}_c$、$\text{FP}_c$、$\text{FN}_c$ 分别为第 $c$ 类的真正例、假正例、假负例（像素级别）。
+其中 {::nomarkdown}$C${:/nomarkdown} 为类别数，{::nomarkdown}$\text{TP}_c${:/nomarkdown}、{::nomarkdown}$\text{FP}_c${:/nomarkdown}、{::nomarkdown}$\text{FN}_c${:/nomarkdown} 分别为第 {::nomarkdown}$c${:/nomarkdown} 类的真正例、假正例、假负例（像素级别）。
 
 **Dice 系数（F1-Score 的变体）**，常用于医学影像分割，衡量预测掩码与真实掩码的重叠程度：
 
 $$\text{Dice} = \frac{2|A \cap B|}{|A| + |B|}$$
 
-其中 $A$ 为预测区域，$B$ 为真实区域。Dice 系数取值范围为 $[0, 1]$，越接近 1 表示分割越准确。
+其中 {::nomarkdown}$A${:/nomarkdown} 为预测区域，{::nomarkdown}$B${:/nomarkdown} 为真实区域。Dice 系数取值范围为 {::nomarkdown}$[0, 1]${:/nomarkdown}，越接近 1 表示分割越准确。
 
 **全景分割评估指标 PQ（Panoptic Quality）**：将语义分割与实例分割统一评估，分为识别质量（RQ）和分割质量（SQ）两部分：
 
@@ -76,7 +76,7 @@ $$\text{PQ} = \underbrace{\frac{\sum_{(p,g)\in TP}\text{IoU}(p,g)}{|TP|}}_{\text
 
 ### 2.1 FCN：全卷积网络的端到端分割
 
-**FCN（Fully Convolutional Network）** [Long et al., 2015] 是语义分割的开山之作，核心思想是将分类网络（如 VGG）的全连接层替换为 $1 \times 1$ 卷积，实现端到端的像素级分类。
+**FCN（Fully Convolutional Network）** [Long et al., 2015] 是语义分割的开山之作，核心思想是将分类网络（如 VGG）的全连接层替换为 {::nomarkdown}$1 \times 1${:/nomarkdown} 卷积，实现端到端的像素级分类。
 
 **关键创新**：
 
@@ -107,13 +107,13 @@ FCN-8s:  输入 → ... → pool3 + pool4 + conv7 → 8×上采样 → 输出
 **核心设计**：
 
 - **对称结构**：编码器逐步下采样提取高维语义，解码器逐步上采样恢复空间分辨率，形成 U 形对称结构。原始 U-Net 为 4 次下采样，共 5 个层级，每层卷积核数翻倍（64→128→256→512→1024）。
-- **跳跃连接**：每个编码器层的输出直接拼接到对应解码器层，将浅层高分辨率细节与深层语义信息融合，极大改善了分割边界的精度。具体而言，第 $i$ 层解码器的输入为上层上采样特征与编码器第 $i$ 层特征的拼接。
+- **跳跃连接**：每个编码器层的输出直接拼接到对应解码器层，将浅层高分辨率细节与深层语义信息融合，极大改善了分割边界的精度。具体而言，第 {::nomarkdown}$i${:/nomarkdown} 层解码器的输入为上层上采样特征与编码器第 {::nomarkdown}$i${:/nomarkdown} 层特征的拼接。
 - **重叠策略**：使用 Overlap-tile 策略处理大图，边缘区域利用镜像填充来预测，避免边界伪影。
 - **损失函数**：原始 U-Net 使用加权交叉熵，为靠近边界的分割区域赋予更大权重，强制模型关注细胞边界：
 
 $$\mathcal{L}_{\text{U-Net}} = -\sum_{\mathbf{x} \in \Omega} w(\mathbf{x}) \log(p_{\ell(\mathbf{x})}(\mathbf{x}))$$
 
-其中 $w(\mathbf{x})$ 为像素权重图，边界像素权重更高，$p_{\ell(\mathbf{x})}(\mathbf{x})$ 为像素 $\mathbf{x}$ 属于真实类别 $\ell(\mathbf{x})$ 的预测概率。
+其中 {::nomarkdown}$w(\mathbf{x})${:/nomarkdown} 为像素权重图，边界像素权重更高，{::nomarkdown}$p_{\ell(\mathbf{x})}(\mathbf{x})${:/nomarkdown} 为像素 {::nomarkdown}$\mathbf{x}${:/nomarkdown} 属于真实类别 {::nomarkdown}$\ell(\mathbf{x})${:/nomarkdown} 的预测概率。
 
 **U-Net 变体**：
 
@@ -131,19 +131,19 @@ U-Net 虽然简洁，但凭借跳跃连接的高效特征融合，在小样本�
 
 标准卷积的感受野与卷积核大小成正比。空洞卷积通过在卷积核元素之间插入空洞（即填充 0），在不增加参数量的前提下指数级扩大感受野，同时保持特征图分辨率不变。
 
-对于空洞率为 $d$ 的 $k \times k$ 卷积，其等效感受野为 $k' = k + (k-1)(d-1)$。例如，$3 \times 3$ 空洞卷积在 $d=2$ 时等效于 $5 \times 5$ 卷积的感受野，参数量却仅为 $3 \times 3 = 9$。
+对于空洞率为 {::nomarkdown}$d${:/nomarkdown} 的 {::nomarkdown}$k \times k${:/nomarkdown} 卷积，其等效感受野为 {::nomarkdown}$k' = k + (k-1)(d-1)${:/nomarkdown}。例如，{::nomarkdown}$3 \times 3${:/nomarkdown} 空洞卷积在 {::nomarkdown}$d=2${:/nomarkdown} 时等效于 {::nomarkdown}$5 \times 5${:/nomarkdown} 卷积的感受野，参数量却仅为 {::nomarkdown}$3 \times 3 = 9${:/nomarkdown}。
 
 输出尺寸公式：
 
 $$H_{out} = \left\lfloor\frac{H_{in} + 2P - d \cdot (k-1) - 1}{S}\right\rfloor + 1$$
 
-其中 $d$ 为空洞率（dilation rate），$d=1$ 退化为标准卷积。DeepLab v2 使用空洞率为 6、12、18、24 的并行空洞卷积来捕获多尺度上下文。
+其中 {::nomarkdown}$d${:/nomarkdown} 为空洞率（dilation rate），{::nomarkdown}$d=1${:/nomarkdown} 退化为标准卷积。DeepLab v2 使用空洞率为 6、12、18、24 的并行空洞卷积来捕获多尺度上下文。
 
 **感受野计算**：对于连续卷积层，感受野递推公式为：
 
 $$r_{i} = r_{i-1} + (k_i - 1) \times \prod_{j=1}^{i-1} s_j$$
 
-其中 $r_i$ 为第 $i$ 层的感受野，$k_i$ 为卷积核大小，$s_j$ 为步长。通过堆叠空洞卷积，DeepLab 可以在不降分辨率的情况下获得极大的感受野，这对准确分割大物体至关重要。
+其中 {::nomarkdown}$r_i${:/nomarkdown} 为第 {::nomarkdown}$i${:/nomarkdown} 层的感受野，{::nomarkdown}$k_i${:/nomarkdown} 为卷积核大小，{::nomarkdown}$s_j${:/nomarkdown} 为步长。通过堆叠空洞卷积，DeepLab 可以在不降分辨率的情况下获得极大的感受野，这对准确分割大物体至关重要。
 
 **ASPP（Atrous Spatial Pyramid Pooling）**：
 
@@ -215,12 +215,12 @@ SegFormer 的设计实现了强大的性能与极高的推理效率，后续版�
 **核心组件**：
 
 - **RoIAlign**：Faster R-CNN 中的 RoIPool 在量化过程中引入了空间不对齐问题。RoIAlign 使用双线性插值，避免了量化取整，保存了精确的空间对应关系，对像素级掩码预测至关重要。
-- **掩码分支（Mask Branch）**：一个轻量 FCN，在检测分支之外为每个 RoI 预测一个 $28 \times 28$ 的二值掩码。掩码分支与分类、回归分支并行，共享 RoI 特征。
+- **掩码分支（Mask Branch）**：一个轻量 FCN，在检测分支之外为每个 RoI 预测一个 {::nomarkdown}$28 \times 28${:/nomarkdown} 的二值掩码。掩码分支与分类、回归分支并行，共享 RoI 特征。
 - **多任务损失**：
 
 $$\mathcal{L} = \mathcal{L}_{\text{cls}} + \mathcal{L}_{\text{box}} + \mathcal{L}_{\text{mask}}$$
 
-其中 $\mathcal{L}_{\text{mask}}$ 为逐像素 Sigmoid + 二值交叉熵，每个类别独立预测掩码（避免类间竞争）。
+其中 {::nomarkdown}$\mathcal{L}_{\text{mask}}${:/nomarkdown} 为逐像素 Sigmoid + 二值交叉熵，每个类别独立预测掩码（避免类间竞争）。
 
 Mask R-CNN 是实例分割的标杆方法，其架构简洁、精度高，后续大量工作在此基础上改进。
 
@@ -246,7 +246,7 @@ Mask2Former 在各大分割基准上均取得了 SOTA 性能，同时保持架�
 
 - **提示式分割（Promptable Segmentation）**：用户通过点、框、掩码或文本提示来指定分割目标，模型输出对应的掩码。同一个图像编码器只需提取一次特征，即可支持任意提示的组合，实现零样本分割。
 - **模型架构（三部分）**：
-  - **图像编码器**：基于 MAE 预训练的 ViT-H（Vision Transformer-Huge），处理 $1024 \times 1024$ 输入，输出 64×64 的特征图。编码开销最大，但只需一次前向。
+  - **图像编码器**：基于 MAE 预训练的 ViT-H（Vision Transformer-Huge），处理 {::nomarkdown}$1024 \times 1024${:/nomarkdown} 输入，输出 64×64 的特征图。编码开销最大，但只需一次前向。
   - **提示编码器**：点（位置编码 + 类别嵌入）、框（对角点位置编码）、掩码（卷积编码）分别编码后加和，统一为一个稀疏的提示嵌入。
   - **掩码解码器**：轻量 Transformer（2 层），将图像嵌入与提示嵌入进行交叉注意力融合，输出多个候选掩码（通常 3 个）及置信度分数。解码器非常轻量，支持实时交互。
 - **多掩码输出**：对于每个提示，SAM 输出 3 个掩码（整体、子部分、子部分），因为在点提示下，一个点可能对应多个有效的分割区域（如衣领 vs 整件衬衫）。
@@ -287,9 +287,9 @@ Mask2Former 在各大分割基准上均取得了 SOTA 性能，同时保持架�
 
 $$\mathcal{L}_{\text{CE}} = -\frac{1}{N}\sum_{i=1}^{N}\sum_{c=1}^{C} y_{i,c} \log(p_{i,c})$$
 
-其中 $N$ 为像素总数，$C$ 为类别数，$y_{i,c}$ 为真实标签（one-hot），$p_{i,c}$ 为预测概率。
+其中 {::nomarkdown}$N${:/nomarkdown} 为像素总数，{::nomarkdown}$C${:/nomarkdown} 为类别数，{::nomarkdown}$y_{i,c}${:/nomarkdown} 为真实标签（one-hot），{::nomarkdown}$p_{i,c}${:/nomarkdown} 为预测概率。
 
-**加权交叉熵**：为每个类别赋予不同权重 $\alpha_c$，缓解类别不平衡问题：
+**加权交叉熵**：为每个类别赋予不同权重 {::nomarkdown}$\alpha_c${:/nomarkdown}，缓解类别不平衡问题：
 
 $$\mathcal{L}_{\text{WCE}} = -\frac{1}{N}\sum_{i=1}^{N}\sum_{c=1}^{C} \alpha_c \cdot y_{i,c} \log(p_{i,c})$$
 
@@ -299,7 +299,7 @@ Dice Loss 直接优化 Dice 系数，对小目标和不平衡数据尤为有效�
 
 $$\mathcal{L}_{\text{Dice}} = 1 - \frac{2\sum_{i} p_i g_i + \epsilon}{\sum_{i} p_i + \sum_{i} g_i + \epsilon}$$
 
-其中 $p_i$ 为预测概率，$g_i$ 为真实标签（0 或 1），$\epsilon$ 为平滑项（通常取 1）防止分母为零。Dice Loss 对前景和背景像素等权重，天然适合前景占比小的场景（如医学影像中的病灶分割）。
+其中 {::nomarkdown}$p_i${:/nomarkdown} 为预测概率，{::nomarkdown}$g_i${:/nomarkdown} 为真实标签（0 或 1），{::nomarkdown}$\epsilon${:/nomarkdown} 为平滑项（通常取 1）防止分母为零。Dice Loss 对前景和背景像素等权重，天然适合前景占比小的场景（如医学影像中的病灶分割）。
 
 ### 4.3 Focal Loss
 
@@ -307,7 +307,7 @@ Focal Loss 通过降低易分类样本的权重，使训练聚焦于难分类样
 
 $$\mathcal{L}_{\text{Focal}} = -\frac{1}{N}\sum_{i=1}^{N} (1 - p_i)^{\gamma} \log(p_i)$$
 
-其中 $\gamma \geq 0$ 为聚焦参数（通常取 2）。当 $p_i$ 接近 1（易分类样本）时，$(1-p_i)^{\gamma}$ 趋近于 0，大幅降低其损失贡献；当 $p_i$ 较小时，损失接近原始交叉熵。
+其中 {::nomarkdown}$\gamma \geq 0${:/nomarkdown} 为聚焦参数（通常取 2）。当 {::nomarkdown}$p_i${:/nomarkdown} 接近 1（易分类样本）时，{::nomarkdown}$(1-p_i)^{\gamma}${:/nomarkdown} 趋近于 0，大幅降低其损失贡献；当 {::nomarkdown}$p_i${:/nomarkdown} 较小时，损失接近原始交叉熵。
 
 ### 4.4 边界损失
 
@@ -322,15 +322,15 @@ $$\mathcal{L}_{\text{Focal}} = -\frac{1}{N}\sum_{i=1}^{N} (1 - p_i)^{\gamma} \lo
 
 $$\mathcal{L} = \lambda_1 \mathcal{L}_{\text{CE}} + \lambda_2 \mathcal{L}_{\text{Dice}} + \lambda_3 \mathcal{L}_{\text{Boundary}}$$
 
-CE + Dice 的组合是最常见的做法：CE 保证像素级分类精度，Dice 优化全局重叠度，两者互补。$\lambda_i$ 为各损失的权重，通常通过实验调参确定。
+CE + Dice 的组合是最常见的做法：CE 保证像素级分类精度，Dice 优化全局重叠度，两者互补。{::nomarkdown}$\lambda_i${:/nomarkdown} 为各损失的权重，通常通过实验调参确定。
 
 ### 4.6 Tversky Loss
 
-Tversky Loss 是 Dice Loss 的泛化形式，通过引入 $\alpha$ 和 $\beta$ 参数来分别控制假正例和假负例的惩罚力度：
+Tversky Loss 是 Dice Loss 的泛化形式，通过引入 {::nomarkdown}$\alpha${:/nomarkdown} 和 {::nomarkdown}$\beta${:/nomarkdown} 参数来分别控制假正例和假负例的惩罚力度：
 
 $$\mathcal{L}_{\text{Tversky}} = 1 - \frac{\sum_{i} p_i g_i}{\sum_{i} p_i g_i + \alpha \sum_{i} p_i (1-g_i) + \beta \sum_{i} (1-p_i) g_i}$$
 
-当 $\alpha = \beta = 0.5$ 时退化为 Dice Loss。设置 $\beta > \alpha$ 可加大对假负例（漏检）的惩罚，这在病灶检测中尤为重要——漏检的代价远高于误检。
+当 {::nomarkdown}$\alpha = \beta = 0.5${:/nomarkdown} 时退化为 Dice Loss。设置 {::nomarkdown}$\beta > \alpha${:/nomarkdown} 可加大对假负例（漏检）的惩罚，这在病灶检测中尤为重要——漏检的代价远高于误检。
 
 ### 4.7 Lovász-Softmax Loss
 
@@ -338,7 +338,7 @@ Lovász-Softmax Loss 直接优化 mIoU 指标，将离散的 Jaccard 指数扩�
 
 $$\mathcal{L}_{\text{Lovász}} = \frac{1}{C}\sum_{c=1}^{C} \overline{\Delta_{J_c}}(\mathbf{m}(c))$$
 
-其中 $\overline{\Delta_{J_c}}$ 为 Jaccard 损失的 Lovász 扩展，$\mathbf{m}(c)$ 为第 $c$ 类的预测误差向量。Lovász-Softmax 在类别极度不平衡的场景下通常优于 CE + Dice 组合，但其计算开销较大，且在不同批次大小下稳定性不如 CE。
+其中 {::nomarkdown}$\overline{\Delta_{J_c}}${:/nomarkdown} 为 Jaccard 损失的 Lovász 扩展，{::nomarkdown}$\mathbf{m}(c)${:/nomarkdown} 为第 {::nomarkdown}$c${:/nomarkdown} 类的预测误差向量。Lovász-Softmax 在类别极度不平衡的场景下通常优于 CE + Dice 组合，但其计算开销较大，且在不同批次大小下稳定性不如 CE。
 
 ### 4.8 损失选择建议
 
@@ -347,7 +347,7 @@ $$\mathcal{L}_{\text{Lovász}} = \frac{1}{C}\sum_{c=1}^{C} \overline{\Delta_{J_c
 | 通用语义分割 | CE + Dice（各 0.5） | 稳定、普适 |
 | 极度不平衡 | CE + Dice + Focal | 多层缓解不平衡 |
 | 医学影像 | Dice + Boundary | 边界精度优先 |
-| 小目标分割 | Tversky（$\beta > \alpha$） | 降低漏检 |
+| 小目标分割 | Tversky（{::nomarkdown}$\beta > \alpha${:/nomarkdown}） | 降低漏检 |
 | 追求 mIoU 极致 | Lovász-Softmax | 直接优化指标 |
 
 ---
@@ -400,7 +400,7 @@ $$\mathcal{L}_{\text{Lovász}} = \frac{1}{C}\sum_{c=1}^{C} \overline{\Delta_{J_c
 
 - **多尺度训练/测试**：训练时随机缩放输入，测试时多尺度推理并融合结果，常用策略如 0.5x、1.0x、1.5x、2.0x。
 - **OHEM（Online Hard Example Mining）**：在训练过程中动态选择损失最大的像素/区域进行反向传播，强制模型关注难例。
-- **学习率调度**：通常使用 Poly 学习率策略（$\text{lr} = \text{base\_lr} \times (1 - \frac{\text{iter}}{\text{max\_iter}})^{\text{power}}$，power=0.9），配合 Warmup 线性预热。
+- **学习率调度**：通常使用 Poly 学习率策略（{::nomarkdown}$\text{lr} = \text{base\_lr} \times (1 - \frac{\text{iter}}{\text{max\_iter}})^{\text{power}}${:/nomarkdown}，power=0.9），配合 Warmup 线性预热。
 - **混合精度训练**：使用 FP16 加速训练，减少显存占用，是分割任务的标准实践。
 
 ---

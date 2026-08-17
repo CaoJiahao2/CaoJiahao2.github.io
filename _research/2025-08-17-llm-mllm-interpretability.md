@@ -48,7 +48,7 @@ $$
 \hat{y} = \sigma(\mathbf{w}^\top h_i + b)
 $$
 
-其中 $h_i$ 是第 $i$ 层的隐藏状态。若探针能准确预测标签 $y$，说明该信息在该层被线性编码。
+其中 {::nomarkdown}$h_i${:/nomarkdown} 是第 {::nomarkdown}$i${:/nomarkdown} 层的隐藏状态。若探针能准确预测标签 {::nomarkdown}$y${:/nomarkdown}，说明该信息在该层被线性编码。
 
 常见探针应用：
 
@@ -102,13 +102,13 @@ Induction heads 的形成与模型的上下文学习能力涌现密切相关，�
 
 ### 4.2 SAE 原理
 
-稀疏自编码器（Cunningham et al., 2023; Bricken et al., 2023）将模型激活 $h$ 分解为稀疏的、可解释的特征组合：
+稀疏自编码器（Cunningham et al., 2023; Bricken et al., 2023）将模型激活 {::nomarkdown}$h${:/nomarkdown} 分解为稀疏的、可解释的特征组合：
 
 $$
 h \approx \sum_{i=1}^{d_s} z_i \mathbf{d}_i, \quad z_i \geq 0
 $$
 
-其中 $\mathbf{d}_i$ 是第 $i$ 个特征方向（字典向量），$z_i$ 是稀疏激活值，$d_s \gg d$（字典维度远大于原始维度，通常 $d_s = 64d$ 或更大）。
+其中 {::nomarkdown}$\mathbf{d}_i${:/nomarkdown} 是第 {::nomarkdown}$i${:/nomarkdown} 个特征方向（字典向量），{::nomarkdown}$z_i${:/nomarkdown} 是稀疏激活值，{::nomarkdown}$d_s \gg d${:/nomarkdown}（字典维度远大于原始维度，通常 {::nomarkdown}$d_s = 64d${:/nomarkdown} 或更大）。
 
 SAE 的训练目标：
 
@@ -116,7 +116,7 @@ $$
 \mathcal{L} = \underbrace{\|h - \hat{h}\|^2}_{\text{重建损失}} + \underbrace{\lambda \|z\|_1}_{\text{稀疏惩罚}}
 $$
 
-其中 $\hat{h} = D z$ 是重建激活，$\lambda$ 控制稀疏度。
+其中 {::nomarkdown}$\hat{h} = D z${:/nomarkdown} 是重建激活，{::nomarkdown}$\lambda${:/nomarkdown} 控制稀疏度。
 
 ### 4.3 特征的可解释性
 
@@ -145,14 +145,14 @@ SAE 学到的特征通常比神经元更具单一语义：
 表征工程（Zou et al., 2023）通过操控模型内部表征来控制行为：
 
 1. 收集不同行为状态下的激活（如"诚实回答" vs "说谎"）。
-2. 提取行为方向 $\mathbf{v} = \bar{h}_{\text{honest}} - \bar{h}_{\text{deceptive}}$。
+2. 提取行为方向 {::nomarkdown}$\mathbf{v} = \bar{h}_{\text{honest}} - \bar{h}_{\text{deceptive}}${:/nomarkdown}。
 3. 在推理时将该方向加到激活上：
 
 $$
 h'_i = h_i + \alpha \mathbf{v}
 $$
 
-其中 $\alpha$ 控制引导强度。这可在不微调的情况下增强或抑制特定行为。
+其中 {::nomarkdown}$\alpha${:/nomarkdown} 控制引导强度。这可在不微调的情况下增强或抑制特定行为。
 
 ### 5.2 Steering Vectors
 
@@ -170,7 +170,7 @@ $$
 \mathbf{v} = \frac{1}{N}\sum_{i=1}^{N} (h_i^+ - h_i^-)
 $$
 
-其中 $h^+$ 是期望行为的激活，$h^-$ 是不期望行为的激活。CAA 在安全、风格控制等场景有效，且比微调更轻量。
+其中 {::nomarkdown}$h^+${:/nomarkdown} 是期望行为的激活，{::nomarkdown}$h^-${:/nomarkdown} 是不期望行为的激活。CAA 在安全、风格控制等场景有效，且比微调更轻量。
 
 ### 5.4 局限与风险
 
@@ -203,7 +203,7 @@ $$
 
 ### 6.3 函数视角（Logit Lens）
 
-Logit Lens（nostalgebraist, 2020）将中间层激活直接用未嵌入矩阵 $W_U$ 投影到词表：
+Logit Lens（nostalgebraist, 2020）将中间层激活直接用未嵌入矩阵 {::nomarkdown}$W_U${:/nomarkdown} 投影到词表：
 
 $$
 \hat{p}_i = \text{softmax}(W_U h_i)
@@ -217,7 +217,7 @@ $$
 
 - **入门路径**：先在小型模型（GPT-2、Pythia）上实践 TransformerLens 库，理解 attention 头和 induction heads，再上手 SAE。
 - **工具链**：TransformerLens（电路分析）、SAELens（SAE 训练与分析）、NEEL-TOOLING、CircuitVis（可视化）。
-- **SAE 训练**：字典大小从 $16x$ 起步，$L_1$ 系数需搜索以平衡稀疏度（~90% 零激活）和重建质量。
+- **SAE 训练**：字典大小从 {::nomarkdown}$16x${:/nomarkdown} 起步，{::nomarkdown}$L_1${:/nomarkdown} 系数需搜索以平衡稀疏度（~90% 零激活）和重建质量。
 - **Steering 实验**：从简单可验证的行为（情感、代码风格）开始，逐层扫描找到最佳引导层，注意控制强度避免退化。
 - **安全应用**：探针和 Steering 可用于运行时监控，但不应作为唯一安全防线——它们本身可能被对抗样本绕过。
 - **局限性认知**：当前可解释性方法仍处于研究阶段，对大模型的完整逆向工程尚不可行。关注结论的因果证据强度，避免过度解读相关性。

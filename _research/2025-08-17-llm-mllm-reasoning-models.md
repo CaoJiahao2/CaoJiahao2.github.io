@@ -87,7 +87,7 @@ Wang et al. (2022) 提出，对同一问题**采样多条推理路径**，然后
 问题 → 采样 N 条 CoT 路径 → 提取每条路径的最终答案 → 多数投票 → 最终答案
 ```
 
-效果：$N$ 越大，投票越稳定，尤其在数学和逻辑推理任务上。通常 $N = 5 \sim 40$ 即可获得显著收益。
+效果：{::nomarkdown}$N${:/nomarkdown} 越大，投票越稳定，尤其在数学和逻辑推理任务上。通常 {::nomarkdown}$N = 5 \sim 40${:/nomarkdown} 即可获得显著收益。
 
 ### 2.4 Tree-of-Thought
 
@@ -125,7 +125,7 @@ CoT (线性):           Tree-of-Thought (分支):
 
 传统 LLM 的范式是：算力几乎全部投入训练，推理时一个答案一次前向。推理模型打破了这一范式：**在生成最终答案前，花费大量 token 进行内部搜索**。
 
-如果用数学形式化：给定问题 $x$，传统 LLM 直接建模 $P(y|x)$，而推理模型先搜索一个推理路径 $z$，再给出答案 $P(y|x,z)$，其中 $z$ 是中间推理序列。
+如果用数学形式化：给定问题 {::nomarkdown}$x${:/nomarkdown}，传统 LLM 直接建模 {::nomarkdown}$P(y|x)${:/nomarkdown}，而推理模型先搜索一个推理路径 {::nomarkdown}$z${:/nomarkdown}，再给出答案 {::nomarkdown}$P(y|x,z)${:/nomarkdown}，其中 {::nomarkdown}$z${:/nomarkdown} 是中间推理序列。
 
 ### 3.2 Scaling Law
 
@@ -133,7 +133,7 @@ OpenAI 在 o1 技术报告中提出 **test-time compute scaling law**：随着�
 
 $$\text{Accuracy}(C_{\text{test}}) \propto \log(C_{\text{test}})$$
 
-其中 $C_{\text{test}}$ 是推理期算力。这类似于训练期的 scaling law，但作用于推理阶段。
+其中 {::nomarkdown}$C_{\text{test}}${:/nomarkdown} 是推理期算力。这类似于训练期的 scaling law，但作用于推理阶段。
 
 **关键含义**：面对难题时，与其训练更大的模型，不如让现有模型「多想一会儿」——这改变了算力分配的思路。
 
@@ -237,7 +237,7 @@ DeepSeek 于 2025 年开源 R1，提供了**完整可复现**的推理模型训�
 
 **定义**：对每一步推理分别打分，提供稠密的中间步骤奖励。
 
-`PRM`(x, z_1, ..., z_t) 给出步骤 $z_t$ 的质量评分
+`PRM`(x, z_1, ..., z_t) 给出步骤 {::nomarkdown}$z_t${:/nomarkdown} 的质量评分
 
 **优点**：
 - 提供稠密监督信号，加速 RL 收敛
@@ -255,19 +255,19 @@ DeepSeek 于 2025 年开源 R1，提供了**完整可复现**的推理模型训�
 
 GRPO（Group Relative Policy Optimization）是 DeepSeek-R1 的关键训练算法，由 Shao et al. (2024) 在 DeepSeekMath 中提出。
 
-**核心思想**：对同一问题采样一组 $G$ 个 rollout，以组内平均奖励为基线计算优势，**免去独立 Critic 网络**。
+**核心思想**：对同一问题采样一组 {::nomarkdown}$G${:/nomarkdown} 个 rollout，以组内平均奖励为基线计算优势，**免去独立 Critic 网络**。
 
 优势估计：
 
 $$A_i = \frac{r_i - \text{mean}(r_1, \ldots, r_G)}{\text{std}(r_1, \ldots, r_G)}$$
 
-其中 $r_i$ 是第 $i$ 个 rollout 的奖励。
+其中 {::nomarkdown}$r_i${:/nomarkdown} 是第 {::nomarkdown}$i${:/nomarkdown} 个 rollout 的奖励。
 
 **GRPO 目标函数**：
 
 $$\mathcal{J}_{\text{GRPO}}(\theta) = \mathbb{E}\left[\min\left(\rho_i(\theta) A_i, \text{clip}(\rho_i(\theta), 1-\epsilon, 1+\epsilon) A_i\right)\right] - \beta \, D_{\text{KL}}(\pi_\theta \| \pi_{\text{ref}})$$
 
-其中 $\rho_i(\theta) = \frac{\pi_\theta(o_i|q)}{\pi_{\text{old}}(o_i|q)}$ 是重要性采样比。
+其中 {::nomarkdown}$\rho_i(\theta) = \frac{\pi_\theta(o_i|q)}{\pi_{\text{old}}(o_i|q)}${:/nomarkdown} 是重要性采样比。
 
 **GRPO vs PPO**：
 
@@ -354,7 +354,7 @@ R1 的训练经验表明，直接从基座做 RL（R1-Zero）虽然能涌现推�
 - R1 在奖励中加入语言一致性奖励
 
 **计算资源**：
-- GRPO 训练需要大规模采样（每组 $G$ 个 rollout）
+- GRPO 训练需要大规模采样（每组 {::nomarkdown}$G${:/nomarkdown} 个 rollout）
 - 推理阶段的极长序列（可达数万 token）对显存和训练速度有要求
 - 推荐使用 FlashAttention 等长序列优化
 

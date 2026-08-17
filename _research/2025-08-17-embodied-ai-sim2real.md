@@ -118,7 +118,7 @@ action_latency    ~ Uniform(0.0, 0.05)     # s
 
 $$\mathcal{L}_{\text{DA}} = \mathcal{L}_{\text{task}} + \lambda \mathcal{L}_{\text{adv}}(G)$$
 
-其中 $G$ 是仿真-真实翻译器。
+其中 {::nomarkdown}$G${:/nomarkdown} 是仿真-真实翻译器。
 
 ### 5.2 特征级适应
 

@@ -432,11 +432,11 @@ $$
 
 其中：
 
-- $S$：system instructions；
-- $H_t$：conversation history；
-- $T_t$：tool call/result；
-- $R_t$：retrieved memory；
-- $W$：workspace/context files。
+- {::nomarkdown}$S${:/nomarkdown}：system instructions；
+- {::nomarkdown}$H_t${:/nomarkdown}：conversation history；
+- {::nomarkdown}$T_t${:/nomarkdown}：tool call/result；
+- {::nomarkdown}$R_t${:/nomarkdown}：retrieved memory；
+- {::nomarkdown}$W${:/nomarkdown}：workspace/context files。
 
 Context 受到模型 context window 的硬限制。
 

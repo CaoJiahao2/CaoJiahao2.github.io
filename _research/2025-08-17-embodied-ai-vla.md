@@ -54,7 +54,7 @@ show_date: true
 
 $$a_i \in \{0, 1, \dots, K-1\}, \quad a_i \sim \pi_\theta(a_i \mid o_{\le t}, \ell, a_{<i})$$
 
-其中 $K$ 是动作词表大小（典型 256 或 1024）。这种方式的好处是：
+其中 {::nomarkdown}$K${:/nomarkdown} 是动作词表大小（典型 256 或 1024）。这种方式的好处是：
 
 - 直接复用 LLM 训练与推理栈；
 - 可与语言 token 联合训练（co-training）。
@@ -117,7 +117,7 @@ NVIDIA Isaac Lab 的基础模型，专为人形机器人设计，强调"全身�
 
 ## 4 动作分块与平滑 {#4}
 
-为降低高频控制下的延迟与累计误差，现代 VLA 通常一次预测未来 $H$ 步动作，称为 **action chunking**：
+为降低高频控制下的延迟与累计误差，现代 VLA 通常一次预测未来 {::nomarkdown}$H${:/nomarkdown} 步动作，称为 **action chunking**：
 
 $$a_{t:t+H} = \pi_\theta(o_t, \ell)$$
 

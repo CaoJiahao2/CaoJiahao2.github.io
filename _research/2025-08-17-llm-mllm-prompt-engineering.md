@@ -163,10 +163,10 @@ A: 设女生人数为 x，则男生人数为 x+4。
 
 $$\text{answer} = \arg\max_{a} \sum_{i=1}^{N} \mathbb{1}[\text{CoT}_i \to a]$$
 
-其中 $N$ 为采样次数（通常 5-40），$\text{CoT}_i$ 为第 $i$ 次采样得到的推理路径与答案。
+其中 {::nomarkdown}$N${:/nomarkdown} 为采样次数（通常 5-40），{::nomarkdown}$\text{CoT}_i${:/nomarkdown} 为第 {::nomarkdown}$i${:/nomarkdown} 次采样得到的推理路径与答案。
 
 **关键参数**：
-- 采样次数 $N$：越大越稳定，但成本线性增长
+- 采样次数 {::nomarkdown}$N${:/nomarkdown}：越大越稳定，但成本线性增长
 - temperature：通常 0.5-0.8，保证多样性但不至于发散
 
 ### 3.3 ReAct（Reasoning + Acting）

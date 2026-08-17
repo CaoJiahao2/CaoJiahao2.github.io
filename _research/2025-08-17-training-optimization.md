@@ -62,7 +62,7 @@ $$v_t = \beta v_{t-1} + \nabla_\theta J(\theta_t)$$
 
 $$\theta_{t+1} = \theta_t - \eta v_t$$
 
-其中 $\beta$ 通常设为 0.9。
+其中 {::nomarkdown}$\beta${:/nomarkdown} 通常设为 0.9。
 
 **物理意义**：球滚下山坡时，动量使其保持方向，不会因小坑洼而停滞。
 
@@ -88,7 +88,7 @@ $$G_t = G_{t-1} + (\nabla_\theta J_t)^2$$
 
 $$\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{G_t + \epsilon}} \odot \nabla_\theta J_t$$
 
-**问题**：$G_t$ 单调递增，导致学习率过早衰减到 0。
+**问题**：{::nomarkdown}$G_t${:/nomarkdown} 单调递增，导致学习率过早衰减到 0。
 
 ### 3.2 RMSprop
 
@@ -118,7 +118,7 @@ $$\hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_
 
 $$\theta_{t+1} = \theta_t - \frac{\eta}{\sqrt{\hat{v}_t} + \epsilon} \hat{m}_t$$
 
-**默认超参数**：$\beta_1 = 0.9, \beta_2 = 0.999, \epsilon = 10^{-8}$
+**默认超参数**：{::nomarkdown}$\beta_1 = 0.9, \beta_2 = 0.999, \epsilon = 10^{-8}${:/nomarkdown}
 
 ### 4.2 AdamW
 
@@ -134,7 +134,7 @@ $$\theta_{t+1} = \theta_t - \eta\left(\frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsil
 |------|------|-------|
 | Weight Decay | 混在梯度中 | 与梯度解耦 |
 | 泛化性能 | 较差 | 更好 |
-| 超参数分离 | $\eta$ 和 $\lambda$ 耦合 | $\eta$ 和 $\lambda$ 独立 |
+| 超参数分离 | {::nomarkdown}$\eta${:/nomarkdown} 和 {::nomarkdown}$\lambda${:/nomarkdown} 耦合 | {::nomarkdown}$\eta${:/nomarkdown} 和 {::nomarkdown}$\lambda${:/nomarkdown} 独立 |
 
 ### 4.4 其他 Adam 变体
 
@@ -162,12 +162,12 @@ $$\theta_{t+1} = \theta_t - \eta \cdot (\text{sign}(\beta_1 m_{t-1} + (1 - \beta
 
 | 优化器 | 核心思想 | 特点 |
 |--------|---------|------|
-| **Muon** | 对"类矩阵"参数近似做 $O$（正交化）更新，标量参数用 AdamW | 大模型训练常比 AdamW 收敛更快（如原版 Gemini 2 / 若干开源模型） |
+| **Muon** | 对"类矩阵"参数近似做 {::nomarkdown}$O${:/nomarkdown}（正交化）更新，标量参数用 AdamW | 大模型训练常比 AdamW 收敛更快（如原版 Gemini 2 / 若干开源模型） |
 | **Schedule-Free** | 去掉显式学习率调度，用凸组合（interpolation）更新历史 | 减少调度调参负担，PyTorch 官方已实现 `torch.optim.ScheduleFree` |
 | **SophiG** | 用矩阵 preconditioner 的幂次近似（Schur-Newton）替代逐元素缩放 | 高精度、内存可控，适合稠密中层 |
 | **muP（Maximal Update Parametrization）** | 随宽度缩放时使用不同的学习率标度，使模型达到"最大更新" | 理论支撑：小模型超参可迁移到大模型的必要架构与学习率标度 |
 
-**Muon 更新示意**（设 $M$ 为权重矩阵）：
+**Muon 更新示意**（设 {::nomarkdown}$M${:/nomarkdown} 为权重矩阵）：
 
 $$M_{t+1} = M_t - \eta\,\operatorname{NewtonSchulz}(\text{orthog}(\text{muon\_momentum}_t))$$
 
@@ -181,7 +181,7 @@ $$M_{t+1} = M_t - \eta\,\operatorname{NewtonSchulz}(\text{orthog}(\text{muon\_mo
 
 | 调度器 | 描述 | 适用场景 |
 |--------|------|---------|
-| StepLR | 每 N 步将 LR 乘以 $\gamma$ | 简单任务 |
+| StepLR | 每 N 步将 LR 乘以 {::nomarkdown}$\gamma${:/nomarkdown} | 简单任务 |
 | MultiStepLR | 在预设里程碑处衰减 | 传统 CV 任务 |
 | ExponentialLR | 指数衰减 | 持续衰减 |
 | CosineAnnealingLR | 余弦衰减 | 现代 DL 标配 |
@@ -193,7 +193,7 @@ $$M_{t+1} = M_t - \eta\,\operatorname{NewtonSchulz}(\text{orthog}(\text{muon\_mo
 
 在训练初期，模型参数是随机初始化的，梯度方差很大。直接使用大学习率会导致训练不稳定。
 
-**Warmup 策略**：在最初的 $N$ 步中，学习率从 0 线性增加到目标值。
+**Warmup 策略**：在最初的 {::nomarkdown}$N${:/nomarkdown} 步中，学习率从 0 线性增加到目标值。
 
 $$\eta_t = \eta_{target} \cdot \frac{t}{N_{warmup}}$$
 
@@ -225,7 +225,7 @@ lr(t) = lr * 0.5 * (1 + cos(π * (t - warmup) / (total - warmup)))
 | Transformer 预训练 | AdamW | 结合 warmup + cosine decay |
 | CNN 图像分类 | SGD + Momentum | 经典选择，泛化好 |
 | 大模型微调 | AdamW | 默认选择 |
-| GAN 训练 | Adam | 通常 $\beta_1=0.5$ |
+| GAN 训练 | Adam | 通常 {::nomarkdown}$\beta_1=0.5${:/nomarkdown} |
 | 扩散模型 | AdamW / Lion | Lion 更快但需调参 |
 | 强化学习 | Adam | 默认选择 |
 
@@ -233,10 +233,10 @@ lr(t) = lr * 0.5 * (1 + cos(π * (t - warmup) / (total - warmup)))
 
 | 超参数 | 建议范围 | 说明 |
 |--------|---------|------|
-| $\eta$ (学习率) | $10^{-4} \sim 10^{-3}$ (AdamW) | Transformer 推荐 $3 \times 10^{-4}$ |
-| $\beta_1$ | 0.9 (默认) | 一阶动量 |
-| $\beta_2$ | 0.999 (默认) 或 0.95 (大模型) | 二阶动量 |
-| $\epsilon$ | $10^{-8} \sim 10^{-6}$ | 大模型可增大到 $10^{-5}$ |
+| {::nomarkdown}$\eta${:/nomarkdown} (学习率) | {::nomarkdown}$10^{-4} \sim 10^{-3}${:/nomarkdown} (AdamW) | Transformer 推荐 {::nomarkdown}$3 \times 10^{-4}${:/nomarkdown} |
+| {::nomarkdown}$\beta_1${:/nomarkdown} | 0.9 (默认) | 一阶动量 |
+| {::nomarkdown}$\beta_2${:/nomarkdown} | 0.999 (默认) 或 0.95 (大模型) | 二阶动量 |
+| {::nomarkdown}$\epsilon${:/nomarkdown} | {::nomarkdown}$10^{-8} \sim 10^{-6}${:/nomarkdown} | 大模型可增大到 {::nomarkdown}$10^{-5}${:/nomarkdown} |
 | Weight Decay | 0.01 ~ 0.1 | AdamW 中与学习率解耦 |
 
 ### 6.3 常见陷阱

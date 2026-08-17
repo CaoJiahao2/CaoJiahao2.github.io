@@ -192,11 +192,11 @@ def init_weights(m):
 
 | 任务 | 损失函数 | 公式 |
 |------|---------|------|
-| 二分类 | BCE Loss | $-\frac{1}{N}\sum[y_i\log\hat{y}_i + (1-y_i)\log(1-\hat{y}_i)]$ |
-| 多分类 | Cross Entropy | $-\frac{1}{N}\sum y_i \log \hat{y}_i$ |
-| 回归 | MSE Loss | $\frac{1}{N}\sum (y_i - \hat{y}_i)^2$ |
+| 二分类 | BCE Loss | {::nomarkdown}$-\frac{1}{N}\sum[y_i\log\hat{y}_i + (1-y_i)\log(1-\hat{y}_i)]${:/nomarkdown} |
+| 多分类 | Cross Entropy | {::nomarkdown}$-\frac{1}{N}\sum y_i \log \hat{y}_i${:/nomarkdown} |
+| 回归 | MSE Loss | {::nomarkdown}$\frac{1}{N}\sum (y_i - \hat{y}_i)^2${:/nomarkdown} |
 | 回归 | Huber Loss | 结合 MSE 和 MAE 的优点 |
-| 不平衡分类 | Focal Loss | $-\alpha_t(1-p_t)^\gamma \log p_t$ |
+| 不平衡分类 | Focal Loss | {::nomarkdown}$-\alpha_t(1-p_t)^\gamma \log p_t${:/nomarkdown} |
 
 ### 5.2 常用评价指标
 

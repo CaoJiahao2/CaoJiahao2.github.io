@@ -90,11 +90,11 @@ x → spatial-attn → temporal-attn → next block
 
 $$\text{AdaLN}(h, t) = \gamma(t) \cdot \text{LayerNorm}(h) + \beta(t)$$
 
-其中 $\gamma(t), \beta(t)$ 由时间步 $t$ 经 MLP 预测。
+其中 {::nomarkdown}$\gamma(t), \beta(t)${:/nomarkdown} 由时间步 {::nomarkdown}$t${:/nomarkdown} 经 MLP 预测。
 
 ### 3.2 Patch 化
 
-把 $H \times W \times C$ 的特征切成 $p \times p$ 的 patches，序列化为 Transformer 输入 token。
+把 {::nomarkdown}$H \times W \times C${:/nomarkdown} 的特征切成 {::nomarkdown}$p \times p${:/nomarkdown} 的 patches，序列化为 Transformer 输入 token。
 
 ### 3.3 规模化优势
 
@@ -112,7 +112,7 @@ Transformer 在数据规模与算力增加时表现稳健，这就是 DiT 在 SD
 
 - **编码器**：时空下采样（如 4×8×8 = 256 倍压缩率）；
 - **解码器**：时空上采样；
-- **潜空间**：$(T/h) \times (H/w) \times (W/w) \times C'$，$C' \in \{4, 16\}$。
+- **潜空间**：{::nomarkdown}$(T/h) \times (H/w) \times (W/w) \times C'${:/nomarkdown}，{::nomarkdown}$C' \in \{4, 16\}${:/nomarkdown}。
 
 Wan 2.1 的 VAE 在 256 倍压缩下仍保持高重建质量，是其能在 14B 模型上生成 5 秒 1080p 的关键。
 

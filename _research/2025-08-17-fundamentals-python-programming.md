@@ -133,7 +133,7 @@ from package.sub import item
 
 ## 4 NumPy：向量化数值计算 {#4}
 
-NumPy 提供高效的 $n$ 维数组（ndarray）与向量化运算，是深度学习数值计算的基础。
+NumPy 提供高效的 {::nomarkdown}$n${:/nomarkdown} 维数组（ndarray）与向量化运算，是深度学习数值计算的基础。
 
 ### 4.1 创建数组
 
@@ -167,7 +167,7 @@ z = np.exp(x)      # 逐元素
 s = x.mean(axis=0) # 沿轴归约
 ```
 
-**为什么向量化重要**：Python 逐元素循环慢；NumPy 底层用 C 实现，且一次操作处理整个数组，避免 Python 解释器开销。深度学习中的矩阵乘法 $Y = XW$ 正是这种向量化计算的核心形态。
+**为什么向量化重要**：Python 逐元素循环慢；NumPy 底层用 C 实现，且一次操作处理整个数组，避免 Python 解释器开销。深度学习中的矩阵乘法 {::nomarkdown}$Y = XW${:/nomarkdown} 正是这种向量化计算的核心形态。
 
 ### 4.4 广播（Broadcasting）
 

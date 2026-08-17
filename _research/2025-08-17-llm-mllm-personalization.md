@@ -87,7 +87,7 @@ show_date: true
 为每个用户（或用户群）训练独立的 LoRA 适配器：
 
 - 基座模型共享，用户 LoRA 按需加载/卸载。
-- 个性化表达为低秩偏移：$\Delta W = BA$。
+- 个性化表达为低秩偏移：{::nomarkdown}$\Delta W = BA${:/nomarkdown}。
 - 存储开销小（每个用户数 MB），支持百万级用户。
 
 ### 4.2 Adapter 组合
@@ -117,7 +117,7 @@ $$
 
 标准 RLHF 优化对所有用户相同的"有用性"。个性化 RLHF 引入用户条件：
 
-- 奖励模型以用户特征为条件：$r(y | x, u)$。
+- 奖励模型以用户特征为条件：{::nomarkdown}$r(y | x, u)${:/nomarkdown}。
 - 偏好数据来自具体用户，反映个体偏好。
 - 训练时对用户 ID 或画像 Embedding 做条件化。
 
@@ -129,7 +129,7 @@ $$
 L = -\mathbb{E}\left[\log \sigma\left(\beta \left(\log \frac{\pi(y_w|x,u)}{\pi_{\text{ref}}(y_w|x,u)} - \log \frac{\pi(y_l|x,u)}{\pi_{\text{ref}}(y_l|x,u)}\right)\right)\right]
 $$
 
-其中 $u$ 为用户标识或画像。
+其中 {::nomarkdown}$u${:/nomarkdown} 为用户标识或画像。
 
 ### 5.3 个性化 SFT
 

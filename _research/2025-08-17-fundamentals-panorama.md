@@ -34,7 +34,7 @@ $$
 
 Transformer 通过基于注意力的并行序列建模取代了传统的循环依赖；ResNet 通过残差路径改善了深层网络优化；BatchNorm、LayerNorm 和 RMSNorm 等归一化方法则从不同维度改善激活与梯度的数值行为。
 
-近两年的主要趋势是：视觉模型从封闭类别监督学习转向自监督基础模型、开放词汇检测和视频世界表征；语言模型从普通预训练与监督微调转向稀疏 MoE、长上下文、多模态原生建模和强化学习后训练；机器人学习从任务专用策略转向 OpenVLA、$\pi_0$、Gemini Robotics、GR00T 等视觉语言动作模型；世界模型则从 Dreamer 类潜在动力学模型扩展到 Genie、Cosmos 和 V-JEPA 等大规模视频或物理世界基础模型。
+近两年的主要趋势是：视觉模型从封闭类别监督学习转向自监督基础模型、开放词汇检测和视频世界表征；语言模型从普通预训练与监督微调转向稀疏 MoE、长上下文、多模态原生建模和强化学习后训练；机器人学习从任务专用策略转向 OpenVLA、{::nomarkdown}$\pi_0${:/nomarkdown}、Gemini Robotics、GR00T 等视觉语言动作模型；世界模型则从 Dreamer 类潜在动力学模型扩展到 Genie、Cosmos 和 V-JEPA 等大规模视频或物理世界基础模型。
 
 本文档为完整 Markdown 版本，包含公式推导、代码、表格、数据集、工具链和参考资料。
 
@@ -94,7 +94,7 @@ $$
 \mathbf{y}\in\mathbb{R}^{d_{\text{out}}}.
 $$
 
-对于批量输入 $\mathbf X\in\mathbb{R}^{B\times d_{\text{in}}}$：
+对于批量输入 {::nomarkdown}$\mathbf X\in\mathbb{R}^{B\times d_{\text{in}}}${:/nomarkdown}：
 
 $$
 \mathbf Y=\mathbf X\mathbf W^\top+\mathbf b.
@@ -139,7 +139,7 @@ R(\theta)
 [\ell(f_\theta(\mathbf x),y)].
 $$
 
-训练误差低只意味着 $\hat R(\theta)$ 较低，并不保证 $R(\theta)$ 较低。训练集与部署分布不一致时，还需要考虑域偏移、协变量偏移、标签偏移和概念漂移。
+训练误差低只意味着 {::nomarkdown}$\hat R(\theta)${:/nomarkdown} 较低，并不保证 {::nomarkdown}$R(\theta)${:/nomarkdown} 较低。训练集与部署分布不一致时，还需要考虑域偏移、协变量偏移、标签偏移和概念漂移。
 
 对分类模型，最大似然估计为
 
@@ -221,7 +221,7 @@ $$
 \mathbf W_2\mathbf h+\mathbf b_2.
 $$
 
-若损失为 $\mathcal L$，则
+若损失为 {::nomarkdown}$\mathcal L${:/nomarkdown}，则
 
 $$
 \frac{\partial\mathcal L}{\partial\mathbf W_2}
@@ -365,7 +365,7 @@ O\left(
 \right)
 $$
 
-的形式，其中 $\mathcal C(\mathcal F)$ 是模型类复杂度。现代深度网络通常高度过参数化，仅靠参数数量无法充分解释泛化；初始化、优化轨迹、隐式正则化、数据结构、预训练和归一化都可能决定最终解。
+的形式，其中 {::nomarkdown}$\mathcal C(\mathcal F)${:/nomarkdown} 是模型类复杂度。现代深度网络通常高度过参数化，仅靠参数数量无法充分解释泛化；初始化、优化轨迹、隐式正则化、数据结构、预训练和归一化都可能决定最终解。
 
 **最小训练闭环：**
 
@@ -547,7 +547,7 @@ $$
 \right)V.
 $$
 
-缩放项用于避免点积方差随维度增加而使 Softmax 过度饱和，$M$ 用于因果或 padding 掩码。多头注意力为
+缩放项用于避免点积方差随维度增加而使 Softmax 过度饱和，{::nomarkdown}$M${:/nomarkdown} 用于因果或 padding 掩码。多头注意力为
 
 $$
 \operatorname{MHA}(X)
@@ -557,7 +557,7 @@ $$
 W^O.
 $$
 
-Transformer 原论文以注意力取代循环和卷积，在机器翻译中展示了更高并行性；标准全局注意力的时间和显存复杂度通常随序列长度呈 $O(L^2)$ 增长。
+Transformer 原论文以注意力取代循环和卷积，在机器翻译中展示了更高并行性；标准全局注意力的时间和显存复杂度通常随序列长度呈 {::nomarkdown}$O(L^2)${:/nomarkdown} 增长。
 
 ```python
 import torch
@@ -1249,7 +1249,7 @@ $$
 \pi(a_{t:t+H}\mid o_{\le t},l),
 $$
 
-其中 $o$ 可以包含图像、视频、深度和机器人本体状态，$l$ 是语言指令，输出是单步动作或动作块。
+其中 {::nomarkdown}$o${:/nomarkdown} 可以包含图像、视频、深度和机器人本体状态，{::nomarkdown}$l${:/nomarkdown} 是语言指令，输出是单步动作或动作块。
 
 ```mermaid
 flowchart LR
@@ -1275,14 +1275,14 @@ flowchart LR
 | 模型 | 核心特点 | 公开状态 |
 |---|---|---|
 | OpenVLA | 7B VLA，视觉编码器融合 DINOv2 与 SigLIP，支持 PEFT | 权重与代码公开 |
-| $\pi_0$ | VLM + action expert，使用 flow matching 生成连续动作 | 论文与部分生态公开 |
+| {::nomarkdown}$\pi_0${:/nomarkdown} | VLM + action expert，使用 flow matching 生成连续动作 | 论文与部分生态公开 |
 | Gemini Robotics | 通用操作与具身推理，多形态适配 | 部分能力闭源 |
 | GR00T N1 | 慢速视觉语言推理 + 快速扩散 Transformer 动作系统 | 模型与代码生态开放 |
 | GR00T N1.7 | 面向跨形态人形机器人技能的更新开放模型 | 2026 年公开 |
 | SmolVLA | 面向低成本与高效率机器人控制 | 开源方向 |
 | StarVLA | 模块化 VLA 研究代码库 | 2026 年开源研究框架 |
 
-OpenVLA 在 970,000 条真实机器人示范上训练，并公开了检查点、微调代码与 Open X-Embodiment 支持；$\pi_0$ 使用基于 VLM 的 flow-matching 动作专家；Gemini Robotics 强调平滑反应式控制、未见环境泛化和具身空间推理；GR00T N1 使用双系统结构，将视觉语言推理和实时动作生成分离。
+OpenVLA 在 970,000 条真实机器人示范上训练，并公开了检查点、微调代码与 Open X-Embodiment 支持；{::nomarkdown}$\pi_0${:/nomarkdown} 使用基于 VLM 的 flow-matching 动作专家；Gemini Robotics 强调平滑反应式控制、未见环境泛化和具身空间推理；GR00T N1 使用双系统结构，将视觉语言推理和实时动作生成分离。
 
 截至 2026 年 8 月，Gemini Robotics 2 进一步强调长时视频理解、工具编排、多步骤任务进度判断与多机器人协作；NVIDIA 的 GR00T N1.7 则提供面向人形和跨形态机器人的开放后训练基础。
 
@@ -1485,7 +1485,7 @@ ONNX Runtime 支持在不同硬件、操作系统和编程语言之间部署模�
 7. Veličković 等，*Graph Attention Networks*。
 8. Hafner 等，*Mastering Diverse Domains through World Models*。
 9. Kim 等，*OpenVLA*。
-10. Black 等，*$\pi_0$: A Vision-Language-Action Flow Model*。
+10. Black 等，*{::nomarkdown}$\pi_0${:/nomarkdown}: A Vision-Language-Action Flow Model*。
 11. Gemini Robotics Team，*Gemini Robotics*。
 12. NVIDIA，*GR00T N1*。
 13. NVIDIA，*Cosmos World Foundation Model Platform*。

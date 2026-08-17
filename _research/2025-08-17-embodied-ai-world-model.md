@@ -28,7 +28,7 @@ show_date: true
 
 ## 1 概念与目标 {#1}
 
-世界模型学习环境的动力学 $\hat{p}(s_{t+1} \mid s_t, a_t)$，使智能体能够"在脑中推演"——给定当前状态与候选动作，预测未来状态，从而进行规划或想象训练，无需每一步都真实交互。
+世界模型学习环境的动力学 {::nomarkdown}$\hat{p}(s_{t+1} \mid s_t, a_t)${:/nomarkdown}，使智能体能够"在脑中推演"——给定当前状态与候选动作，预测未来状态，从而进行规划或想象训练，无需每一步都真实交互。
 
 自回归世界模型目标（最大似然下一状态）：
 
@@ -51,10 +51,10 @@ $$\mathcal{L}_{\text{world}} = -\mathbb{E}\left[\log \hat p_\theta(s_{t+1}\mid s
 
 **Recurrent State-Space Model**（Hafner et al.）是 Dreamer 的核心：
 
-- **隐状态** $h_t$：循环更新，承载长期记忆；
-- **随机状态** $s_t$：捕捉随机性；
-- **观测模型** $p(o_t \mid h_t, s_t)$：从隐状态重建观测；
-- **转移模型** $q(s_t \mid h_t, a_{t-1}, s_{t-1})$：预测下一随机状态。
+- **隐状态** {::nomarkdown}$h_t${:/nomarkdown}：循环更新，承载长期记忆；
+- **随机状态** {::nomarkdown}$s_t${:/nomarkdown}：捕捉随机性；
+- **观测模型** {::nomarkdown}$p(o_t \mid h_t, s_t)${:/nomarkdown}：从隐状态重建观测；
+- **转移模型** {::nomarkdown}$q(s_t \mid h_t, a_{t-1}, s_{t-1})${:/nomarkdown}：预测下一随机状态。
 
 ```text
 o_t ──► encoder ──► 拼接 ──► RSSM ──► h_t ──► decoder ──► ô_t
@@ -90,7 +90,7 @@ Sora、Wan 2.1、Genie 等大规模视频生成模型引发争论：**视频生�
 ### 3.2 正方观点
 
 - 大规模视频预测隐式学到了物理规律（重力、碰撞、流体）；
-- 能预测未来 $N$ 帧，并保持视觉一致性；
+- 能预测未来 {::nomarkdown}$N${:/nomarkdown} 帧，并保持视觉一致性；
 - 在可控条件下可作"游戏引擎"或"仿真器"。
 
 ### 3.3 反方观点

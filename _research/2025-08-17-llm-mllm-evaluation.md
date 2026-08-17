@@ -182,13 +182,13 @@ $$
 E_A = \frac{1}{1 + 10^{(R_B - R_A) / 400}}
 $$
 
-其中 $R_A$ 和 $R_B$ 是两个模型的 Elo 分，$E_A$ 是模型 A 的预期胜率。实际对战结果更新分数的公式为：
+其中 {::nomarkdown}$R_A${:/nomarkdown} 和 {::nomarkdown}$R_B${:/nomarkdown} 是两个模型的 Elo 分，{::nomarkdown}$E_A${:/nomarkdown} 是模型 A 的预期胜率。实际对战结果更新分数的公式为：
 
 $$
 R_A' = R_A + K \cdot (S_A - E_A)
 $$
 
-其中 $S_A$ 为实际结果（胜=1, 平=0.5, 负=0），$K$ 为更新系数。Arena 还引入了 Bradley-Terry 模型和置信区间，提供更稳健的排名估计。
+其中 {::nomarkdown}$S_A${:/nomarkdown} 为实际结果（胜=1, 平=0.5, 负=0），{::nomarkdown}$K${:/nomarkdown} 为更新系数。Arena 还引入了 Bradley-Terry 模型和置信区间，提供更稳健的排名估计。
 
 Chatbot Arena 的优势在于：覆盖真实用户分布、多样化 prompt、持续更新。局限在于：用户群体偏技术，可能不代表所有使用场景；且无法控制 prompt 难度分布。
 

@@ -45,22 +45,22 @@ show_date: true
 
 ### 2.1 大 O 记号
 
-衡量算法运行时间随输入规模 $n$ 的增长阶数：
+衡量算法运行时间随输入规模 {::nomarkdown}$n${:/nomarkdown} 的增长阶数：
 
 | 记号 | 含义 | 示例 |
 |------|------|------|
-| $O(1)$ | 常数时间 | 数组按索引访问 |
-| $O(\log n)$ | 对数时间 | 二分查找 |
-| $O(n)$ | 线性时间 | 遍历数组 |
-| $O(n \log n)$ | 线性对数 | 归并/快速排序 |
-| $O(n^2)$ | 平方时间 | 双层循环 |
-| $O(2^n)$ | 指数时间 | 暴力枚举 |
+| {::nomarkdown}$O(1)${:/nomarkdown} | 常数时间 | 数组按索引访问 |
+| {::nomarkdown}$O(\log n)${:/nomarkdown} | 对数时间 | 二分查找 |
+| {::nomarkdown}$O(n)${:/nomarkdown} | 线性时间 | 遍历数组 |
+| {::nomarkdown}$O(n \log n)${:/nomarkdown} | 线性对数 | 归并/快速排序 |
+| {::nomarkdown}$O(n^2)${:/nomarkdown} | 平方时间 | 双层循环 |
+| {::nomarkdown}$O(2^n)${:/nomarkdown} | 指数时间 | 暴力枚举 |
 
 ### 2.2 时间与空间权衡
 
 有时可以用空间换时间，例如：
 
-- 用哈希表把查找从 $O(n)$ 降到 $O(1)$；
+- 用哈希表把查找从 {::nomarkdown}$O(n)${:/nomarkdown} 降到 {::nomarkdown}$O(1)${:/nomarkdown}；
 - 用缓存（cache）避免重复计算。
 
 ### 2.3 平均 vs 最坏
@@ -75,14 +75,14 @@ show_date: true
 
 ### 3.1 数组（Array）
 
-- 连续内存，按索引访问 $O(1)$；
-- 插入/删除中部 $O(n)$；
+- 连续内存，按索引访问 {::nomarkdown}$O(1)${:/nomarkdown}；
+- 插入/删除中部 {::nomarkdown}$O(n)${:/nomarkdown}；
 - 深度学习中的张量底层多为连续数组（见 `python-programming.md`）。
 
 ### 3.2 链表（Linked List）
 
 - 节点通过指针相连；
-- 插入/删除头部 $O(1)$，按索引访问 $O(n)$；
+- 插入/删除头部 {::nomarkdown}$O(1)${:/nomarkdown}，按索引访问 {::nomarkdown}$O(n)${:/nomarkdown}；
 - 不要求连续内存。
 
 ### 3.3 栈（Stack）
@@ -112,7 +112,7 @@ queue.append(1); queue.popleft()
 
 ### 4.1 原理
 
-哈希表通过哈希函数把键映射到桶（bucket），实现近似 $O(1)$ 的插入、删除、查找：
+哈希表通过哈希函数把键映射到桶（bucket），实现近似 {::nomarkdown}$O(1)${:/nomarkdown} 的插入、删除、查找：
 
 $$h: \text{key} \to \text{bucket index}$$
 
@@ -143,14 +143,14 @@ s = {1, 2, 3}      # set 底层也是哈希表
 
 ### 5.1 二叉树与二叉搜索树
 
-- 二叉搜索树（BST）：左 < 根 < 右，查找 $O(\log n)$（平衡时）；
-- 平衡树（AVL、红黑树）保证 $O(\log n)$；
+- 二叉搜索树（BST）：左 < 根 < 右，查找 {::nomarkdown}$O(\log n)${:/nomarkdown}（平衡时）；
+- 平衡树（AVL、红黑树）保证 {::nomarkdown}$O(\log n)${:/nomarkdown}；
 - 应用：符号表、有序集合。
 
 ### 5.2 堆（Heap）
 
 - 完全二叉树，父节点优于子节点（最大堆/最小堆）；
-- 插入/取最值 $O(\log n)$；
+- 插入/取最值 {::nomarkdown}$O(\log n)${:/nomarkdown}；
 - 应用：优先队列、Top-k 问题、任务调度。
 
 ```python
@@ -173,8 +173,8 @@ heapq.heappop(heap)   # 1
 
 ### 6.1 表示
 
-- **邻接矩阵**：$O(V^2)$ 空间，查找 $O(1)$；
-- **邻接表**：$O(V + E)$ 空间，遍历高效。
+- **邻接矩阵**：{::nomarkdown}$O(V^2)${:/nomarkdown} 空间，查找 {::nomarkdown}$O(1)${:/nomarkdown}；
+- **邻接表**：{::nomarkdown}$O(V + E)${:/nomarkdown} 空间，遍历高效。
 
 ### 6.2 遍历
 
@@ -202,15 +202,15 @@ heapq.heappop(heap)   # 1
 
 | 算法 | 平均复杂度 | 最坏 | 稳定 | 说明 |
 |------|-----------|------|------|------|
-| 冒泡 | $O(n^2)$ | $O(n^2)$ | 是 | 教学用 |
-| 快排 | $O(n \log n)$ | $O(n^2)$ | 否 | 实际常用 |
-| 归并 | $O(n \log n)$ | $O(n \log n)$ | 是 | 稳定 |
-| 堆排 | $O(n \log n)$ | $O(n \log n)$ | 否 | 原地 |
+| 冒泡 | {::nomarkdown}$O(n^2)${:/nomarkdown} | {::nomarkdown}$O(n^2)${:/nomarkdown} | 是 | 教学用 |
+| 快排 | {::nomarkdown}$O(n \log n)${:/nomarkdown} | {::nomarkdown}$O(n^2)${:/nomarkdown} | 否 | 实际常用 |
+| 归并 | {::nomarkdown}$O(n \log n)${:/nomarkdown} | {::nomarkdown}$O(n \log n)${:/nomarkdown} | 是 | 稳定 |
+| 堆排 | {::nomarkdown}$O(n \log n)${:/nomarkdown} | {::nomarkdown}$O(n \log n)${:/nomarkdown} | 否 | 原地 |
 
 ### 7.2 查找
 
-- **线性查找**：$O(n)$；
-- **二分查找**：有序数组 $O(\log n)$；
+- **线性查找**：{::nomarkdown}$O(n)${:/nomarkdown}；
+- **二分查找**：有序数组 {::nomarkdown}$O(\log n)${:/nomarkdown}；
 - 深度学习常用：在有序列表（如阈值、Top-k）上二分。
 
 ---

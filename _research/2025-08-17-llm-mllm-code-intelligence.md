@@ -108,13 +108,13 @@ FIM 的三种格式：
 ### 3.3 补全质量评估
 
 - **Exact Match / Edit Similarity**：补全与参考代码的精确匹配率或编辑相似度。
-- **Pass@$k$**：生成 $k$ 个补全，至少一个通过测试的概率：
+- **Pass@{::nomarkdown}$k${:/nomarkdown}**：生成 {::nomarkdown}$k${:/nomarkdown} 个补全，至少一个通过测试的概率：
 
 $$
 \text{Pass@}k = 1 - \binom{n-c}{k} / \binom{n}{k}
 $$
 
-其中 $n$ 为总采样数，$c$ 为通过测试的样本数。
+其中 {::nomarkdown}$n${:/nomarkdown} 为总采样数，{::nomarkdown}$c${:/nomarkdown} 为通过测试的样本数。
 - **用户接受率**：实际使用中补全被采纳的比例，是最核心的产品指标。
 
 ---
@@ -133,7 +133,7 @@ $$
 
 代码是测试时计算最自然的应用场景——生成多个候选方案，用编译和测试结果筛选正确答案：
 
-- **Best-of-N**：生成 $N$ 个候选程序，运行测试，选择全部通过的。
+- **Best-of-N**：生成 {::nomarkdown}$N${:/nomarkdown} 个候选程序，运行测试，选择全部通过的。
 - **Self-Debugging**：模型运行自己的代码，根据错误信息自行修复。
 - **Reflexion（Shinn et al., 2023）**：将执行失败的反馈加入上下文，让模型反思并重试。
 - **CodeR（Zhang et al., 2024）**：将代码执行与迭代修复集成到 RL 循环中。

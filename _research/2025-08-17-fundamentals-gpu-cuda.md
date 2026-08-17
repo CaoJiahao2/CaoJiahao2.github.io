@@ -169,8 +169,8 @@ $$t_{\text{compute}} = \frac{\text{FLOPs}}{\text{FLOPS}}, \quad t_{\text{memory}
 
 $$AI = \frac{\text{FLOPs}}{\text{Bytes moved}}$$
 
-- $AI$ 高 → compute-bound；
-- $AI$ 低 → memory-bound。
+- {::nomarkdown}$AI${:/nomarkdown} 高 → compute-bound；
+- {::nomarkdown}$AI${:/nomarkdown} 低 → memory-bound。
 
 H100 的 HBM 带宽约 3.35 TB/s，CPU 内存带宽远低于此；主机↔设备数据传输（PCIe ~几十 GB/s）是常见瓶颈。
 

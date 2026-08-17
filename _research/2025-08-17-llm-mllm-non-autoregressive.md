@@ -28,7 +28,7 @@ show_date: true
 
 ## 1. 概述
 
-主流 LLM 采用自回归（Autoregressive, AR）方式逐 Token 生成：每步生成一个 Token，串行执行 $n$ 步。这一范式简单稳定，但在推理时存在两个根本问题：
+主流 LLM 采用自回归（Autoregressive, AR）方式逐 Token 生成：每步生成一个 Token，串行执行 {::nomarkdown}$n${:/nomarkdown} 步。这一范式简单稳定，但在推理时存在两个根本问题：
 
 - **延迟与长度成正比**：生成 1000 个 Token 需要 1000 次串行前向传播。
 - **计算利用率低**：每步只处理一个新 Token，GPU 大量计算资源闲置。
@@ -47,7 +47,7 @@ $$
 
 ### 2.1 延迟分析
 
-自回归生成长度为 $n$ 的序列需要 $n$ 次串行前向传播。每次前向传播的延迟包括：
+自回归生成长度为 {::nomarkdown}$n${:/nomarkdown} 的序列需要 {::nomarkdown}$n${:/nomarkdown} 次串行前向传播。每次前向传播的延迟包括：
 
 - GPU kernel 启动开销。
 - 注意力计算（随上下文增长）。
@@ -63,7 +63,7 @@ $$
 \text{单次前向可承受 Token 数} \approx \frac{\text{内存带宽} \times \text{延迟容忍}}{\text{模型参数字节数}}
 $$
 
-在典型 A100 + 7B 模型场景下，单次前向理论上可处理数十至数百个 Token，但自回归每次只处理 1 个。这意味着如果能并行生成 $k$ 个 Token，理论加速比可达 $k$ 倍。
+在典型 A100 + 7B 模型场景下，单次前向理论上可处理数十至数百个 Token，但自回归每次只处理 1 个。这意味着如果能并行生成 {::nomarkdown}$k${:/nomarkdown} 个 Token，理论加速比可达 {::nomarkdown}$k${:/nomarkdown} 倍。
 
 ---
 
@@ -71,24 +71,24 @@ $$
 
 ### 3.1 核心思想
 
-投机解码（Leviathan et al., 2023; Chen et al., 2023）用一个小模型（草稿模型）快速生成 $k$ 个候选 Token，再用大模型（目标模型）一次性验证。接受匹配的前缀，拒绝后从拒绝位置重新采样。
+投机解码（Leviathan et al., 2023; Chen et al., 2023）用一个小模型（草稿模型）快速生成 {::nomarkdown}$k${:/nomarkdown} 个候选 Token，再用大模型（目标模型）一次性验证。接受匹配的前缀，拒绝后从拒绝位置重新采样。
 
 算法流程：
 
-1. 草稿模型自回归生成 $k$ 个候选 Token：$\tilde{x}_1, \ldots, \tilde{x}_k$。
-2. 目标模型对 $\tilde{x}_1, \ldots, \tilde{x}_k$ 并行前向，获得每个位置的概率分布。
+1. 草稿模型自回归生成 {::nomarkdown}$k${:/nomarkdown} 个候选 Token：{::nomarkdown}$\tilde{x}_1, \ldots, \tilde{x}_k${:/nomarkdown}。
+2. 目标模型对 {::nomarkdown}$\tilde{x}_1, \ldots, \tilde{x}_k${:/nomarkdown} 并行前向，获得每个位置的概率分布。
 3. 从第一个位置开始，按接受/拒绝准则采样：若草稿 Token 被接受则保留，否则用调整后的分布重新采样并停止。
 4. 若全部接受，再从目标模型采样一个额外 Token。
 
 ### 3.2 接受准则
 
-为保证输出分布与目标模型完全一致，第 $i$ 个草稿 Token 的接受概率为：
+为保证输出分布与目标模型完全一致，第 {::nomarkdown}$i${:/nomarkdown} 个草稿 Token 的接受概率为：
 
 $$
 \alpha_i = \min\left(1, \frac{p(\tilde{x}_i | x_{<i})}{q(\tilde{x}_i | x_{<i})}\right)
 $$
 
-其中 $p$ 是目标模型分布，$q$ 是草稿模型分布。若拒绝，修正分布为：
+其中 {::nomarkdown}$p${:/nomarkdown} 是目标模型分布，{::nomarkdown}$q${:/nomarkdown} 是草稿模型分布。若拒绝，修正分布为：
 
 $$
 p'(x) = \max(0, p(x) - q(x))
@@ -103,10 +103,10 @@ $$
 
 ### 3.4 变体
 
-- **Medusa（Cai et al., 2024）**：在目标模型上添加多个并行解码头，每个头预测未来第 $k$ 个 Token，无需独立草稿模型。
+- **Medusa（Cai et al., 2024）**：在目标模型上添加多个并行解码头，每个头预测未来第 {::nomarkdown}$k${:/nomarkdown} 个 Token，无需独立草稿模型。
 - **EAGLE（Li et al., 2024）**：在隐藏状态上训练轻量自回归草稿头，比投机解码接受率更高。
 - **Lookahead Decoding**：用 Jacobi 迭代并行生成候选，无需草稿模型。
-- **Prompt Lookup Decoding**：直接从 prompt 中匹配 $n$-gram 作为草稿。
+- **Prompt Lookup Decoding**：直接从 prompt 中匹配 {::nomarkdown}$n${:/nomarkdown}-gram 作为草稿。
 
 ---
 
@@ -114,13 +114,13 @@ $$
 
 ### 4.1 Medusa
 
-Medusa 在 LLM 最后一层隐藏状态上添加 $k$ 个解码头，每个头独立预测未来第 $i$ 个 Token：
+Medusa 在 LLM 最后一层隐藏状态上添加 {::nomarkdown}$k${:/nomarkdown} 个解码头，每个头独立预测未来第 {::nomarkdown}$i${:/nomarkdown} 个 Token：
 
 $$
 \hat{x}_{t+i} = \text{head}_i(h_t)
 $$
 
-生成时，$k$ 个头同时产生候选 Token，组合成候选序列树，由主模型并行验证。Medusa 的典型配置是 4-5 个头，实现 2-3x 加速。
+生成时，{::nomarkdown}$k${:/nomarkdown} 个头同时产生候选 Token，组合成候选序列树，由主模型并行验证。Medusa 的典型配置是 4-5 个头，实现 2-3x 加速。
 
 Medusa 头的训练只需少量数据（~100K 条），冻结主模型，单独训练解码头，训练成本极低。
 
@@ -177,8 +177,8 @@ NVIDIA 的 Mercury（2025）代表了掩码生成模型在文本上的复兴：
 
 扩散模型在图像生成上取得了巨大成功（见 `architectures/diffusion.md`）。扩散式语言模型（Diffusion LLM）将离散文本 Token 视为离散状态，通过前向加噪和反向去噪生成文本：
 
-- **前向过程**：逐步将文本 Token 替换为随机 Token（或 mask Token），从 $x_0$ 到 $x_T$（全噪声）。
-- **反向过程**：训练神经网络从 $x_t$ 预测 $x_0$（或预测被噪声替换的原始 Token），迭代去噪。
+- **前向过程**：逐步将文本 Token 替换为随机 Token（或 mask Token），从 {::nomarkdown}$x_0${:/nomarkdown} 到 {::nomarkdown}$x_T${:/nomarkdown}（全噪声）。
+- **反向过程**：训练神经网络从 {::nomarkdown}$x_t${:/nomarkdown} 预测 {::nomarkdown}$x_0${:/nomarkdown}（或预测被噪声替换的原始 Token），迭代去噪。
 
 ### 6.2 离散扩散
 
@@ -188,7 +188,7 @@ $$
 q(x_t | x_{t-1}) = (1 - \beta_t) \delta(x_t, x_{t-1}) + \beta_t \frac{1}{K}
 $$
 
-即以概率 $\beta_t$ 将 Token 替换为均匀随机 Token（或 [MASK]）。反向过程学习 $p_\theta(x_{t-1} | x_t)$，恢复被腐蚀的 Token。
+即以概率 {::nomarkdown}$\beta_t${:/nomarkdown} 将 Token 替换为均匀随机 Token（或 [MASK]）。反向过程学习 {::nomarkdown}$p_\theta(x_{t-1} | x_t)${:/nomarkdown}，恢复被腐蚀的 Token。
 
 ### 6.3 LLaDA
 
@@ -234,7 +234,7 @@ $$
 
 Blockwise 或 Semi-Autoregressive 方法将序列分成块（block），块间串行、块内并行：
 
-- 每个块包含 $k$ 个连续 Token。
+- 每个块包含 {::nomarkdown}$k${:/nomarkdown} 个连续 Token。
 - 块内 Token 由专门的解码头并行预测。
 - 块之间保持自回归依赖，确保一致性。
 
@@ -266,7 +266,7 @@ Blockwise Parallel Decoding（Stern et al., 2018）是早期探索，近年因�
 ### 8.2 投机解码实践
 
 - 草稿模型与目标模型必须共享同一分词器。
-- 草稿长度 $k$ 需根据接受率调整：接受率高时增大 $k$，低时减小。
+- 草稿长度 {::nomarkdown}$k${:/nomarkdown} 需根据接受率调整：接受率高时增大 {::nomarkdown}$k${:/nomarkdown}，低时减小。
 - 典型配置：草稿模型参数量为目标模型的 1/10 到 1/5。
 - vLLM、TensorRT-LLM、TGI 等主流推理框架已内置投机解码支持。
 

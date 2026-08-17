@@ -48,11 +48,11 @@ GUI Agent 把"自动化"的范围从"被开发者主动封装的部分"扩展到
 
 GUI 操作的本质是 POMDP：
 
-- 状态 $s_t$：屏幕的完整渲染（像素 + DOM/accessibility tree）；
-- 观测 $o_t$：截屏 + UI 元素列表；
-- 动作 $a_t$：点击、输入、滚动、拖动、热键、等待；
-- 转移 $p(s_{t+1} \mid s_t, a_t)$：由操作系统/应用决定；
-- 奖励 $r_t$：任务完成度（如最终是否到达目标页面/状态）。
+- 状态 {::nomarkdown}$s_t${:/nomarkdown}：屏幕的完整渲染（像素 + DOM/accessibility tree）；
+- 观测 {::nomarkdown}$o_t${:/nomarkdown}：截屏 + UI 元素列表；
+- 动作 {::nomarkdown}$a_t${:/nomarkdown}：点击、输入、滚动、拖动、热键、等待；
+- 转移 {::nomarkdown}$p(s_{t+1} \mid s_t, a_t)${:/nomarkdown}：由操作系统/应用决定；
+- 奖励 {::nomarkdown}$r_t${:/nomarkdown}：任务完成度（如最终是否到达目标页面/状态）。
 
 ### 2.2 动作空间
 
@@ -102,11 +102,11 @@ a_t ∈ {
 
 ### 3.3 行动预测
 
-把多模态观测编码后，由策略 $\pi_\theta$ 预测下一个动作：
+把多模态观测编码后，由策略 {::nomarkdown}$\pi_\theta${:/nomarkdown} 预测下一个动作：
 
 $$a_t = \pi_\theta(o_{\le t}, \ell)$$
 
-其中 $\ell$ 是任务指令（自然语言）。
+其中 {::nomarkdown}$\ell${:/nomarkdown} 是任务指令（自然语言）。
 
 行动预测的训练范式：
 

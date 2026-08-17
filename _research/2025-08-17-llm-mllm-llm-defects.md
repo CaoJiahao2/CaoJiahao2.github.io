@@ -60,7 +60,7 @@ show_date: true
 
 **知识边界层面**：模型对自身知识的边界缺乏感知，面对未知问题时仍「硬答」而非拒绝回答。这源于模型没有内在的「知道 / 不知道」校准机制。
 
-**解码策略层面**：采样温度过高引入随机性，导致生成偏离；贪婪解码则可能固化某些错误模式。Top-$p$ / Top-$k$ 采样虽然提升多样性，但也可能引入幻觉。
+**解码策略层面**：采样温度过高引入随机性，导致生成偏离；贪婪解码则可能固化某些错误模式。Top-{::nomarkdown}$p${:/nomarkdown} / Top-{::nomarkdown}$k${:/nomarkdown} 采样虽然提升多样性，但也可能引入幻觉。
 
 **上下文利用层面**：长上下文场景下存在「中间丢失」（lost-in-the-middle）现象，模型对上下文中间位置的检索片段关注度不足，导致忠实性幻觉。
 
@@ -127,11 +127,11 @@ $$F = \frac{1}{N}\sum_{i=1}^{N}\mathbb{I}(\text{claim}_i\text{ 被上下文支�
 
 ### 3.2 评估指标
 
-**遗忘量（Forgetting）**：任务 $k$ 上相对历史最佳性能的平均下降。
+**遗忘量（Forgetting）**：任务 {::nomarkdown}$k${:/nomarkdown} 上相对历史最佳性能的平均下降。
 
 $$F_k = \max_{t < k} a_{k,t} - a_{k,k}$$
 
-其中 $a_{k,t}$ 表示在学习完任务 $t$ 后，任务 $k$ 上的性能。
+其中 {::nomarkdown}$a_{k,t}${:/nomarkdown} 表示在学习完任务 {::nomarkdown}$t${:/nomarkdown} 后，任务 {::nomarkdown}$k${:/nomarkdown} 上的性能。
 
 **后向迁移（Backward Transfer, BWT）**：学完所有任务后，新任务对旧任务的整体影响（正值表示正向迁移）。
 
@@ -149,11 +149,11 @@ $$\mathrm{BWT} = \frac{1}{T-1}\sum_{j=1}^{T-1} (a_{T,j} - a_{j,j})$$
 | **知识蒸馏（Distillation）** | 旧模型输出约束新模型 | LwF (Li & Hoiem 2017) |
 | **Prompt 方法** | 可训前缀隔离任务 | L2P、DualPrompt (Wang 2022) |
 
-**EWC（弹性权重巩固）**：核心思想是用 Fisher 信息矩阵 $F$ 估计每个参数对旧任务的重要性，重要的参数在后续训练中改动受罚。
+**EWC（弹性权重巩固）**：核心思想是用 Fisher 信息矩阵 {::nomarkdown}$F${:/nomarkdown} 估计每个参数对旧任务的重要性，重要的参数在后续训练中改动受罚。
 
 $$\mathcal{L}_{\text{EWC}} = \mathcal{L}_{\text{task}} + \frac{\lambda}{2}\sum_i F_i (\theta_i - \theta_i^*)^2$$
 
-其中 $\theta_i^*$ 是旧任务训练后的最优参数，$F_i$ 是 Fisher 信息矩阵的对角元素，$\lambda$ 控制遗忘惩罚强度。
+其中 {::nomarkdown}$\theta_i^*${:/nomarkdown} 是旧任务训练后的最优参数，{::nomarkdown}$F_i${:/nomarkdown} 是 Fisher 信息矩阵的对角元素，{::nomarkdown}$\lambda${:/nomarkdown} 控制遗忘惩罚强度。
 
 **LLM 微调实践建议**：首选 **PEFT（LoRA）+ 小学习率 + 混合原分布数据 + 少量回放样本**。LoRA 等参数高效方法天然具有参数隔离效果，能最大程度保留预训练能力。
 
@@ -180,7 +180,7 @@ Shumailov et al. (2023, 2024) 在 Nature 上系统阐述了这一现象的机制
 
 - **分布距离**：与原始数据分布的 KL 散度 / JS 散度上升，衡量整体分布偏移。
 - **长尾保留率**：稀有事件在生成数据中的占比下降幅度，衡量尾部信息丢失。
-- **多样性指标**：$n$-gram 多样性、生成长度方差、嵌入层表示的多样性。
+- **多样性指标**：{::nomarkdown}$n${:/nomarkdown}-gram 多样性、生成长度方差、嵌入层表示的多样性。
 - **困惑度与人类评价**：可读性（perplexity）可能仍高甚至更优，但信息量、新颖度退化 —— 这是模型坍塌的隐蔽性所在。
 
 ### 4.3 应对策略

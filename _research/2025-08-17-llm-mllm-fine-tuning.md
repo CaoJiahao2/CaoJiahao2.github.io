@@ -62,7 +62,7 @@ show_date: true
 
 ### 2.3 训练技巧
 
-- 低学习率：通常 $10^{-5} \sim 5 \times 10^{-5}$（比预训练低 1-2 个数量级）
+- 低学习率：通常 {::nomarkdown}$10^{-5} \sim 5 \times 10^{-5}${:/nomarkdown}（比预训练低 1-2 个数量级）
 - Warmup 比例小：总步数的 3-10%
 - 小 batch size + 梯度累积
 - 使用 BF16 替代 FP16（动态范围更大）
@@ -73,24 +73,24 @@ show_date: true
 
 ### 3.1 LoRA (Low-Rank Adaptation)
 
-**核心思想**：权重更新矩阵 $\Delta W$ 是低秩的，可以用两个小矩阵的乘积表示。
+**核心思想**：权重更新矩阵 {::nomarkdown}$\Delta W${:/nomarkdown} 是低秩的，可以用两个小矩阵的乘积表示。
 
 $$\Delta W = BA, \quad B \in \mathbb{R}^{d \times r}, A \in \mathbb{R}^{r \times k}$$
 
 $$h = W_0x + \Delta W x = W_0x + BAx$$
 
-其中 $r \ll \min(d, k)$，通常 $r = 8 \sim 64$。
+其中 {::nomarkdown}$r \ll \min(d, k)${:/nomarkdown}，通常 {::nomarkdown}$r = 8 \sim 64${:/nomarkdown}。
 
-**可训练参数**：$r \times (d + k)$，相比原始 $d \times k$ 大幅减少。
+**可训练参数**：{::nomarkdown}$r \times (d + k)${:/nomarkdown}，相比原始 {::nomarkdown}$d \times k${:/nomarkdown} 大幅减少。
 
-**缩放因子**：通常将 $\Delta W x$ 乘以 $\alpha / r$ 控制更新幅度。
+**缩放因子**：通常将 {::nomarkdown}$\Delta W x${:/nomarkdown} 乘以 {::nomarkdown}$\alpha / r${:/nomarkdown} 控制更新幅度。
 
 ### 3.2 LoRA 配置参数
 
 | 参数 | 建议值 | 说明 |
 |------|--------|------|
-| $r$ | 8, 16, 32, 64 | rank 越大能力越强，参数越多 |
-| $\alpha$ | 16, 32 | 通常 $\alpha = 2r$ |
+| {::nomarkdown}$r${:/nomarkdown} | 8, 16, 32, 64 | rank 越大能力越强，参数越多 |
+| {::nomarkdown}$\alpha${:/nomarkdown} | 16, 32 | 通常 {::nomarkdown}$\alpha = 2r${:/nomarkdown} |
 | target_modules | q_proj, v_proj | 或 qkv_proj + o_proj |
 | dropout | 0.05 - 0.1 | LoRA dropout |
 
@@ -136,7 +136,7 @@ target_modules = ["q_proj", "k_proj", "v_proj", "o_proj",
 FFN(x) + Adapter(x) = FFN(x) + W_up(ReLU(W_down(x)))
 ```
 
-其中 $W_{down} \in \mathbb{R}^{d \times m}$，$W_{up} \in \mathbb{R}^{m \times d}$，$m \ll d$。
+其中 {::nomarkdown}$W_{down} \in \mathbb{R}^{d \times m}${:/nomarkdown}，{::nomarkdown}$W_{up} \in \mathbb{R}^{m \times d}${:/nomarkdown}，{::nomarkdown}$m \ll d${:/nomarkdown}。
 
 ### 4.2 Adapter 变体
 
@@ -158,7 +158,7 @@ FFN(x) + Adapter(x) = FFN(x) + W_up(ReLU(W_down(x)))
 
 $$h = \text{Transformer}([P_k; x])$$
 
-其中 $P_k$ 是可训练的 prefix 嵌入，$k$ 通常为 10-100。
+其中 {::nomarkdown}$P_k${:/nomarkdown} 是可训练的 prefix 嵌入，{::nomarkdown}$k${:/nomarkdown} 通常为 10-100。
 
 ### 5.2 Prompt Tuning
 
@@ -232,15 +232,15 @@ prompt = f"<|im_start|>user\n{instruction}<|im_end|>\n<|im_start|>assistant\n{re
 
 $$\mathcal{L}_{DPO} = -\mathbb{E}_{(x, y_w, y_l) \sim \mathcal{D}}\left[\log\sigma\left(\beta \log\frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)} - \beta \log\frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)}\right)\right]$$
 
-其中 $y_w$ 是偏好回答，$y_l$ 是非偏好回答。
+其中 {::nomarkdown}$y_w${:/nomarkdown} 是偏好回答，{::nomarkdown}$y_l${:/nomarkdown} 是非偏好回答。
 
 #### DPO 的推导（从 Bradley-Terry 到闭式最优策略）
 
-RLHF 的奖励模型基于 **Bradley-Terry 模型**：给定偏好对 $(y_w, y_l)$，人类偏好 $y_w$ 的概率为
+RLHF 的奖励模型基于 **Bradley-Terry 模型**：给定偏好对 {::nomarkdown}$(y_w, y_l)${:/nomarkdown}，人类偏好 {::nomarkdown}$y_w${:/nomarkdown} 的概率为
 
 $$P(y_w \succ y_l \mid x) = \sigma\big(r(x, y_w) - r(x, y_l)\big)$$
 
-其中 $r$ 为奖励模型，$\sigma$ 为 sigmoid。RLHF 的 KL 约束优化目标为
+其中 {::nomarkdown}$r${:/nomarkdown} 为奖励模型，{::nomarkdown}$\sigma${:/nomarkdown} 为 sigmoid。RLHF 的 KL 约束优化目标为
 
 $$\max_{\pi_\theta} \mathbb{E}_{x \sim \mathcal{D}, y \sim \pi_\theta(\cdot \mid x)}\left[r(x, y)\right] - \beta\, D_{KL}\big(\pi_\theta(\cdot \mid x) \,\|\, \pi_{ref}(\cdot \mid x)\big)$$
 
@@ -248,7 +248,7 @@ $$\max_{\pi_\theta} \mathbb{E}_{x \sim \mathcal{D}, y \sim \pi_\theta(\cdot \mid
 
 $$\pi^*(y \mid x) = \frac{1}{Z(x)}\pi_{ref}(y \mid x)\exp\left(\frac{1}{\beta}r(x, y)\right)$$
 
-反解出奖励：$r(x, y) = \beta\log\dfrac{\pi^*(y\mid x)}{\pi_{ref}(y\mid x)} + \beta\log Z(x)$。代入 Bradley-Terry 的 $P(y_w \succ y_l)$，配分函数 $Z(x)$ 恰好约掉，得到：
+反解出奖励：{::nomarkdown}$r(x, y) = \beta\log\dfrac{\pi^*(y\mid x)}{\pi_{ref}(y\mid x)} + \beta\log Z(x)${:/nomarkdown}。代入 Bradley-Terry 的 {::nomarkdown}$P(y_w \succ y_l)${:/nomarkdown}，配分函数 {::nomarkdown}$Z(x)${:/nomarkdown} 恰好约掉，得到：
 
 $$\mathcal{L}_{DPO} = -\mathbb{E}_{(x, y_w, y_l) \sim \mathcal{D}}\left[\log\sigma\left(\beta\log\frac{\pi_\theta(y_w\mid x)}{\pi_{ref}(y_w\mid x)} - \beta\log\frac{\pi_\theta(y_l\mid x)}{\pi_{ref}(y_l\mid x)}\right)\right]$$
 
@@ -270,7 +270,7 @@ $$\mathcal{L}_{DPO} = -\mathbb{E}_{(x, y_w, y_l) \sim \mathcal{D}}\left[\log\sig
 | **GRPO** | 同一 prompt 采样一组输出，用组内相对优势替代价值模型（DeepSeek-R1/V3 的核心训练目标） |
 | **RLVR** | 用**可验证奖励**（代码单元测试、数学答案可核对）替代学习得到的奖励模型，有效缓解奖励黑客 |
 
-**GRPO 目标**：对每个 prompt 采样 $G$ 个输出，advantage 为组内归一化 $\hat{A}_i = \dfrac{r_i - \mu}{\sigma}$，目标为
+**GRPO 目标**：对每个 prompt 采样 {::nomarkdown}$G${:/nomarkdown} 个输出，advantage 为组内归一化 {::nomarkdown}$\hat{A}_i = \dfrac{r_i - \mu}{\sigma}${:/nomarkdown}，目标为
 
 $$\mathcal{J}_{GRPO}(\theta) = \mathbb{E}\left[\frac{1}{G}\sum_{i=1}^{G}\frac{1}{|y_i|}\sum_{t}\min\left(\frac{\pi_\theta(y_{i,t}\mid\cdots)}{\pi_{\theta_{\text{old}}}(y_{i,t}\mid\cdots)}\hat{A}_i,\, \operatorname{clip}\left(\frac{\pi_\theta}{\pi_{\theta_{\text{old}}}}, 1-\epsilon, 1+\epsilon\right)\hat{A}_i\right)\right]$$
 

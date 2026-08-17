@@ -43,23 +43,23 @@ show_date: true
 
 ### 2.1 马尔可夫决策过程
 
-马尔可夫决策过程（Markov Decision Process, MDP）由五元组 $(\mathcal{S}, \mathcal{A}, P, r, \gamma)$ 定义：
+马尔可夫决策过程（Markov Decision Process, MDP）由五元组 {::nomarkdown}$(\mathcal{S}, \mathcal{A}, P, r, \gamma)${:/nomarkdown} 定义：
 
-- $\mathcal{S}$：状态空间
-- $\mathcal{A}$：动作空间
-- $P(s'|s,a)$：状态转移概率，满足马尔可夫性 $P(s_{t+1}|s_t,a_t,s_{t-1},\dots)=P(s_{t+1}|s_t,a_t)$
-- $r(s,a,s')$：奖励函数
-- $\gamma \in [0,1)$：折扣因子
+- {::nomarkdown}$\mathcal{S}${:/nomarkdown}：状态空间
+- {::nomarkdown}$\mathcal{A}${:/nomarkdown}：动作空间
+- {::nomarkdown}$P(s'|s,a)${:/nomarkdown}：状态转移概率，满足马尔可夫性 {::nomarkdown}$P(s_{t+1}|s_t,a_t,s_{t-1},\dots)=P(s_{t+1}|s_t,a_t)${:/nomarkdown}
+- {::nomarkdown}$r(s,a,s')${:/nomarkdown}：奖励函数
+- {::nomarkdown}$\gamma \in [0,1)${:/nomarkdown}：折扣因子
 
-策略 $\pi(a|s)$ 是状态到动作分布的映射。给定策略，回报（return）为：
+策略 {::nomarkdown}$\pi(a|s)${:/nomarkdown} 是状态到动作分布的映射。给定策略，回报（return）为：
 
 $$G_t = \sum_{k=0}^{\infty} \gamma^k r_{t+k+1}$$
 
-折扣因子 $\gamma$ 既保证无限长回报收敛，也反映对未来奖励的不确定性偏好。与之对应的有效视野（effective horizon）约为 $1/(1-\gamma)$：若 $\gamma=0.99$，智能体约关注未来 $100$ 步内的奖励。
+折扣因子 {::nomarkdown}$\gamma${:/nomarkdown} 既保证无限长回报收敛，也反映对未来奖励的不确定性偏好。与之对应的有效视野（effective horizon）约为 {::nomarkdown}$1/(1-\gamma)${:/nomarkdown}：若 {::nomarkdown}$\gamma=0.99${:/nomarkdown}，智能体约关注未来 {::nomarkdown}$100${:/nomarkdown} 步内的奖励。
 
 ### 2.2 状态值与动作值
 
-状态值函数 $V^\pi(s)$ 与动作值函数 $Q^\pi(s,a)$ 定义为期望回报：
+状态值函数 {::nomarkdown}$V^\pi(s)${:/nomarkdown} 与动作值函数 {::nomarkdown}$Q^\pi(s,a)${:/nomarkdown} 定义为期望回报：
 
 $$V^\pi(s) = \mathbb{E}_\pi\left[G_t \mid s_t = s\right]$$
 
@@ -67,7 +67,7 @@ $$Q^\pi(s,a) = \mathbb{E}_\pi\left[G_t \mid s_t = s, a_t = a\right]$$
 
 ### 2.3 贝尔曼方程
 
-通过对 $G_t = r_{t+1} + \gamma G_{t+1}$ 取条件期望，可得贝尔曼期望方程：
+通过对 {::nomarkdown}$G_t = r_{t+1} + \gamma G_{t+1}${:/nomarkdown} 取条件期望，可得贝尔曼期望方程：
 
 $$V^\pi(s)=\sum_a \pi(a|s)\sum_{s'}P(s'|s,a)\left[r(s,a,s')+\gamma V^\pi(s')\right]$$
 
@@ -79,13 +79,13 @@ $$V^\pi(s)=\sum_a \pi(a|s)Q^\pi(s,a)$$
 
 ### 2.4 贝尔曼最优方程
 
-最优策略 $\pi^*$ 满足 $V^{\pi^*}(s) \ge V^\pi(s), \forall \pi$。对应贝尔曼最优方程：
+最优策略 {::nomarkdown}$\pi^*${:/nomarkdown} 满足 {::nomarkdown}$V^{\pi^*}(s) \ge V^\pi(s), \forall \pi${:/nomarkdown}。对应贝尔曼最优方程：
 
 $$V^*(s)=\max_a \sum_{s'}P(s'|s,a)\left[r(s,a,s')+\gamma V^*(s')\right]$$
 
 $$Q^*(s,a)=\sum_{s'}P(s'|s,a)\left[r(s,a,s')+\gamma \max_{a'}Q^*(s',a')\right]$$
 
-最优策略可由 $Q^*$ 贪心给出 $\pi^*(a|s)=1$ 当 $a=\arg\max_{a'}Q^*(s,a')$。这是值迭代、Q-learning 等方法的根基。
+最优策略可由 {::nomarkdown}$Q^*${:/nomarkdown} 贪心给出 {::nomarkdown}$\pi^*(a|s)=1${:/nomarkdown} 当 {::nomarkdown}$a=\arg\max_{a'}Q^*(s,a')${:/nomarkdown}。这是值迭代、Q-learning 等方法的根基。
 
 ---
 
@@ -93,18 +93,18 @@ $$Q^*(s,a)=\sum_{s'}P(s'|s,a)\left[r(s,a,s')+\gamma \max_{a'}Q^*(s',a')\right]$$
 
 ### 3.1 TD 学习与 off-policy
 
-Q-learning（Watkins, 1989）是时序差分（Temporal Difference, TD）学习的代表。它直接学习最优 $Q^*$，且为 off-policy：用任意行为策略采集的样本更新目标策略。更新规则为：
+Q-learning（Watkins, 1989）是时序差分（Temporal Difference, TD）学习的代表。它直接学习最优 {::nomarkdown}$Q^*${:/nomarkdown}，且为 off-policy：用任意行为策略采集的样本更新目标策略。更新规则为：
 
 $$Q(s,a)\leftarrow Q(s,a)+\alpha\left[r+\gamma \max_{a'}Q(s',a')-Q(s,a)\right]$$
 
-其中括号内项称为 TD 误差 $\delta = r+\gamma \max_{a'}Q(s',a')-Q(s,a)$。注意目标 $r+\gamma \max_{a'}Q(s',a')$ 已用 $\max$，而非当前策略的动作，这正是 off-policy 的体现。
+其中括号内项称为 TD 误差 {::nomarkdown}$\delta = r+\gamma \max_{a'}Q(s',a')-Q(s,a)${:/nomarkdown}。注意目标 {::nomarkdown}$r+\gamma \max_{a'}Q(s',a')${:/nomarkdown} 已用 {::nomarkdown}$\max${:/nomarkdown}，而非当前策略的动作，这正是 off-policy 的体现。
 
 ### 3.2 DQN
 
-当状态空间连续或高维时（如 Atari 像素），用神经网络 $Q_\theta(s,a)$ 近似 $Q$。DQN（Mnih et al., 2015, Nature）引入两项关键技术稳定训练：
+当状态空间连续或高维时（如 Atari 像素），用神经网络 {::nomarkdown}$Q_\theta(s,a)${:/nomarkdown} 近似 {::nomarkdown}$Q${:/nomarkdown}。DQN（Mnih et al., 2015, Nature）引入两项关键技术稳定训练：
 
-- **经验回放（Experience Replay）**：将转移 $(s,a,r,s')$ 存入回放缓冲区，训练时随机采样批量，打破样本间时间相关性，提高数据利用率。
-- **目标网络（Target Network）**：用一份延迟更新的网络 $Q_{\theta^-}$ 计算 TD 目标 $r+\gamma \max_{a'}Q_{\theta^-}(s',a')$，避免自举中目标随 $\theta$ 同步抖动导致的发散。
+- **经验回放（Experience Replay）**：将转移 {::nomarkdown}$(s,a,r,s')${:/nomarkdown} 存入回放缓冲区，训练时随机采样批量，打破样本间时间相关性，提高数据利用率。
+- **目标网络（Target Network）**：用一份延迟更新的网络 {::nomarkdown}$Q_{\theta^-}${:/nomarkdown} 计算 TD 目标 {::nomarkdown}$r+\gamma \max_{a'}Q_{\theta^-}(s',a')${:/nomarkdown}，避免自举中目标随 {::nomarkdown}$\theta${:/nomarkdown} 同步抖动导致的发散。
 
 ```python
 # DQN 训练伪代码
@@ -137,11 +137,11 @@ for step in range(num_steps):
 
 ### 4.1 直接优化策略
 
-值函数方法（Q-learning）在动作空间离散且不大时有效，但对连续动作或巨大动作空间（如 LLM 词表）困难。策略梯度方法直接参数化策略 $\pi_\theta(a|s)$，对期望回报做梯度上升。
+值函数方法（Q-learning）在动作空间离散且不大时有效，但对连续动作或巨大动作空间（如 LLM 词表）困难。策略梯度方法直接参数化策略 {::nomarkdown}$\pi_\theta(a|s)${:/nomarkdown}，对期望回报做梯度上升。
 
 ### 4.2 REINFORCE 推导
 
-设轨迹 $\tau=(s_0,a_0,r_1,s_1,a_1,\dots)$，目标函数：
+设轨迹 {::nomarkdown}$\tau=(s_0,a_0,r_1,s_1,a_1,\dots)${:/nomarkdown}，目标函数：
 
 $$J(\theta)=\mathbb{E}_{\tau\sim\pi_\theta}\left[\sum_t \gamma^t r_t\right]$$
 
@@ -149,15 +149,15 @@ $$J(\theta)=\mathbb{E}_{\tau\sim\pi_\theta}\left[\sum_t \gamma^t r_t\right]$$
 
 $$\nabla_\theta J(\theta)=\mathbb{E}_{\tau}\left[\sum_t \nabla_\theta \log \pi_\theta(a_t|s_t)\, G_t\right]$$
 
-直观解释：$\nabla_\theta \log\pi_\theta(a_t|s_t)$ 指向增大 $a_t$ 概率的方向，乘以回报 $G_t$ 后，高回报的动作概率被提升，低回报的被压低。可用 Monte Carlo 样本估计，得到 REINFORCE 算法（Williams, 1992）。
+直观解释：{::nomarkdown}$\nabla_\theta \log\pi_\theta(a_t|s_t)${:/nomarkdown} 指向增大 {::nomarkdown}$a_t${:/nomarkdown} 概率的方向，乘以回报 {::nomarkdown}$G_t${:/nomarkdown} 后，高回报的动作概率被提升，低回报的被压低。可用 Monte Carlo 样本估计，得到 REINFORCE 算法（Williams, 1992）。
 
 ### 4.3 基线与方差减少
 
-REINFORCE 方差极大。引入基线 $b(s_t)$（与动作无关）不改变期望但降低方差，因为 $\mathbb{E}_{a\sim\pi}[\nabla_\theta\log\pi_\theta(a|s_t)b(s_t)]=b(s_t)\nabla_\theta\sum_a\pi(a|s_t)=0$：
+REINFORCE 方差极大。引入基线 {::nomarkdown}$b(s_t)${:/nomarkdown}（与动作无关）不改变期望但降低方差，因为 {::nomarkdown}$\mathbb{E}_{a\sim\pi}[\nabla_\theta\log\pi_\theta(a|s_t)b(s_t)]=b(s_t)\nabla_\theta\sum_a\pi(a|s_t)=0${:/nomarkdown}：
 
 $$\nabla_\theta J(\theta)=\mathbb{E}_{\tau}\left[\sum_t \nabla_\theta \log \pi_\theta(a_t|s_t)\,(G_t - b(s_t))\right]$$
 
-自然选择 $b(s_t)=V(s_t)$，差值 $A_t = G_t - V(s_t)$ 称为优势（advantage）。用学得的 $V_\phi$ 作基线，并用网络估计 $A_t$，即得到 Actor-Critic 架构（Konda & Tsitsiklis）：actor 更新策略，critic 评估状态值。其同步/异步变体即 A2C/A3C（Mnih et al., 2016）。
+自然选择 {::nomarkdown}$b(s_t)=V(s_t)${:/nomarkdown}，差值 {::nomarkdown}$A_t = G_t - V(s_t)${:/nomarkdown} 称为优势（advantage）。用学得的 {::nomarkdown}$V_\phi${:/nomarkdown} 作基线，并用网络估计 {::nomarkdown}$A_t${:/nomarkdown}，即得到 Actor-Critic 架构（Konda & Tsitsiklis）：actor 更新策略，critic 评估状态值。其同步/异步变体即 A2C/A3C（Mnih et al., 2016）。
 
 ---
 
@@ -169,7 +169,7 @@ $$\nabla_\theta J(\theta)=\mathbb{E}_{\tau}\left[\sum_t \nabla_\theta \log \pi_\
 
 ### 5.2 重要性采样与裁剪目标
 
-设新旧策略分别为 $\pi_\theta, \pi_{\theta_{old}}$，重要性采样比：
+设新旧策略分别为 {::nomarkdown}$\pi_\theta, \pi_{\theta_{old}}${:/nomarkdown}，重要性采样比：
 
 $$r_t(\theta)=\frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)}$$
 
@@ -177,7 +177,7 @@ PPO 的 Clipped 目标：
 
 $$L^{CLIP}(\theta)=\mathbb{E}_t\left[\min\left(r_t(\theta)A_t,\; \text{clip}(r_t(\theta),1-\epsilon,1+\epsilon)A_t\right)\right]$$
 
-裁剪机理：当 $A_t>0$（动作优于平均），$r_t$ 被允许增大到 $1+\epsilon$ 后封顶，防止过度利用；当 $A_t<0$，$r_t$ 被压到 $1-\epsilon$ 为止，防止过度抑制。$\min$ 取两者较小者形成下界，使目标对过大更新保持悲观估计，从而限制策略步长。
+裁剪机理：当 {::nomarkdown}$A_t>0${:/nomarkdown}（动作优于平均），{::nomarkdown}$r_t${:/nomarkdown} 被允许增大到 {::nomarkdown}$1+\epsilon${:/nomarkdown} 后封顶，防止过度利用；当 {::nomarkdown}$A_t<0${:/nomarkdown}，{::nomarkdown}$r_t${:/nomarkdown} 被压到 {::nomarkdown}$1-\epsilon${:/nomarkdown} 为止，防止过度抑制。{::nomarkdown}$\min${:/nomarkdown} 取两者较小者形成下界，使目标对过大更新保持悲观估计，从而限制策略步长。
 
 ### 5.3 完整损失
 
@@ -215,7 +215,7 @@ RLHF（Ouyang et al., 2022, InstructGPT）分三阶段，把"人类偏好"转化
 
 ### 6.3 奖励模型
 
-人类偏好数据以成对比较形式 $(x, y_w, y_l)$ 给出，$y_w$ 为偏好（win）回复，$y_l$ 为非偏好（lose）。基于 Bradley-Terry 模型，假设人类偏好概率仅取决于奖励差：
+人类偏好数据以成对比较形式 {::nomarkdown}$(x, y_w, y_l)${:/nomarkdown} 给出，{::nomarkdown}$y_w${:/nomarkdown} 为偏好（win）回复，{::nomarkdown}$y_l${:/nomarkdown} 为非偏好（lose）。基于 Bradley-Terry 模型，假设人类偏好概率仅取决于奖励差：
 
 $$P(y_w \succ y_l \mid x) = \sigma\left(r(x,y_w)-r(x,y_l)\right)$$
 
@@ -225,13 +225,13 @@ $$L_{RM}=-\mathbb{E}_{(x,y_w,y_l)}\left[\log\sigma\left(r(x,y_w)-r(x,y_l)\right)
 
 ### 6.4 PPO 对齐与 KL 约束
 
-用 RM 给出的 $r_\phi(x,y)$ 作奖励，PPO 优化策略，同时用参考模型 $\pi_{ref}$（通常即 SFT 模型）做 KL 约束防止策略漂移：
+用 RM 给出的 {::nomarkdown}$r_\phi(x,y)${:/nomarkdown} 作奖励，PPO 优化策略，同时用参考模型 {::nomarkdown}$\pi_{ref}${:/nomarkdown}（通常即 SFT 模型）做 KL 约束防止策略漂移：
 
 $$\max_{\pi_\theta}\mathbb{E}_{x\sim\mathcal{D},\, y\sim\pi_\theta}\left[r_\phi(x,y)-\beta\,D_{KL}\left(\pi_\theta(\cdot|x)\,\|\,\pi_{ref}(\cdot|x)\right)\right]$$
 
 ### 6.5 讨论
 
-- **KL 系数 $\beta$**：过小则策略漂移过大，可能输出 RM 的高奖励但低质量文本（reward hacking）；过大则退化为 SFT，无法学到偏好信号。需谨慎调节。
+- **KL 系数 {::nomarkdown}$\beta${:/nomarkdown}**：过小则策略漂移过大，可能输出 RM 的高奖励但低质量文本（reward hacking）；过大则退化为 SFT，无法学到偏好信号。需谨慎调节。
 - **RM 局限**：RM 是对人类偏好的有损近似，易被过度优化（reward over-optimization），尤其在 PPO 后期奖励持续上升但真实质量下降；需结合 RM 训练分布与对 KL 的强约束缓解。
 - **数据成本**：偏好数据昂贵且标注者间一致性有限。
 
@@ -275,7 +275,7 @@ DPO 以极简实现获得接近 PPO 的效果，是当前离线对齐的主流�
 
 ### 8.1 GRPO
 
-GRPO（Group Relative Policy Optimization, Shao et al., 2024, DeepSeekMath）针对 PPO 在大模型上维护 value 网络开销巨大的问题。对同一 prompt $x$ 采样一组 $G$ 个回复 $\{y_i\}$，得到奖励 $\{r_i\}$，用组内相对优势代替 critic：
+GRPO（Group Relative Policy Optimization, Shao et al., 2024, DeepSeekMath）针对 PPO 在大模型上维护 value 网络开销巨大的问题。对同一 prompt {::nomarkdown}$x${:/nomarkdown} 采样一组 {::nomarkdown}$G${:/nomarkdown} 个回复 {::nomarkdown}$\{y_i\}${:/nomarkdown}，得到奖励 {::nomarkdown}$\{r_i\}${:/nomarkdown}，用组内相对优势代替 critic：
 
 $$A_i = \frac{r_i - \text{mean}(r_1,\dots,r_G)}{\text{std}(r_1,\dots,r_G)}$$
 
@@ -283,7 +283,7 @@ $$A_i = \frac{r_i - \text{mean}(r_1,\dots,r_G)}{\text{std}(r_1,\dots,r_G)}$$
 
 $$L^{GRPO}(\theta)=\mathbb{E}_{x,\{y_i\}}\left[\frac{1}{G}\sum_{i=1}^{G}\min\left(r_i(\theta)A_i,\,\text{clip}(r_i(\theta),1-\epsilon,1+\epsilon)A_i\right)\right] - \beta\,D_{KL}(\pi_\theta\|\pi_{ref})$$
 
-其中 $r_i(\theta)=\pi_\theta(y_i|x)/\pi_{\theta_{old}}(y_i|x)$。组内归一化作为 baseline 起到方差减少作用。省去 critic 网络显著降低显存与工程复杂度，使其特别适合百亿至千亿参数大模型的 RL 微调。
+其中 {::nomarkdown}$r_i(\theta)=\pi_\theta(y_i|x)/\pi_{\theta_{old}}(y_i|x)${:/nomarkdown}。组内归一化作为 baseline 起到方差减少作用。省去 critic 网络显著降低显存与工程复杂度，使其特别适合百亿至千亿参数大模型的 RL 微调。
 
 ### 8.2 RLVR
 
@@ -319,10 +319,10 @@ RLVR（Reinforcement Learning with Verifiable Rewards）的关键转变：奖励
 
 1. **先 SFT 再 RL**：未经 SFT 的预训练模型直接做 RL 几乎不可收敛，SFT 提供良好初始化与参考策略。
 2. **课程学习**：由易到难安排任务，避免早期奖励稀疏导致策略崩塌；RLVR 中按难度分桶采样。
-3. **奖励设计**：可验证奖励优先；用 RM 时关注分布偏移，定期用新数据更新 RM，并对 KL 系数 $\beta$ 做扫描。
+3. **奖励设计**：可验证奖励优先；用 RM 时关注分布偏移，定期用新数据更新 RM，并对 KL 系数 {::nomarkdown}$\beta${:/nomarkdown} 做扫描。
 4. **评估不只看 reward**：reward 上升未必代表真实质量提升，需用 held-out 评测集、人类评估或独立基准，警惕 reward hacking。
-5. **监控 KL**：训练中持续跟踪 $D_{KL}(\pi_\theta\|\pi_{ref})$，漂移过大通常是异常信号。
-6. **采样温度与探索**：GRPO/PPO 阶段保持足够采样温度与组数 $G$，确保优势估计有区分度。
+5. **监控 KL**：训练中持续跟踪 {::nomarkdown}$D_{KL}(\pi_\theta\|\pi_{ref})${:/nomarkdown}，漂移过大通常是异常信号。
+6. **采样温度与探索**：GRPO/PPO 阶段保持足够采样温度与组数 {::nomarkdown}$G${:/nomarkdown}，确保优势估计有区分度。
 
 ---
 

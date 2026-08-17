@@ -59,7 +59,7 @@ CoT 将复杂问题分解为子步骤，每步只需简单推理。它不改变�
 
 Self-Consistency（Wang et al., 2022）对同一问题采样多条 CoT 推理路径，取多数投票答案：
 
-1. 用温度 $T > 0$ 独立采样 $N$ 条推理链。
+1. 用温度 {::nomarkdown}$T > 0${:/nomarkdown} 独立采样 {::nomarkdown}$N${:/nomarkdown} 条推理链。
 2. 每条链独立得出最终答案。
 3. 选择出现次数最多的答案。
 
@@ -75,20 +75,20 @@ Self-Consistency 是最简单有效的测试时计算方法，在数学推理上
 
 ### 3.1 Best-of-N
 
-Best-of-N 生成 $N$ 个候选回答，用某种评分函数选择最优：
+Best-of-N 生成 {::nomarkdown}$N${:/nomarkdown} 个候选回答，用某种评分函数选择最优：
 
 - **多数投票**：选最常见答案（即 Self-Consistency）。
 - **奖励模型打分**：用训练好的奖励模型对每个候选评分，选最高分。
 - **规则验证**：代码任务运行测试用例，数学任务检查答案数值。
 - **LLM-as-Judge**：用另一个（通常更强的）LLM 评判候选质量。
 
-Best-of-N 的期望收益随 $N$ 增长但存在边际递减：
+Best-of-N 的期望收益随 {::nomarkdown}$N${:/nomarkdown} 增长但存在边际递减：
 
 $$
 P(\text{正确}) \approx 1 - (1-p)^N
 $$
 
-其中 $p$ 是单次采样正确的概率。当 $p=0.5$、$N=10$ 时，Best-of-N 正确率可达 99.9%。
+其中 {::nomarkdown}$p${:/nomarkdown} 是单次采样正确的概率。当 {::nomarkdown}$p=0.5${:/nomarkdown}、{::nomarkdown}$N=10${:/nomarkdown} 时，Best-of-N 正确率可达 99.9%。
 
 ### 3.2 验证器（Verifier）
 
@@ -97,7 +97,7 @@ $$
 1. 用生成模型对训练问题采样多条解答。
 2. 标注每条解答正确与否（运行测试或人工标注）。
 3. 训练验证器模型预测解答的正确性。
-4. 推理时用验证器从 $N$ 个候选中选最优。
+4. 推理时用验证器从 {::nomarkdown}$N${:/nomarkdown} 个候选中选最优。
 
 验证器可分为：
 
@@ -141,7 +141,7 @@ Graph of Thoughts（GoT, Besta et al., 2023）将推理结构从树扩展为有�
 | 策略 | 特点 |
 |------|------|
 | 贪心解码 | 每步选概率最高，无回溯 |
-| Beam Search | 维护 $k$ 条最优路径 |
+| Beam Search | 维护 {::nomarkdown}$k${:/nomarkdown} 条最优路径 |
 | DFS + 回溯 | 深度探索，失败时回退 |
 | BFS + 剪枝 | 层展探索，剪掉低分支 |
 | MCTS | 蒙特卡洛树搜索，平衡探索与利用 |
@@ -199,7 +199,7 @@ $$
 \text{Accuracy} \propto (\text{compute})^{-\alpha}
 $$
 
-其中 $\alpha$ 取决于任务类型和方法。Best-of-N 增长慢但稳定，搜索方法增长快但需要良好的验证器。
+其中 {::nomarkdown}$\alpha${:/nomarkdown} 取决于任务类型和方法。Best-of-N 增长慢但稳定，搜索方法增长快但需要良好的验证器。
 
 ### 6.3 训练时 vs 推理时缩放
 
@@ -236,7 +236,7 @@ Wu et al.（2024）对比了两种缩放策略：
 ### 7.1 方法选型
 
 - 简单事实性问答：直接回答，无需额外计算。
-- 数学/逻辑推理：CoT + Self-Consistency（$N=5-10$），成本低收益高。
+- 数学/逻辑推理：CoT + Self-Consistency（{::nomarkdown}$N=5-10${:/nomarkdown}），成本低收益高。
 - 代码生成：Best-of-N + 测试用例验证，性价比最高。
 - 高难度竞赛题：ToT/MCTS + PRM 验证器 + 代码执行。
 - 需要实时知识：ReAct + 搜索引擎。

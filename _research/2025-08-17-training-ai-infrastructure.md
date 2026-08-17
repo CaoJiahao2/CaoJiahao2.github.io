@@ -243,7 +243,7 @@ $$
 \text{成本} = \frac{6 \times N \times D}{\text{MFU} \times \text{GPU 有效算力}} \times \text{每 GPU 小时单价}
 $$
 
-其中 $N$ 是参数量，$D$ 是训练 Token 数，6 来自 Transformer 每 Token 约 6 FLOPs/参数的经验估计。MFU（Model FLOPs Utilization）通常在 30%-55%。
+其中 {::nomarkdown}$N${:/nomarkdown} 是参数量，{::nomarkdown}$D${:/nomarkdown} 是训练 Token 数，6 来自 Transformer 每 Token 约 6 FLOPs/参数的经验估计。MFU（Model FLOPs Utilization）通常在 30%-55%。
 
 示例：训练 70B 模型、2T Token，在 H100 上 MFU 45%：
 

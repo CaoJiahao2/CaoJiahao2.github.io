@@ -46,12 +46,12 @@ show_date: true
 
 ### 2.1 MDP / POMDP 要素
 
-- 状态 $s_t$：环境与机器人的完整描述，通常不可直接获取；包含视觉观测（RGB-D 帧）、本体感觉（关节角度、力矩、末端位姿）等。
-- 观测 $o_t$：传感器读数，$o_t \sim \Omega(s_t)$，$\Omega$ 为观测函数。
-- 动作 $a_t$：可执行指令，如关节力矩 $\tau_t$、末端速度 $\dot{x}_t$、夹爪开合量，或离散化的动作 token。
-- 转移 $p(s_{t+1} \mid s_t, a_t)$：环境动力学，通常未知。
-- 奖励 $r_t = r(s_t, a_t)$：任务完成度的标量反馈。
-- 策略 $\pi_\theta(a_t \mid o_t)$：由参数 $\theta$ 决定的（随机）策略。
+- 状态 {::nomarkdown}$s_t${:/nomarkdown}：环境与机器人的完整描述，通常不可直接获取；包含视觉观测（RGB-D 帧）、本体感觉（关节角度、力矩、末端位姿）等。
+- 观测 {::nomarkdown}$o_t${:/nomarkdown}：传感器读数，{::nomarkdown}$o_t \sim \Omega(s_t)${:/nomarkdown}，{::nomarkdown}$\Omega${:/nomarkdown} 为观测函数。
+- 动作 {::nomarkdown}$a_t${:/nomarkdown}：可执行指令，如关节力矩 {::nomarkdown}$\tau_t${:/nomarkdown}、末端速度 {::nomarkdown}$\dot{x}_t${:/nomarkdown}、夹爪开合量，或离散化的动作 token。
+- 转移 {::nomarkdown}$p(s_{t+1} \mid s_t, a_t)${:/nomarkdown}：环境动力学，通常未知。
+- 奖励 {::nomarkdown}$r_t = r(s_t, a_t)${:/nomarkdown}：任务完成度的标量反馈。
+- 策略 {::nomarkdown}$\pi_\theta(a_t \mid o_t)${:/nomarkdown}：由参数 {::nomarkdown}$\theta${:/nomarkdown} 决定的（随机）策略。
 
 ### 2.2 策略目标
 
@@ -59,7 +59,7 @@ show_date: true
 
 $$\max_\theta\; \mathbb{E}_{\pi_\theta}\left[\sum_{t=0}^{T}\gamma^t r_t\right]$$
 
-其中 $\gamma \in [0,1)$ 为折扣因子。在模仿学习设定下并不显式使用奖励，而是从专家演示中直接回归策略；两者最终都希望逼近一个好的回报。
+其中 {::nomarkdown}$\gamma \in [0,1)${:/nomarkdown} 为折扣因子。在模仿学习设定下并不显式使用奖励，而是从专家演示中直接回归策略；两者最终都希望逼近一个好的回报。
 
 ### 2.3 POMDP 的近似求解
 
@@ -76,8 +76,8 @@ $$\pi_\theta(a_t \mid o_1, a_1, \dots, o_t)$$
 | 范式 | 表示 | 优点 | 局限 |
 |---|---|---|---|
 | 基于规则控制 | PID / 运动学规划 / 状态机 | 可解释、稳定、可验证 | 难以泛化到非结构化场景 |
-| 学习式（经典 RL） | $\pi_\theta(a \mid s)$，奖励驱动 | 可发现新策略、自适应 | 样本效率低、真机探索代价高 |
-| 端到端 VLA | $\pi_\theta(a \mid o, \ell)$，条件于语言 | 跨任务泛化、利用大规模预训练 | 黑箱、数据昂贵、实时性约束 |
+| 学习式（经典 RL） | {::nomarkdown}$\pi_\theta(a \mid s)${:/nomarkdown}，奖励驱动 | 可发现新策略、自适应 | 样本效率低、真机探索代价高 |
+| 端到端 VLA | {::nomarkdown}$\pi_\theta(a \mid o, \ell)${:/nomarkdown}，条件于语言 | 跨任务泛化、利用大规模预训练 | 黑箱、数据昂贵、实时性约束 |
 
 范式演进的主线是：**从手工设计规则 → 从数据中学习 → 从大规模多模态预训练中迁移**，使得策略具备语言可指令性与跨任务泛化能力。
 
@@ -87,7 +87,7 @@ $$\pi_\theta(a_t \mid o_1, a_1, \dots, o_t)$$
 
 ### 4.1 动作分块 (Action Chunking)
 
-为降低高频控制下的延迟与累计误差，现代 VLA 通常一次预测未来 $H$ 步动作：
+为降低高频控制下的延迟与累计误差，现代 VLA 通常一次预测未来 {::nomarkdown}$H${:/nomarkdown} 步动作：
 
 $$a_{t:t+H} = \pi_\theta(o_t, \ell)$$
 

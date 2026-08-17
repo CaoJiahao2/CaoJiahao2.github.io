@@ -31,8 +31,8 @@ show_date: true
 
 GAN (Goodfellow et al., 2014) 由两个网络组成，通过对抗训练相互提升：
 
-- **生成器（Generator）** $G$：将随机噪声 $z$ 映射为逼真的数据样本 $G(z)$
-- **判别器（Discriminator）** $D$：判断输入是真实数据还是生成器产生的假数据
+- **生成器（Generator）** {::nomarkdown}$G${:/nomarkdown}：将随机噪声 {::nomarkdown}$z${:/nomarkdown} 映射为逼真的数据样本 {::nomarkdown}$G(z)${:/nomarkdown}
+- **判别器（Discriminator）** {::nomarkdown}$D${:/nomarkdown}：判断输入是真实数据还是生成器产生的假数据
 
 类比：**造假者（G）** 试图制造逼真的假画，**鉴定师（D）** 试图区分真画和假画。两者在不断博弈中共同进步。
 
@@ -40,8 +40,8 @@ GAN (Goodfellow et al., 2014) 由两个网络组成，通过对抗训练相互�
 
 $$\min_G \max_D V(D, G) = \mathbb{E}_{x \sim p_{data}(x)}[\log D(x)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z)))]$$
 
-- **判别器目标**：最大化 $V(D,G)$，即对真实数据输出高值，对生成数据输出低值
-- **生成器目标**：最小化 $V(D,G)$，即让判别器无法区分生成数据
+- **判别器目标**：最大化 {::nomarkdown}$V(D,G)${:/nomarkdown}，即对真实数据输出高值，对生成数据输出低值
+- **生成器目标**：最小化 {::nomarkdown}$V(D,G)${:/nomarkdown}，即让判别器无法区分生成数据
 
 ---
 
@@ -49,19 +49,19 @@ $$\min_G \max_D V(D, G) = \mathbb{E}_{x \sim p_{data}(x)}[\log D(x)] + \mathbb{E
 
 ### 2.1 最优判别器
 
-对于固定生成器 $G$，最优判别器为：
+对于固定生成器 {::nomarkdown}$G${:/nomarkdown}，最优判别器为：
 
 $$D_G^*(x) = \frac{p_{data}(x)}{p_{data}(x) + p_g(x)}$$
 
 ### 2.2 全局最优解
 
-当 $p_g = p_{data}$ 时，$D_G^*(x) = \frac{1}{2}$，$V(D, G)$ 达到全局最小值 $-\log 4$。
+当 {::nomarkdown}$p_g = p_{data}${:/nomarkdown} 时，{::nomarkdown}$D_G^*(x) = \frac{1}{2}${:/nomarkdown}，{::nomarkdown}$V(D, G)${:/nomarkdown} 达到全局最小值 {::nomarkdown}$-\log 4${:/nomarkdown}。
 
 ### 2.3 与 Jensen-Shannon 散度的关系
 
 $$\max_D V(D, G) = -\log 4 + 2 \cdot \text{JSD}(p_{data} \parallel p_g)$$
 
-GAN 的优化目标等价于最小化 $p_{data}$ 和 $p_g$ 之间的 JS 散度。
+GAN 的优化目标等价于最小化 {::nomarkdown}$p_{data}${:/nomarkdown} 和 {::nomarkdown}$p_g${:/nomarkdown} 之间的 JS 散度。
 
 ### 2.4 梯度消失问题
 
@@ -69,7 +69,7 @@ GAN 的优化目标等价于最小化 $p_{data}$ 和 $p_g$ 之间的 JS 散度�
 
 $$\nabla_{\theta_g} \mathbb{E}_{z}[\log(1 - D(G(z)))] \approx 0$$
 
-**Non-saturating Loss**（实用技巧）：改为最大化 $\log D(G(z))$，提供更强的梯度信号。
+**Non-saturating Loss**（实用技巧）：改为最大化 {::nomarkdown}$\log D(G(z))${:/nomarkdown}，提供更强的梯度信号。
 
 $$\max_G \mathbb{E}_{z \sim p_z(z)}[\log D(G(z))]$$
 
@@ -93,7 +93,7 @@ for 每个训练迭代：
     更新 G 以最大化：1/m Σ log D(G(zᵢ))
 ```
 
-通常 $k=1$（交替更新一次），某些情况下 $k>1$ 使判别器更强。
+通常 {::nomarkdown}$k=1${:/nomarkdown}（交替更新一次），某些情况下 {::nomarkdown}$k>1${:/nomarkdown} 使判别器更强。
 
 ### 3.2 训练技巧
 
@@ -131,19 +131,19 @@ for 每个训练迭代：
 
 ### 4.2 WGAN / WGAN-GP (2017)
 
-**问题**：JS 散度在 $p_{data}$ 和 $p_g$ 不重叠时梯度消失。
+**问题**：JS 散度在 {::nomarkdown}$p_{data}${:/nomarkdown} 和 {::nomarkdown}$p_g${:/nomarkdown} 不重叠时梯度消失。
 
 **Wasserstein 距离**：
 
 $$W(p_{data}, p_g) = \inf_{\gamma \sim \Pi(p_{data}, p_g)} \mathbb{E}_{(x,y) \sim \gamma}[\|x - y\|]$$
 
-直观理解：将分布 $p_{data}$ 的"土"搬运到 $p_g$ 的最小成本。
+直观理解：将分布 {::nomarkdown}$p_{data}${:/nomarkdown} 的"土"搬运到 {::nomarkdown}$p_g${:/nomarkdown} 的最小成本。
 
 **Kantorovich-Rubinstein 对偶**：
 
 $$W(p_{data}, p_g) = \sup_{\|f\|_L \leq 1} \mathbb{E}_{x \sim p_{data}}[f(x)] - \mathbb{E}_{x \sim p_g}[f(x)]$$
 
-其中 $f$ 是 1-Lipschitz 函数。
+其中 {::nomarkdown}$f${:/nomarkdown} 是 1-Lipschitz 函数。
 
 **WGAN 损失**：
 
@@ -158,8 +158,8 @@ $$\mathcal{L}_{GP} = \lambda \mathbb{E}_{\hat{x} \sim p_{\hat{x}}}[(\|\nabla_{\h
 ### 4.3 StyleGAN / StyleGAN2 / StyleGAN3 (2019-2021)
 
 **核心创新**：
-- **映射网络**：将噪声 $z$ 映射到中间潜空间 $w$（$\mathcal{W}$ 空间）
-- **AdaIN (Adaptive Instance Normalization)**：通过 $w$ 调制每一层的风格
+- **映射网络**：将噪声 {::nomarkdown}$z${:/nomarkdown} 映射到中间潜空间 {::nomarkdown}$w${:/nomarkdown}（{::nomarkdown}$\mathcal{W}${:/nomarkdown} 空间）
+- **AdaIN (Adaptive Instance Normalization)**：通过 {::nomarkdown}$w${:/nomarkdown} 调制每一层的风格
 - **噪声注入**：在每层卷积后添加随机噪声，控制随机细节
 
 **StyleGAN2 改进**：
@@ -181,8 +181,8 @@ $$\mathcal{L}_{GP} = \lambda \mathbb{E}_{\hat{x} \sim p_{\hat{x}}}[(\|\nabla_{\h
 
 无配对图像到图像翻译：
 - 通过**循环一致性损失**实现无监督学习
-- $G: X \to Y$ 和 $F: Y \to X$ 两个生成器
-- $\mathcal{L}_{cyc} = \mathbb{E}_{x}[\|F(G(x)) - x\|_1] + \mathbb{E}_{y}[\|G(F(y)) - y\|_1]$
+- {::nomarkdown}$G: X \to Y${:/nomarkdown} 和 {::nomarkdown}$F: Y \to X${:/nomarkdown} 两个生成器
+- {::nomarkdown}$\mathcal{L}_{cyc} = \mathbb{E}_{x}[\|F(G(x)) - x\|_1] + \mathbb{E}_{y}[\|G(F(y)) - y\|_1]${:/nomarkdown}
 
 ### 4.6 Pix2Pix (2017)
 
@@ -197,7 +197,7 @@ $$\mathcal{L}_{GP} = \lambda \mathbb{E}_{\hat{x} \sim p_{\hat{x}}}[(\|\nabla_{\h
 
 ### 5.1 条件 GAN (cGAN)
 
-将条件信息 $c$（如类别标签）输入生成器和判别器：
+将条件信息 {::nomarkdown}$c${:/nomarkdown}（如类别标签）输入生成器和判别器：
 
 $$\min_G \max_D \mathbb{E}_{x \sim p_{data}}[\log D(x|c)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z|c)))]$$
 
@@ -206,7 +206,7 @@ $$\min_G \max_D \mathbb{E}_{x \sim p_{data}}[\log D(x|c)] + \mathbb{E}_{z \sim p
 | 方式 | 说明 |
 |------|------|
 | 拼接 | 将条件向量拼接到输入或中间特征 |
-| 条件 BatchNorm | 每类条件使用不同的 $\gamma, \beta$ |
+| 条件 BatchNorm | 每类条件使用不同的 {::nomarkdown}$\gamma, \beta${:/nomarkdown} |
 | AdaIN | 通过条件信息调制特征图的均值和方差 |
 | 交叉注意力 | 将条件信息通过 Cross-Attention 注入 |
 
@@ -218,7 +218,7 @@ $$\min_G \max_D \mathbb{E}_{x \sim p_{data}}[\log D(x|c)] + \mathbb{E}_{z \sim p
 
 $$\text{IS} = \exp\left(\mathbb{E}_{x \sim p_g}[D_{KL}(p(y|x) \parallel p(y))]\right)$$
 
-- 好：生成样本类别清晰（$p(y|x)$ 低熵）、类别多样（$p(y)$ 高熵）
+- 好：生成样本类别清晰（{::nomarkdown}$p(y|x)${:/nomarkdown} 低熵）、类别多样（{::nomarkdown}$p(y)${:/nomarkdown} 高熵）
 - 局限：不考虑真实分布，可能被对抗样本欺骗
 
 ### 6.2 Fréchet Inception Distance (FID)

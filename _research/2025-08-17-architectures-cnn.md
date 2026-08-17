@@ -54,14 +54,14 @@ $$(I * K)_{i,j} = \sum_{m=0}^{k_h-1}\sum_{n=0}^{k_w-1} I_{i+m, j+n} \cdot K_{m,n
 $$H_{out} = \left\lfloor\frac{H_{in} + 2P - k_h}{S}\right\rfloor + 1$$
 
 其中：
-- $H_{in}$：输入高度
-- $k_h$：卷积核高度
-- $P$：填充（Padding）
-- $S$：步长（Stride）
+- {::nomarkdown}$H_{in}${:/nomarkdown}：输入高度
+- {::nomarkdown}$k_h${:/nomarkdown}：卷积核高度
+- {::nomarkdown}$P${:/nomarkdown}：填充（Padding）
+- {::nomarkdown}$S${:/nomarkdown}：步长（Stride）
 
-**参数数量**：$k_h \times k_w \times C_{in} \times C_{out} + C_{out}$（包含偏置）
+**参数数量**：{::nomarkdown}$k_h \times k_w \times C_{in} \times C_{out} + C_{out}${:/nomarkdown}（包含偏置）
 
-**计算量 (FLOPs)**：$H_{out} \times W_{out} \times k_h \times k_w \times C_{in} \times C_{out}$
+**计算量 (FLOPs)**：{::nomarkdown}$H_{out} \times W_{out} \times k_h \times k_w \times C_{in} \times C_{out}${:/nomarkdown}
 
 ### 2.2 池化层（Pooling Layer）
 
@@ -80,10 +80,10 @@ $$H_{out} = \left\lfloor\frac{H_{in} + 2P - k_h}{S}\right\rfloor + 1$$
 
 | 激活函数 | 公式 | 特点 |
 |----------|------|------|
-| ReLU | $f(x) = \max(0, x)$ | 简单高效，缓解梯度消失 |
-| Leaky ReLU | $f(x) = \max(0.01x, x)$ | 解决 ReLU 的 "Dead Neuron" 问题 |
-| GELU | $f(x) = x \cdot \Phi(x)$ | 现代架构首选，平滑近似 |
-| SiLU/Swish | $f(x) = x \cdot \sigma(x)$ | EfficientNet 中使用 |
+| ReLU | {::nomarkdown}$f(x) = \max(0, x)${:/nomarkdown} | 简单高效，缓解梯度消失 |
+| Leaky ReLU | {::nomarkdown}$f(x) = \max(0.01x, x)${:/nomarkdown} | 解决 ReLU 的 "Dead Neuron" 问题 |
+| GELU | {::nomarkdown}$f(x) = x \cdot \Phi(x)${:/nomarkdown} | 现代架构首选，平滑近似 |
+| SiLU/Swish | {::nomarkdown}$f(x) = x \cdot \sigma(x)${:/nomarkdown} | EfficientNet 中使用 |
 
 ### 2.4 全连接层（Fully Connected Layer）
 
@@ -153,7 +153,7 @@ FC(4096) → FC(4096) → FC(1000)
 
 $$\mathbf{y} = \mathcal{F}(\mathbf{x}, \{W_i\}) + \mathbf{x}$$
 
-其中 $\mathcal{F}$ 是残差函数，$\mathbf{x}$ 是恒等映射（shortcut connection）。
+其中 {::nomarkdown}$\mathcal{F}${:/nomarkdown} 是残差函数，{::nomarkdown}$\mathbf{x}${:/nomarkdown} 是恒等映射（shortcut connection）。
 
 **两种残差块**：
 - **BasicBlock**：两个 3×3 卷积，用于 ResNet-18/34
@@ -198,7 +198,7 @@ $$\mathbf{z} = \text{GAP}(\mathbf{X}), \quad \mathbf{s} = \sigma(\mathbf{W}_2\de
 
 $$\text{depth: } d = \alpha^\phi, \quad \text{width: } w = \beta^\phi, \quad \text{resolution: } r = \gamma^\phi$$
 
-约束条件：$\alpha \cdot \beta^2 \cdot \gamma^2 \approx 2$，$\phi$ 控制总缩放量。
+约束条件：{::nomarkdown}$\alpha \cdot \beta^2 \cdot \gamma^2 \approx 2${:/nomarkdown}，{::nomarkdown}$\phi${:/nomarkdown} 控制总缩放量。
 
 **EfficientNet-B0 的 MBConv Block**：
 - 深度可分离卷积 + SE 模块
@@ -233,13 +233,13 @@ ConvNeXt 借鉴 Vision Transformer 的设计理念"现代化"了 ResNet：
 
 将标准卷积分解为两步：
 
-**标准卷积**：$k_h \times k_w \times C_{in} \times C_{out}$
+**标准卷积**：{::nomarkdown}$k_h \times k_w \times C_{in} \times C_{out}${:/nomarkdown}
 
 **深度可分离卷积**：
-1. Depthwise Conv：$k_h \times k_w \times C_{in}$（每个通道独立卷积）
-2. Pointwise Conv：$1 \times 1 \times C_{in} \times C_{out}$（1×1 卷积混合通道）
+1. Depthwise Conv：{::nomarkdown}$k_h \times k_w \times C_{in}${:/nomarkdown}（每个通道独立卷积）
+2. Pointwise Conv：{::nomarkdown}$1 \times 1 \times C_{in} \times C_{out}${:/nomarkdown}（1×1 卷积混合通道）
 
-计算量比值：$\frac{1}{C_{out}} + \frac{1}{k_h \times k_w}$
+计算量比值：{::nomarkdown}$\frac{1}{C_{out}} + \frac{1}{k_h \times k_w}${:/nomarkdown}
 
 ### 4.3 归一化层选择
 
@@ -254,7 +254,7 @@ ConvNeXt 借鉴 Vision Transformer 的设计理念"现代化"了 ResNet：
 
 $$RF_l = RF_{l-1} + (k_l - 1) \times \prod_{i=1}^{l-1} S_i$$
 
-其中 $RF_l$ 是第 $l$ 层的感受野，$k_l$ 是卷积核大小，$S_i$ 是第 $i$ 层的步长。
+其中 {::nomarkdown}$RF_l${:/nomarkdown} 是第 {::nomarkdown}$l${:/nomarkdown} 层的感受野，{::nomarkdown}$k_l${:/nomarkdown} 是卷积核大小，{::nomarkdown}$S_i${:/nomarkdown} 是第 {::nomarkdown}$i${:/nomarkdown} 层的步长。
 
 ---
 

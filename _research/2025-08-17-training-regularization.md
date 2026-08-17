@@ -87,16 +87,16 @@ $$\tilde{J}(\theta) = J(\theta) + \lambda_1\|\theta\|_1 + \frac{\lambda_2}{2}\|\
 
 ### 3.1 Dropout
 
-训练时以概率 $p$ 随机丢弃神经元：
+训练时以概率 {::nomarkdown}$p${:/nomarkdown} 随机丢弃神经元：
 
 $$\tilde{h}_i = h_i \cdot m_i, \quad m_i \sim \text{Bernoulli}(1-p)$$
 
-推理时使用所有权重，但乘以 $(1-p)$ 进行缩放（或训练时除以 $1-p$ 实现 inverted dropout）：
+推理时使用所有权重，但乘以 {::nomarkdown}$(1-p)${:/nomarkdown} 进行缩放（或训练时除以 {::nomarkdown}$1-p${:/nomarkdown} 实现 inverted dropout）：
 
 $$h_i^{\text{test}} = (1-p) \cdot h_i$$
 
 **为什么有效**：
-- **集成学习视角**：每次训练相当于训练一个不同的子网络，推理时相当于 $2^n$ 个子网络的集成
+- **集成学习视角**：每次训练相当于训练一个不同的子网络，推理时相当于 {::nomarkdown}$2^n${:/nomarkdown} 个子网络的集成
 - **防止共适应**：每个神经元不能依赖特定其他神经元的存在
 - **噪声注入**：相当于对隐藏层添加乘性噪声
 
@@ -112,8 +112,8 @@ $$h_i^{\text{test}} = (1-p) \cdot h_i$$
 
 ### 3.3 Dropout 使用建议
 
-- CNN：通常 $p=0.2 \sim 0.5$，在全连接层使用
-- Transformer：$p=0.1$ 为默认值，应用于 Attention 和 FFN 输出
+- CNN：通常 {::nomarkdown}$p=0.2 \sim 0.5${:/nomarkdown}，在全连接层使用
+- Transformer：{::nomarkdown}$p=0.1${:/nomarkdown} 为默认值，应用于 Attention 和 FFN 输出
 - 现代 CNN（ResNet 等）倾向于使用 BatchNorm 替代 Dropout
 - ViT 等现代架构仍广泛使用 Dropout / DropPath
 - 训练时开启，推理时关闭
@@ -194,7 +194,7 @@ Pre-Norm 训练更稳定，梯度流动更好，是现代大模型的标准选�
 $$\tilde{x} = \lambda x_i + (1 - \lambda) x_j$$
 $$\tilde{y} = \lambda y_i + (1 - \lambda) y_j$$
 
-其中 $\lambda \sim \text{Beta}(\alpha, \alpha)$，通常 $\alpha = 0.2$。
+其中 {::nomarkdown}$\lambda \sim \text{Beta}(\alpha, \alpha)${:/nomarkdown}，通常 {::nomarkdown}$\alpha = 0.2${:/nomarkdown}。
 
 **效果**：鼓励模型在样本之间线性插值，提高鲁棒性和泛化能力。
 
@@ -254,11 +254,11 @@ One-hot 标签过于自信（100% 概率），可能导致模型过度自信。
 
 ### 7.2 方法
 
-将 one-hot 标签 $y$ 替换为平滑标签 $\tilde{y}$：
+将 one-hot 标签 {::nomarkdown}$y${:/nomarkdown} 替换为平滑标签 {::nomarkdown}$\tilde{y}${:/nomarkdown}：
 
 $$\tilde{y}_i = \begin{cases} 1 - \epsilon + \epsilon/K & \text{if } i = y \\ \epsilon/K & \text{otherwise} \end{cases}$$
 
-其中 $\epsilon$ 通常为 0.1。
+其中 {::nomarkdown}$\epsilon${:/nomarkdown} 通常为 0.1。
 
 **效果**：
 - 防止模型对训练标签过度自信

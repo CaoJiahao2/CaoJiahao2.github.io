@@ -122,7 +122,7 @@ $$
 L(\theta) = \mathbb{E}_{q_\theta}\left[r(x,y) - \beta \log \frac{q_\theta(y|x)}{q_{\text{ref}}(y|x)}\right]
 $$
 
-其中 $r(x,y)$ 是奖励信号，$\beta$ 控制偏离程度。
+其中 {::nomarkdown}$r(x,y)${:/nomarkdown} 是奖励信号，{::nomarkdown}$\beta${:/nomarkdown} 控制偏离程度。
 
 ### 4.2 RLAIF
 
@@ -151,7 +151,7 @@ $$
 L_{\text{DPO}} = -\mathbb{E}\left[\log \sigma\left(\beta \log \frac{\pi_\theta(y_w|x)}{\pi_{\text{ref}}(y_w|x)} - \beta \log \frac{\pi_\theta(y_l|x)}{\pi_{\text{ref}}(y_l|x)}\right)\right]
 $$
 
-其中 $y_w$ 为安全回答，$y_l$ 为有害回答。DPO 训练更稳定、计算成本更低，在安全对齐中被广泛采用。
+其中 {::nomarkdown}$y_w${:/nomarkdown} 为安全回答，{::nomarkdown}$y_l${:/nomarkdown} 为有害回答。DPO 训练更稳定、计算成本更低，在安全对齐中被广泛采用。
 
 ---
 

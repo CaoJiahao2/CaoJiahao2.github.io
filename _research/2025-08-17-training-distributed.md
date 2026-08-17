@@ -113,12 +113,12 @@ for i, batch in enumerate(train_loader):
 **行并行（Row Parallel）**：
 $$Y = XA, \quad X \in \mathbb{R}^{b \times d}, A \in \mathbb{R}^{d \times h}$$
 
-将 $A$ 沿列切分：$A = [A_1 | A_2]$，每张 GPU 计算 $Y_i = XA_i$，最后拼接。
+将 {::nomarkdown}$A${:/nomarkdown} 沿列切分：{::nomarkdown}$A = [A_1 | A_2]${:/nomarkdown}，每张 GPU 计算 {::nomarkdown}$Y_i = XA_i${:/nomarkdown}，最后拼接。
 
 **列并行（Column Parallel）**：
 $$Y = XB, \quad X \in \mathbb{R}^{b \times h}, B \in \mathbb{R}^{h \times d}$$
 
-将 $B$ 沿行切分，每张 GPU 先计算 $Y_i = X_i B_i$，再通过 AllReduce 求和。
+将 {::nomarkdown}$B${:/nomarkdown} 沿行切分，每张 GPU 先计算 {::nomarkdown}$Y_i = X_i B_i${:/nomarkdown}，再通过 AllReduce 求和。
 
 **Megatron-LM 的 TP 方案**：
 
@@ -191,9 +191,9 @@ Megatron-LM 提出的三维并行策略：
 
 | 组件 | 大小 (字节) | 说明 |
 |------|------------|------|
-| 参数 (Parameters) | $2\Psi$ | FP16 参数 |
-| 梯度 (Gradients) | $2\Psi$ | FP16 梯度 |
-| 优化器状态 (Optimizer States) | $12\Psi$ | FP32 参数 + 动量 + 方差 |
+| 参数 (Parameters) | {::nomarkdown}$2\Psi${:/nomarkdown} | FP16 参数 |
+| 梯度 (Gradients) | {::nomarkdown}$2\Psi${:/nomarkdown} | FP16 梯度 |
+| 优化器状态 (Optimizer States) | {::nomarkdown}$12\Psi${:/nomarkdown} | FP32 参数 + 动量 + 方差 |
 | 激活值 (Activations) | 取决于 batch 和层数 | 可通过 checkpointing 折半 |
 
 以 7.5B 参数模型、Adam 优化器为例：

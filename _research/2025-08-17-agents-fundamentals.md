@@ -68,7 +68,7 @@ while not done:
     observation  ← 收集行动结果，更新状态
 ```
 
-形式化为：在每个时刻 $t$，策略 $\pi_\theta$ 接收观测 $o_t$，输出动作 $a_t$：
+形式化为：在每个时刻 {::nomarkdown}$t${:/nomarkdown}，策略 {::nomarkdown}$\pi_\theta${:/nomarkdown} 接收观测 {::nomarkdown}$o_t${:/nomarkdown}，输出动作 {::nomarkdown}$a_t${:/nomarkdown}：
 
 $$\pi_\theta(a_t \mid o_1, a_1, \dots, o_t)$$
 
